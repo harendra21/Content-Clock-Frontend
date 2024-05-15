@@ -1,0 +1,31 @@
+.instagram-post-container{
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 12px;
+  max-width: 500px;
+}
+.instagram-post-header img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.instagram-post-header .instagram-username {
+  font-weight: bold;
+}
+.instagram-post-image {
+  width: 100%;
+  height: auto;
+}
+.instagram-post-content {
+  padding: 12px;
+}
+.instagram-post-content p {
+  margin: 0;
+}
+.img-responsive {
+  max-width: 100%;
+}
+.img-half {
+  width: 50%;
+}

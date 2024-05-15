@@ -1,0 +1,232 @@
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="15" nzMd="15" nzLg="15">
+    <nz-select
+      [nzMaxTagCount]="10"
+      [nzMaxTagPlaceholder]="tagPlaceHolder"
+      nzMode="multiple"
+      nzPlaceHolder="Select Channel"
+      [(ngModel)]="selectedConnections"
+      (ngModelChange)="connectionToggle($event)"
+    >
+      <nz-option
+        *ngFor="let item of connections"
+        [nzCustomContent]="true"
+        [nzLabel]="item.Name"
+        [nzValue]="item"
+      >
+        <ng-container *ngIf="item.ConnectionName == 'facebook_page'"
+          ><span nz-icon nzType="facebook" nzTheme="fill"></span
+        ></ng-container>
+        <ng-container *ngIf="item.ConnectionName == 'instagram'"
+          ><span nz-icon nzType="instagram" nzTheme="fill"></span
+        ></ng-container>
+        <ng-container *ngIf="item.ConnectionName == 'linkedin_profile'"
+          ><span nz-icon nzType="linkedin" nzTheme="fill"></span
+        ></ng-container>
+        <ng-container *ngIf="item.ConnectionName == 'twitter'"
+          ><span nz-icon nzType="twitter-circle" nzTheme="fill"></span
+        ></ng-container>
+        <ng-container *ngIf="item.ConnectionName == 'pintrest_board'"
+          ><span nz-icon nzType="pushpin" nzTheme="fill"></span
+        ></ng-container>
+        {{ item.Name }}
+      </nz-option>
+    </nz-select>
+
+   
+
+    <ng-template #tagPlaceHolder let-selectedList
+      >and {{ selectedList.length }} more selected</ng-template
+    >
+
+    <div class="mt-10">
+      <button nz-button nzType="dashed" (click)="showModal()">
+        <span nz-icon nzType="bulb" nzTheme="fill"></span> Write With AI
+      </button>
+    </div>
+
+    <div class="mt-10">
+      <textarea
+        nz-input
+        placeholder="Post Content"
+        [(ngModel)]="postContent"
+        [nzAutosize]="{ minRows: 6, maxRows: 20 }"
+      ></textarea>
+    </div>
+
+    <!-- <div class="mt-10">
+      <button nz-button nzType="dashed" (click)="showModal()">
+        <span nz-icon nzType="bulb" nzTheme="fill"></span> Genrate With AI
+      </button>
+    </div> -->
+
+    <div class="clearfix mt-10">
+      <nz-upload
+        nzType="drag"
+        [nzAction]="uploadUrl"
+        [nzHeaders]="headers"
+        nzListType="picture"
+        [(nzFileList)]="files"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)"
+        [nzMultiple]="true"
+      >
+        <p class="ant-upload-drag-icon">
+          <span nz-icon nzType="inbox"></span>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload. Strictly prohibit from uploading
+          company data or other band files
+        </p>
+      </nz-upload>
+    </div>
+
+    <div class="mt-10">
+      <nz-date-picker
+        nzShowTime
+        nzFormat="yyyy-MM-dd HH:mm"
+        [(ngModel)]="postDate"
+        ngModel
+      ></nz-date-picker>
+    </div>
+
+    <div class="mt-10 text-right">
+      <button nz-button nzType="dashed" (click)="schedulePost(true)">
+        Draft
+      </button> &nbsp; 
+      <button nz-button nzType="primary" (click)="schedulePost()">
+        Schedule
+      </button>
+    </div>
+  </div>
+
+  <div nz-col nzXs="24" nzSm="9" nzMd="9" nzLg="9" class="pd-10">
+    <nz-tabset>
+      <ng-container *ngFor="let selected of selectedConnections; let i = index">
+        <ng-container *ngIf="selected.ConnectionName == 'facebook_page'">
+          <nz-tab [nzTitle]="title">
+            <ng-template #title>
+              <span nz-icon nzType="facebook" nzTheme="outline"></span>
+              {{ selected.Name }}
+            </ng-template>
+
+            <app-facebook-card
+              [name]="selected.Name"
+              [profile_image]="selected.ProfileImage"
+              [images]="filePaths"
+              [postDate]="postDate"
+              [postContent]="postContent"
+            ></app-facebook-card>
+          </nz-tab>
+        </ng-container>
+
+        <ng-container *ngIf="selected.ConnectionName == 'instagram'">
+          <nz-tab [nzTitle]="title">
+            <ng-template #title>
+              <span nz-icon nzType="instagram" nzTheme="outline"></span>
+              {{ selected.Name }}
+            </ng-template>
+
+            <app-instagram-card
+              [name]="selected.Name"
+              [profile_image]="selected.ProfileImage"
+              [images]="filePaths"
+              [postDate]="postDate"
+              [postContent]="postContent"
+            ></app-instagram-card>
+          </nz-tab>
+        </ng-container>
+
+        <ng-container *ngIf="selected.ConnectionName == 'twitter'">
+          <nz-tab [nzTitle]="title">
+            <ng-template #title>
+              <span nz-icon nzType="twitter" nzTheme="outline"></span>
+              {{ selected.Name }}
+            </ng-template>
+
+            <app-twitter-card
+              [name]="selected.Name"
+              [profile_image]="selected.ProfileImage"
+              [images]="filePaths"
+              [postDate]="postDate"
+              [postContent]="postContent"
+            ></app-twitter-card>
+          </nz-tab>
+        </ng-container>
+
+        <ng-container *ngIf="selected.ConnectionName == 'linkedin_profile'">
+          <nz-tab [nzTitle]="title">
+            <ng-template #title>
+              <span nz-icon nzType="linkedin" nzTheme="outline"></span>
+              {{ selected.Name }}
+            </ng-template>
+
+            <app-linkedin-card
+              [name]="selected.Name"
+              [profile_image]="selected.ProfileImage"
+              [images]="filePaths"
+              [postDate]="postDate"
+              [postContent]="postContent"
+            ></app-linkedin-card>
+          </nz-tab>
+        </ng-container>
+      </ng-container>
+    </nz-tabset>
+  </div>
+</div>
+
+<nz-modal
+  nzDraggable
+  nzCentered
+  [(nzVisible)]="isVisible"
+  nzTitle="Write With AI"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input
+        type="text"
+        nz-input
+        placeholder="Input your topic"
+        [(ngModel)]="aiText"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch>
+        <span nz-icon nzType="bulb" nzTheme="fill" (click)="writeAi()"></span>
+      </button>
+    </ng-template>
+
+    <ng-container *ngIf="aiPost != ''">
+      <p class="content">{{ aiPost }}</p>
+
+      <nz-space>
+        <button *nzSpaceItem nz-button nzType="primary" nzSearch>
+          <span
+            nz-icon
+            nzType="reload"
+            nzTheme="outline"
+            (click)="writeAi()"
+          ></span>
+        </button>
+
+        <button *nzSpaceItem nz-button nzType="primary" nzSearch>
+          <span
+            nz-icon
+            nzType="check-circle"
+            nzTheme="fill"
+            (click)="postContent = aiPost; isVisible = false"
+          ></span>
+        </button>
+      </nz-space>
+    </ng-container>
+
+    <div *ngIf="loadingAi" class="text-center">
+      <div class="spin-center">
+        <nz-spin nzSimple></nz-spin>
+      </div>
+    </div>
+  </ng-container>
+</nz-modal>

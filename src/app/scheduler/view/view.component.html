@@ -1,0 +1,187 @@
+<ng-template #facebook>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/fb_fhxGf49v.png"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+<ng-template #instagram>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/instagram_icon.png_P2n4El51.webp"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-template #linkedin>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/linkedin_logo_initials.png_G0eVpCWb.webp"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-template #pintrest>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/pinterest-logo_lhG5inoN.png"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-template #twitter>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/twitter_6tGq0h68.webp"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-container *ngIf="posts.length > 0">
+  <div nz-row>
+    <ng-container *ngFor="let post of posts">
+      <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+        <div class="m-10">
+          <nz-ribbon
+            nzText="{{ post.publish_status | titlecase }}"
+            nzColor="{{
+              post.publish_status == 'published'
+                ? 'green'
+                : post.publish_status == 'draft'
+                  ? 'yellow'
+                  : 'red'
+            }}"
+          >
+            <div class="card mt-10">
+              <div class="card-header">
+                {{ post.publish_at | date: "medium" }}
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  {{ post.content }}
+                </p>
+
+                <div nz-row>
+                  <div nz-col nzXs="18">
+                    <ng-container *ngFor="let social of post.social">
+                      <!-- <nz-avatar nzIcon="user" nzSrc="{{ social.profile_image}}"></nz-avatar> -->
+                      <ng-container
+                        *ngIf="social.connection_name == 'facebook_page'"
+                      >
+                        <nz-badge
+                          [nzCount]="facebook"
+                          style="margin-right: 24px"
+                        >
+                          <nz-avatar
+                            [nzShape]="'square'"
+                            nzIcon="user"
+                            nzSrc="{{ social.profile_image }}"
+                          ></nz-avatar>
+                        </nz-badge>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="social.connection_name == 'linkedin_profile'"
+                      >
+                        <nz-badge
+                          [nzCount]="linkedin"
+                          style="margin-right: 24px"
+                        >
+                          <nz-avatar
+                            [nzShape]="'square'"
+                            nzIcon="user"
+                            nzSrc="{{ social.profile_image }}"
+                          ></nz-avatar>
+                        </nz-badge>
+                      </ng-container>
+
+                      <ng-container *ngIf="social.connection_name == 'twitter'">
+                        <nz-badge
+                          [nzCount]="twitter"
+                          style="margin-right: 24px"
+                        >
+                          <nz-avatar
+                            [nzShape]="'square'"
+                            nzIcon="user"
+                            nzSrc="{{ social.profile_image }}"
+                          ></nz-avatar>
+                        </nz-badge>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="social.connection_name == 'pintrest_board'"
+                      >
+                        <nz-badge
+                          [nzCount]="pintrest"
+                          style="margin-right: 24px"
+                        >
+                          <nz-avatar
+                            [nzShape]="'square'"
+                            nzIcon="user"
+                            nzSrc="{{ social.profile_image }}"
+                          ></nz-avatar>
+                        </nz-badge>
+                      </ng-container>
+
+                      <ng-container
+                        *ngIf="social.connection_name == 'instagram'"
+                      >
+                        <nz-badge
+                          [nzCount]="instagram"
+                          style="margin-right: 24px"
+                        >
+                          <nz-avatar
+                            [nzShape]="'square'"
+                            nzIcon="user"
+                            nzSrc="{{ social.profile_image }}"
+                          ></nz-avatar>
+                        </nz-badge>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                  <div nz-col nzXs="6" class="text-right">
+                    <button
+                      nz-button
+                      nzType="text"
+                      *ngIf="
+                        post.publish_status == 'scheduled' ||
+                        post.publish_status == 'draft'
+                      "
+                    >
+                      <span nz-icon nzType="edit" nzTheme="outline"></span>
+                    </button>
+                    <button
+                      nz-button
+                      nzType="text"
+                      nzType="text"
+                      *ngIf="
+                        post.publish_status == 'scheduled' ||
+                        post.publish_status == 'draft'
+                      "
+                    >
+                      <span nz-icon nzType="delete" nzTheme="outline"></span>
+                    </button>
+                    <a
+                      nz-button
+                      nzType="text"
+                      nzType="text"
+                      *ngIf="post.publish_status == 'published'"
+                      routerLink="/scheduler/preview/{{ post.id }}"
+                    >
+                      <span nz-icon nzType="eye" nzTheme="outline"></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nz-ribbon>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

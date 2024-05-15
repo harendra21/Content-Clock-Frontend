@@ -1,0 +1,56 @@
+
+
+<ng-container *ngIf="post != null">
+  <nz-card nzTitle="{{ post.PublishAt | date:'medium'}}" [nzExtra]="statusTemp">
+    <p class="post-content">{{ post.Content }}</p>
+  </nz-card>
+  <ng-template #statusTemp>
+    {{ post.PublishStatus | titlecase }}
+  </ng-template>
+
+
+  <div class="posts">
+    <ng-container *ngFor="let s of social">
+      <ng-container *ngIf="s.connection_name == 'instagram'">
+        <app-instagram-card
+          [name]="s.name"
+          [profile_image]="s.profile_image"
+          [images]="images"
+          [postDate]="post.PublishAt"
+          [postContent]="post.Content"
+        ></app-instagram-card>
+      </ng-container>
+      <ng-container *ngIf="s.connection_name == 'facebook_page'">
+        <app-facebook-card
+          [name]="s.name"
+          [profile_image]="s.profile_image"
+          [images]="images"
+          [postDate]="post.PublishAt"
+          [postContent]="post.Content"
+        ></app-facebook-card>
+      </ng-container>
+  
+      <ng-container *ngIf="s.connection_name == 'linkedin_profile'">
+        <app-linkedin-card
+          [name]="s.name"
+          [profile_image]="s.profile_image"
+          [images]="images"
+          [postDate]="post.PublishAt"
+          [postContent]="post.Content"
+        ></app-linkedin-card>
+      </ng-container>
+      <ng-container *ngIf="s.connection_name == 'twitter'">
+        <app-twitter-card
+          [name]="s.name"
+          [profile_image]="s.profile_image"
+          [images]="images"
+          [postDate]="post.PublishAt"
+          [postContent]="post.Content"
+        ></app-twitter-card>
+      </ng-container>
+    </ng-container>
+  </div>
+  
+
+  
+</ng-container>

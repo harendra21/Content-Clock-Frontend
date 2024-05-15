@@ -1,0 +1,8 @@
+.posts{
+    max-width: 500px;
+    margin: 0 auto;
+}
+.post{
+    padding: 10px;
+    border-bottom: 1px solid #ccc
+}

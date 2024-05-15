@@ -1,0 +1,25 @@
+<div class="post">
+  <div class="header">
+      <nz-avatar nzIcon="user" nzSrc="{{ profile_image }}"></nz-avatar>
+      <div class="user-info">
+        <div class="name">{{ name }}</div>
+        <div class="time">{{ postDate | date: "medium" }}</div>
+      </div>
+  </div>
+  <div class="content">
+    <p class="post-content">{{ postContent }}</p>
+    <ng-container *ngIf="images.length == 1">
+      <img
+        nz-image
+        nzSrc="{{ images[0] }}"
+        alt="{{ images[0] }}"
+        class="img-responsive"
+      />
+    </ng-container>
+    <ng-container *ngIf="images.length > 1">
+      <ng-container *ngFor="let file of images">
+        <img nz-image nzSrc="{{ file }}" alt="{{ file }}" class="img-half" />
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

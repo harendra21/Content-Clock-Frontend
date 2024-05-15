@@ -1,0 +1,32 @@
+
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.pd-10 {
+  padding: 10px;
+}
+
+.post-container {
+  max-width: 400px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.img-half {
+  width: 50%;
+}
+
+nz-select,
+nz-date-picker {
+  width: 100%;
+}
+
+.post-content {
+  padding: 5px;
+}

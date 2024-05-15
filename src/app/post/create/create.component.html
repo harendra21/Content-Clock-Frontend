@@ -1,0 +1,34 @@
+<nz-tabset nzLinkRouter>
+  <nz-tab>
+    <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ action: 'queue'}">
+      Queue
+    </a>
+    <ng-container *ngIf="action == 'queue' && connection">
+      <app-queue [connection]="connection"></app-queue>
+    </ng-container>
+  </nz-tab>
+  <nz-tab>
+    <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ action: 'scheduled' }" >
+      Scheduled
+    </a>
+    <ng-container *ngIf="action == 'scheduled'">
+      <app-scheduled [connection]="connection"></app-scheduled>
+    </ng-container>
+  </nz-tab>
+  <nz-tab>
+    <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ action: 'published' }" >
+      Published
+    </a>
+    <ng-container *ngIf="action == 'published'">
+      <app-published [connection]="connection"></app-published>
+    </ng-container>
+  </nz-tab>
+  <nz-tab>
+    <a *nzTabLink nz-tab-link [routerLink]="['.']" [queryParams]="{ action: 'draft' }" >
+      Draft
+    </a>
+    <ng-container *ngIf="action == 'draft'">
+      <app-draft [connection]="connection"></app-draft>
+    </ng-container>
+  </nz-tab>
+</nz-tabset>

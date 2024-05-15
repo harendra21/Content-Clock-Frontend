@@ -1,0 +1,43 @@
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+  <input
+    type="text"
+    nz-input
+    placeholder="Input your topic"
+    [(ngModel)]="aiText"
+  />
+</nz-input-group>
+<ng-template #suffixIconButton>
+  <button nz-button nzType="primary" nzSearch>
+    <span nz-icon nzType="bulb" nzTheme="fill" (click)="writeAi()"></span>
+  </button>
+</ng-template>
+
+<div *ngIf="loading" class="text-center">
+  <div class="spin-center">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</div>
+
+<ng-container *ngIf="aiPost != '' && !loading">
+  <p class="content">{{ aiPost }}</p>
+
+  <nz-space>
+    <button *nzSpaceItem nz-button nzType="primary" nzSearch>
+      <span
+        nz-icon
+        nzType="reload"
+        nzTheme="outline"
+        (click)="writeAi()"
+      ></span>
+    </button>
+
+    <button *nzSpaceItem nz-button nzType="primary" nzSearch>
+      <span
+        nz-icon
+        nzType="check-circle"
+        nzTheme="fill"
+        (click)="acceptContent()"
+      ></span>
+    </button>
+  </nz-space>
+</ng-container>

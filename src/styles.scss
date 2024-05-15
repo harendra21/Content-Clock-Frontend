@@ -1,0 +1,70 @@
+a{
+  text-decoration: none;
+  color: #000;
+}
+.justify{
+  text-align: justify;
+}
+.mat-mdc-card-header{
+  background-color: #ccc;
+}
+.mat-mdc-card-header h3{
+  margin-top: 0;
+}
+.img-responsive{
+  max-width: 100%;
+  height: auto;
+}
+
+mat-sidenav[style] {
+  visibility: visible !important;
+}
+.mat-drawer {
+  transform: none !important;
+}
+.inline-icon {
+  vertical-align: middle;
+  font-size: 18px !important;
+}
+
+.spin-center {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+}
+.text-center{
+  text-align: center;
+}
+nz-filter-trigger {
+  float: right;
+  margin-top: 9px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+.mb-10{
+  margin-top: 10px;
+}
+.text-right{
+  text-align: right;
+}
+.animation-container{
+  width: 400px;
+  margin: 0 auto;
+}
+.m-10{
+  margin: 10px;
+}
+.mt-20{
+  margin-top: 20px;
+}
+.full-width{
+  width: 100%;
+}
+.post-content,
+.content {
+  white-space: break-spaces;
+}

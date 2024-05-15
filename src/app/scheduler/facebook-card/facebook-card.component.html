@@ -1,0 +1,48 @@
+<div class="fb-post">
+  <div class="post-header">
+    <nz-avatar nzIcon="user" nzSrc="{{ profile_image }}"></nz-avatar>
+    <div class="post-info">
+      <h3 class="profile-name">{{ name }}</h3>
+      <p class="post-time">{{ postDate | date: "medium" }}</p>
+    </div>
+  </div>
+  <div class="post-content">
+    <p class="post-content">{{ postContent }}</p>
+    <ng-container *ngIf="images">
+      <ng-container *ngIf="images.length == 1">
+        <img
+          nz-image
+          nzSrc="{{ images[0] }}"
+          alt="{{ images[0] }}"
+          class="img-responsive"
+        />
+      </ng-container>
+      <ng-container *ngIf="images.length > 1">
+        <ng-container *ngFor="let file of images">
+          <img
+            nz-image
+            nzSrc="{{ file }}"
+            alt="{{ file }}"
+            class="img-half"
+          />
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    
+  </div>
+  <div class="post-actions mt-20">
+    <div nz-row class="text-center">
+      <div nz-col nzSpan="8">
+        <span nz-icon nzType="like" nzTheme="outline"></span> Like
+      </div>
+      <div nz-col nzSpan="8">
+        <span nz-icon nzType="comment" nzTheme="outline"></span>
+        Comment
+      </div>
+      <div nz-col nzSpan="8">
+        <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+        Share
+      </div>
+    </div>
+  </div>
+</div>

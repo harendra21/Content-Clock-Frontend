@@ -1,0 +1,62 @@
+<div class="mt-10 text-right">
+  <button nz-button nzType="primary" (click)="addNew()">
+    Add New
+  </button>
+</div>
+
+<div *ngFor="let date of getDates()">
+  <h2>{{ date | date: "EEEE, MMMM d, y" }}</h2>
+
+  <ng-container *ngFor="let timeSlot of schedules[date]">
+    <ng-container
+      *ngIf="getPostFromSlot(timeSlot) && getPostFromSlot(timeSlot).Description"
+    >
+      <div class="card green-border" (click)="editPost(getPostFromSlot(timeSlot).ID)">
+        {{ getTimeFromSlot(timeSlot) }}
+
+        <span class="post-content"
+          ><strong>PublishAt:</strong>
+          {{ getPostFromSlot(timeSlot).PublishAt | date: "medium" }}</span
+        >
+      </div>
+    </ng-container>
+
+    <ng-container
+    *ngIf="getPostFromSlot(timeSlot) && !getPostFromSlot(timeSlot).Description"
+  >
+    <div class="card" (click)="addNew(date + ' ' + getTimeFromSlot(timeSlot))">
+      {{ getTimeFromSlot(timeSlot) }}
+
+    </div>
+  </ng-container>
+
+  </ng-container>
+</div>
+
+<!-- <div *ngFor="let date of schedules">
+  <h3>{{ date }}</h3>
+  <div class="card" *ngFor="let time of schedules[date]" (click)="addNew(time)">
+    {{ time | date: "HH:mm" }}
+  </div>
+</div> -->
+
+<!-- Modal-->
+<nz-modal
+  nzDraggable
+  nzCentered
+  [(nzVisible)]="isVisible"
+  nzTitle="Write With AI"
+  (nzOnCancel)="handleCancel()"
+  [nzWidth]="'80%'"
+  [nzClosable]="true"
+  [nzKeyboard]="false"
+  [nzCloseOnNavigation]="false"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <add-new
+      [connection]="connection"
+      [slot]="slot"
+    ></add-new>
+  </ng-container>
+</nz-modal>

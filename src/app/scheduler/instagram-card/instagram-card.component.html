@@ -1,0 +1,28 @@
+<div class="instagram-post-container">
+  <div class="instagram-post-header">
+    <nz-avatar nzIcon="user" nzSrc="{{ profile_image }}"></nz-avatar>
+    <span class="instagram-username">{{ name }}</span>
+  </div>
+  
+
+  <ng-container *ngIf="images.length == 1">
+      <img
+        nz-image
+        nzSrc="{{ images[0] }}"
+        alt="{{ images[0] }}"
+        class="img-responsive"
+      />
+    </ng-container>
+    <ng-container *ngIf="images.length > 1">
+      <ng-container *ngFor="let file of images">
+        <img
+          nz-image
+          nzSrc="{{ file }}"
+          alt="{{ file }}"
+          class="img-half"
+        />
+      </ng-container>
+      </ng-container>
+
+  <p class="post-content">{{ postContent }}</p>
+</div>

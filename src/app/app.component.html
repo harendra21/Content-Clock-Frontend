@@ -1,0 +1,179 @@
+<nz-layout class="app-layout">
+  <nz-sider
+    *ngIf="isCollapsed && isAuthenticated"
+    class="menu-sidebar"
+    nzWidth="256px"
+    [nzTrigger]="null"
+    nzTheme="light"
+  >
+    <div class="sidebar-logo">
+      <a routerLink="/admin/dashboard">
+        <img
+          src="https://res.cloudinary.com/harendra21/image/upload/h_100/With_Code_Example_pemcaz.png"
+          alt="logo"
+        />
+        <h1>Admin Panel</h1>
+      </a>
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline">
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
+        <span nz-icon nzType="dashboard"></span>
+        <span><a routerLink="/admin/dashboard">Dashboard</a></span>
+      </li>
+
+      <li nz-submenu nzTitle="Scheduler" nzIcon="schedule">
+        <ul>
+          <li nz-menu-item nzMatchRouterExact>
+            <span nz-icon nzType="eye" nzTheme="outline"></span>
+            <span><a routerLink="/scheduler/view">View All</a></span>
+          </li>
+          <li nz-menu-item nzMatchRouterExact>
+            <span nz-icon nzType="appstore-add" nzTheme="outline"></span>
+            <span><a routerLink="/scheduler/add">Add New</a></span>
+          </li>
+        </ul>
+      </li>
+
+      <ng-container *ngFor="let connection of connections">
+        <li nz-menu-item>
+          <nz-badge
+            [nzCount]="facebook"
+            style="margin-right: 5px"
+            *ngIf="connection.connection_name == 'facebook_page'"
+          >
+            <nz-avatar
+              nzIcon="user"
+              nzSrc="{{ connection.profile_image }}"
+            ></nz-avatar>
+          </nz-badge>
+
+          <nz-badge
+            [nzCount]="instagram"
+            style="margin-right: 5px"
+            *ngIf="connection.connection_name == 'instagram'"
+          >
+            <nz-avatar
+              nzIcon="user"
+              nzSrc="{{ connection.profile_image }}"
+            ></nz-avatar>
+          </nz-badge>
+
+          <nz-badge
+            [nzCount]="linkedin"
+            style="margin-right: 5px"
+            *ngIf="connection.connection_name == 'linkedin_profile'"
+          >
+            <nz-avatar
+              nzIcon="user"
+              nzSrc="{{ connection.profile_image }}"
+            ></nz-avatar>
+          </nz-badge>
+
+          <nz-badge
+            [nzCount]="pintrest"
+            style="margin-right: 5px"
+            *ngIf="connection.connection_name == 'pintrest_board'"
+          >
+            <nz-avatar
+              nzIcon="user"
+              nzSrc="{{ connection.profile_image }}"
+            ></nz-avatar>
+          </nz-badge>
+
+          <nz-badge
+            [nzCount]="twitter"
+            style="margin-right: 5px"
+            *ngIf="connection.connection_name == 'twitter'"
+          >
+            <nz-avatar
+              nzIcon="user"
+              nzSrc="{{ connection.profile_image }}"
+            ></nz-avatar>
+          </nz-badge>
+
+          <span
+            ><a routerLink="post/create/{{ connection.connection_id }}">{{
+              connection.name
+            }}</a></span
+          >
+        </li>
+      </ng-container>
+
+      <ng-template #facebook>
+        <img
+          src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/fb_fhxGf49v.png"
+          width="15px"
+          alt=""
+          class="ant-scroll-number-custom-component"
+        />
+      </ng-template>
+      <ng-template #instagram>
+        <img
+          src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/instagram_icon.png_P2n4El51.webp"
+          width="15px"
+          alt=""
+          class="ant-scroll-number-custom-component"
+        />
+      </ng-template>
+
+      <ng-template #linkedin>
+        <img
+          src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/linkedin_logo_initials.png_G0eVpCWb.webp"
+          width="15px"
+          alt=""
+          class="ant-scroll-number-custom-component"
+        />
+      </ng-template>
+
+      <ng-template #pintrest>
+        <img
+          src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/pinterest-logo_lhG5inoN.png"
+          width="15px"
+          alt=""
+          class="ant-scroll-number-custom-component"
+        />
+      </ng-template>
+
+      <ng-template #twitter>
+        <img
+          src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/twitter_6tGq0h68.webp"
+          width="15px"
+          alt=""
+          class="ant-scroll-number-custom-component"
+        />
+      </ng-template>
+
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
+        <span nz-icon nzType="link" nzTheme="outline"></span>
+        <span><a routerLink="/connections">Connections</a></span>
+      </li>
+
+      <li nz-menu-item nzMatchRouter>
+        <span nz-icon nzType="logout" nzTheme="outline"></span>
+        <span><a (click)="logout()">Logout</a></span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span
+          class="header-trigger"
+          (click)="changeMenuState(!isCollapsed)"
+          *ngIf="isAuthenticated"
+        >
+          <span
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></span>
+        </span>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

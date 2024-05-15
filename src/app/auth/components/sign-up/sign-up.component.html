@@ -1,0 +1,61 @@
+<!-- <div class="container">
+    <form [formGroup]="registerForm">
+        <h2>Sign Up</h2>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Enter Email" formControlName="name" type="text">
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Enter Email" formControlName="email" type="email">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <span class="text-danger"
+                *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+                Email is required
+            </span>
+            <span class="text-danger"
+                *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.email">
+                Enter a valid email address
+            </span>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter Password" formControlName="password" type="password">
+                <mat-icon matSuffix>password</mat-icon>
+            </mat-form-field>
+            <span class="text-danger" *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                Password is required
+            </span>
+            <span class="text-danger"
+                *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                letter and 1 number
+            </span>
+        </p>
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput placeholder="Enter Password" type="password" formControlName="confirmPassword">
+                <mat-icon matSuffix>password</mat-icon>
+            </mat-form-field>
+            <span class="text-danger"
+                *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required">
+                Confirm Password is required
+            </span>
+            <span class="text-danger"
+                *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                Passwords does not match
+            </span>
+        </p>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="submitted">Register</button>
+        <a mat-button [routerLink]="['/admin/auth/login']" >Login</a>
+        <div class="error" *ngIf="errorString != ''">{{ errorString }}</div>
+    </form>
+</div> -->

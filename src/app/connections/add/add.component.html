@@ -1,0 +1,217 @@
+<div nz-row>
+  <div nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-card nzTitle="Facebook" [nzExtra]="fbButton">
+      <ng-container *ngFor="let connection of connections">
+        <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
+          <div nz-row class="mt-10 connection">
+            <div nz-col nzXs="6">
+              <nz-avatar
+                [nzSize]="64"
+                nzIcon="user"
+                nzSrc="{{ connection.ProfileImage }}"
+              ></nz-avatar>
+            </div>
+            <div nz-col nzXs="16">
+              <div class="name">{{ connection.Name }}</div>
+              <div class="connection-id">{{ connection.ConnectionId }}</div>
+              <div class="connection-time">
+                {{ connection.CreatedAt | date: "medium" }}
+              </div>
+            </div>
+
+            <div nz-col nzXs="2">
+              <button
+                nz-button
+                nzType="link"
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this connection?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="deleteConnection(connection.ID)"
+              >
+                <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+              </button>
+            </div>
+
+          </div>
+        </ng-container>
+      </ng-container>
+    </nz-card>
+    <ng-template #fbButton>
+      <a nz-button nzType="link" (click)="connectFacebook()"
+        ><span nz-icon nzType="link" nzTheme="outline"></span> Connect</a
+      >
+    </ng-template>
+  </div>
+
+  <div nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-card nzTitle="Instagram" [nzExtra]="instaButton">
+      <ng-container *ngFor="let connection of connections">
+        <ng-container *ngIf="connection.ConnectionName == 'instagram'">
+          <div nz-row class="mt-10 connection">
+            <div nz-col nzXs="6">
+              <nz-avatar
+                [nzSize]="64"
+                nzIcon="user"
+                nzSrc="{{ connection.ProfileImage }}"
+              ></nz-avatar>
+            </div>
+            <div nz-col nzXs="16">
+              <div class="name">{{ connection.Name }}</div>
+              <div class="connection-id">{{ connection.ConnectionId }}</div>
+              <div class="connection-time">
+                {{ connection.CreatedAt | date: "medium" }}
+              </div>
+            </div>
+
+            <div nz-col nzXs="2">
+              <button
+                nz-button
+                nzType="link"
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this connection?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="deleteConnection(connection.ID)"
+              >
+                <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </nz-card>
+    <ng-template #instaButton>
+      <a nz-button nzType="link" (click)="connectInstagram()"
+        ><span nz-icon nzType="link" nzTheme="outline"></span> Connect</a
+      >
+    </ng-template>
+  </div>
+
+  <div nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-card nzTitle="LinkedIn" [nzExtra]="linkedinButton">
+      <ng-container *ngFor="let connection of connections">
+        <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
+          <div nz-row class="mt-10 connection">
+            <div nz-col nzXs="6">
+              <nz-avatar
+                [nzSize]="64"
+                nzIcon="user"
+                nzSrc="{{ connection.ProfileImage }}"
+              ></nz-avatar>
+            </div>
+            <div nz-col nzXs="16">
+              <div class="name">{{ connection.Name }}</div>
+              <div class="connection-id">{{ connection.ConnectionId }}</div>
+              <div class="connection-time">
+                {{ connection.CreatedAt | date: "medium" }}
+              </div>
+            </div>
+
+            <div nz-col nzXs="2">
+              <button
+                nz-button
+                nzType="link"
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this connection?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="deleteConnection(connection.ID)"
+              >
+                <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </nz-card>
+    <ng-template #linkedinButton>
+      <a nz-button nzType="link" (click)="connectLinkedin()"
+        ><span nz-icon nzType="link" nzTheme="outline"></span> Connect</a
+      >
+    </ng-template>
+  </div>
+
+  <div nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-card nzTitle="Twitter" [nzExtra]="twitterButton">
+      <ng-container *ngFor="let connection of connections">
+        <ng-container *ngIf="connection.ConnectionName == 'twitter'">
+          <div nz-row class="mt-10 connection">
+            <div nz-col nzXs="6">
+              <nz-avatar
+                [nzSize]="64"
+                nzIcon="user"
+                nzSrc="{{ connection.ProfileImage }}"
+              ></nz-avatar>
+            </div>
+            <div nz-col nzXs="16">
+              <div class="name">{{ connection.Name }}</div>
+              <div class="connection-id">{{ connection.ConnectionId }}</div>
+              <div class="connection-time">
+                {{ connection.CreatedAt | date: "medium" }}
+              </div>
+            </div>
+
+            <div nz-col nzXs="2">
+              <button
+                nz-button
+                nzType="link"
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this connection?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="deleteConnection(connection.ID)"
+              >
+                <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </nz-card>
+    <ng-template #twitterButton>
+      <a nz-button nzType="link" (click)="connectTwitter()"
+        ><span nz-icon nzType="link" nzTheme="outline"></span> Connect</a
+      >
+    </ng-template>
+  </div>
+
+  <div nz-col nzXs="24" nzSm="12" nzMd="6">
+    <nz-card nzTitle="Pintrest" [nzExtra]="pintrestButton">
+      <ng-container *ngFor="let connection of connections">
+        <ng-container *ngIf="connection.ConnectionName == 'pintrest_board'">
+          <div nz-row class="mt-10 connection">
+            <div nz-col nzXs="6">
+              <nz-avatar
+                [nzSize]="64"
+                nzIcon="user"
+                nzSrc="{{ connection.ProfileImage }}"
+              ></nz-avatar>
+            </div>
+            <div nz-col nzXs="16">
+              <div class="name">{{ connection.Name }}</div>
+              <div class="connection-id">{{ connection.ConnectionId }}</div>
+              <div class="connection-time">
+                {{ connection.CreatedAt | date: "medium" }}
+              </div>
+            </div>
+
+            <div nz-col nzXs="2">
+              <button
+                nz-button
+                nzType="link"
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this connection?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="deleteConnection(connection.ID)"
+              >
+                <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </nz-card>
+    <ng-template #pintrestButton>
+      <a nz-button nzType="link" (click)="connectPintrest()"
+        ><span nz-icon nzType="link" nzTheme="outline"></span> Connect</a
+      >
+    </ng-template>
+  </div>
+</div>
