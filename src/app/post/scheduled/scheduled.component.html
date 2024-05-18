@@ -1,74 +1,138 @@
-<nz-timeline *ngIf="connections">
-  <nz-timeline-item *ngFor="let conn of connections">
-    <strong>{{ conn.PublishAt | date: "yyyy-MM-dd HH:mm" }}</strong>
-    <a nz-button nzType="link" (click)="1 == 1">Edit</a>
-    <a nz-button nzType="link" (click)="1">Delete</a>
-    
+<ng-container *ngIf="!loading">
+  <div class="m-10">
+    <nz-select
+      [ngModel]="status"
+      (ngModelChange)="statusChange($event)"
+      [nzLoading]="loading"
+      style="width: 500px"
+    >
+      <nz-option nzValue="" nzLabel="All"></nz-option>
+      <nz-option nzValue="scheduled" nzLabel="Scheduled"></nz-option>
+      <nz-option nzValue="draft" nzLabel="Draft"></nz-option>
+      <nz-option nzValue="published" nzLabel="Published"></nz-option>
+      <nz-option nzValue="failed" nzLabel="Failed"></nz-option>
+    </nz-select>
+  </div>
 
-    <ng-container *ngIf="connection.ConnectionName == 'twitter'">
+  <div style="padding-left: 5px">
+    <nz-timeline *ngIf="connections">
+      <nz-timeline-item
+        *ngFor="let conn of connections"
+        [nzDot]="getDotTemplate(conn.Status)"
+      >
+        <strong>{{ conn.PublishAt | date: "yyyy-MM-dd HH:mm" }}</strong>
+        <ng-container
+          *ngIf="conn.Status == 'scheduled' || conn.Status == 'draft'"
+        >
+          <a nz-button nzType="link" (click)="navigateToEdit(conn.ID)">Edit</a>
+          <a
+            nz-button
+            nzType="link"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this post?"
+            nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="deletePost(conn.ID)"
+            >Delete</a
+          >
+        </ng-container>
 
-      <app-twitter-card
-      [name]="connection.Name"
-      [profile_image]="connection.ProfileImage"
-      [images]="conn.Medias"
-      [postDate]="conn.PublishAt"
-      [postContent]="conn.Description"
-    ></app-twitter-card>
-    
-    </ng-container>
+        <ng-container *ngIf="connection.ConnectionName == 'twitter'">
+          <app-twitter-card
+            [name]="connection.Name"
+            [profile_image]="connection.ProfileImage"
+            [images]="conn.Medias"
+            [postDate]="conn.PublishAt"
+            [postContent]="conn.Description"
+          ></app-twitter-card>
+        </ng-container>
 
-    <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
+        <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
+          <app-facebook-card
+            [name]="connection.Name"
+            [profile_image]="connection.ProfileImage"
+            [images]="conn.Medias"
+            [postDate]="conn.PublishAt"
+            [postContent]="conn.Description"
+          ></app-facebook-card>
+        </ng-container>
 
-      <app-facebook-card
-      [name]="connection.Name"
-      [profile_image]="connection.ProfileImage"
-      [images]="conn.Medias"
-      [postDate]="conn.PublishAt"
-      [postContent]="conn.Description"
-    ></app-facebook-card>
-    
-    </ng-container>
+        <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
+          <app-linkedin-card
+            [name]="connection.Name"
+            [profile_image]="connection.ProfileImage"
+            [images]="conn.Medias"
+            [postDate]="conn.PublishAt"
+            [postContent]="conn.Description"
+          ></app-linkedin-card>
+        </ng-container>
 
-    <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
+        <ng-container *ngIf="connection.ConnectionName == 'instagram'">
+          <app-instagram-card
+            [name]="connection.Name"
+            [profile_image]="connection.ProfileImage"
+            [images]="conn.Medias"
+            [postDate]="conn.PublishAt"
+            [postContent]="conn.Description"
+          ></app-instagram-card>
+        </ng-container>
 
-      <app-linkedin-card
-      [name]="connection.Name"
-      [profile_image]="connection.ProfileImage"
-      [images]="conn.Medias"
-      [postDate]="conn.PublishAt"
-      [postContent]="conn.Description"
-    ></app-linkedin-card>
-    
-    </ng-container>
+        <ng-container *ngIf="connection.ConnectionName == 'pintrest_board'">
+          <app-pinterest-card
+            [name]="connection.Name"
+            [profile_image]="connection.ProfileImage"
+            [images]="conn.Medias"
+            [postDate]="conn.PublishAt"
+            [postContent]="conn.Description"
+          ></app-pinterest-card>
+        </ng-container>
+      </nz-timeline-item>
+    </nz-timeline>
+  </div>
 
+  <ng-container *ngIf="!connections">
+    <nz-empty
+      nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+      [nzNotFoundContent]="contentTpl"
+      [nzNotFoundFooter]="footerTpl"
+    >
+      <ng-template #contentTpl>
+        <span> No Post Avaliable </span>
+      </ng-template>
+      <ng-template #footerTpl>
+        <a nz-button nzType="primary" (click)="redirectAddNew()">Create Now</a>
+      </ng-template>
+    </nz-empty>
+  </ng-container>
 
-    <ng-container *ngIf="connection.ConnectionName == 'instagram'">
+  <ng-template #defaultDot>
+    <i nz-icon nzType="clock-circle" nzTheme="outline"></i>
+  </ng-template>
 
-      <app-instagram-card
-      [name]="connection.Name"
-      [profile_image]="connection.ProfileImage"
-      [images]="conn.Medias"
-      [postDate]="conn.PublishAt"
-      [postContent]="conn.Description"
-    ></app-instagram-card>
-    
-    </ng-container>
+  <ng-template #successDot>
+    <i nz-icon nzType="check-circle" nzTheme="outline" style="color: green"></i>
+  </ng-template>
 
+  <ng-template #errorDot>
+    <i nz-icon nzType="close-circle" nzTheme="outline" style="color: red"></i>
+  </ng-template>
 
-  </nz-timeline-item>
-</nz-timeline>
-
-<ng-container *ngIf="!connections">
-  <nz-empty
-    nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-    [nzNotFoundContent]="contentTpl"
-    [nzNotFoundFooter]="footerTpl"
-  >
-    <ng-template #contentTpl>
-      <span> No Post Avaliable </span>
-    </ng-template>
-    <ng-template #footerTpl>
-      <a nz-button nzType="primary" (click)="redirectAddNew()">Create Now</a>
-    </ng-template>
-  </nz-empty>
+  <ng-template #scheduledDot>
+    <i
+      nz-icon
+      nzType="calendar"
+      nzTheme="outline"
+      style="color: rgb(226, 226, 22)"
+    ></i>
+  </ng-template>
 </ng-container>
+
+<div class="animation-container" *ngIf="loading">
+  <lottie-player
+    src="/assets/animations/loading.json"
+    background="transparent"
+    speed="1"
+    loop
+    autoplay
+  >
+  </lottie-player>
+</div>

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     UploadMediaComponent,
@@ -23,7 +23,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     FormsModule,
     NzSpinModule,
     NzSpaceModule,
-    NzButtonModule
+    NzButtonModule,
+    HttpClientModule
   ], 
   exports: [
     UploadMediaComponent,

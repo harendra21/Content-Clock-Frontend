@@ -10,8 +10,6 @@ import { TwitterComponent } from './twitter/twitter.component';
 import { PintrestComponent } from './pintrest/pintrest.component';
 import { FacebookComponent } from './facebook/facebook.component';
 
-
-
 @NgModule({
   declarations: [
     AddComponent,

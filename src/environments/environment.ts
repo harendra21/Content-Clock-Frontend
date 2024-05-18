@@ -10,3 +10,4 @@ export const environment = {
     authSuccess: "http://localhost:4200/auth/success",
     authFailure: "http://localhost:4200/auth/failure"
 }
+// https://social-app-dtfau3loxa-uc.a.run.app

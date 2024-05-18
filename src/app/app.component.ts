@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from './auth/service/api.service'
+import { MenuService as Menu } from './services/menu.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,10 @@ export class AppComponent {
   public isAuthenticated: boolean = false;
   public connections: any[] = []
 
-  constructor(private apiService: ApiService){
+  constructor(
+    private apiService: ApiService,
+    private menuService: Menu
+  ){
     this.isAuthenticated = false
   }
 
@@ -24,13 +28,20 @@ export class AppComponent {
   }
 
   getMenuConnections(){
-    this.apiService.getRequest(`/menu`).subscribe((res: any) => {
-      if (res.status) {
-        this.connections = res.data
-      }else{
-        this.connections = []
-      }
+    // this.apiService.getRequest(`/menu`).subscribe((res: any) => {
+    //   if (res.status) {
+    //     this.connections = res.data
+    //   }else{
+    //     this.connections = []
+    //   }
+    // })
+
+    this.menuService.getConnections()
+
+    this.menuService.connections$.subscribe((data: any[]) => {
+      this.connections = data
     })
+
   }
 
   getMenuState(){

@@ -20,7 +20,6 @@ export class CreateComponent implements OnInit {
     // this.router.routeReuseStrategy.shouldReuseRoute = () => true;
     this.route.queryParams.subscribe((params) => {
       this.action = params['action'];
-
         if (this.action == undefined) {
           this.router.navigate([`/post/create/${this.route.snapshot.params['id']}`], {
             queryParams: { action: 'queue' },

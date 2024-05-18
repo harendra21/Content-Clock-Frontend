@@ -1,34 +1,55 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from 'src/app/auth/service/api.service';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpEventType,
+  HttpHeaders,
+  HttpParams,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 
 @Component({
   selector: 'app-upload-media',
   templateUrl: './upload-media.component.html',
-  styleUrls: ['./upload-media.component.css']
+  styleUrls: ['./upload-media.component.css'],
 })
 export class UploadMediaComponent implements OnInit {
-
-  public uploadUrl = `${environment.v1Api}/file-upload`;;
+  public uploadUrl = '';
   @Input() files: NzUploadFile[] = [];
   public filePaths: any[] = [];
   @Output() uploadedFiles = new EventEmitter<any[]>();
 
   public accessToken = this.apiService.getAccessToken();
   public headers: object = {
-    Authorization: `Bearer ${this.accessToken}`,
+    'Content-Type': `application/octet-stream`,
   };
-
 
   constructor(
     private apiService: ApiService,
     private msg: NzMessageService,
-  ) { }
+    private http: HttpClient,
+  ) {}
 
   ngOnInit() {
+    setTimeout(() => {
+      if (this.files.length > 0) {
+        this.filePaths = this.files.map((file: NzUploadFile) => file.url);
+      }
+    }, 1000);
+  }
+
+  getSignedUrl(fileName: string, fileType: string) {
+    var data: HttpParams = new HttpParams();
+    data = data.append('filename', fileName);
+    data = data.append('type', fileType);
+
+    return this.apiService.getRequest(`/google-storage-signed-url`, true, data);
   }
 
   beforeUpload = (
@@ -37,9 +58,13 @@ export class UploadMediaComponent implements OnInit {
   ): Observable<boolean> =>
     new Observable((observer: Observer<boolean>) => {
       const isJpgOrPng =
-        file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'video/mp4';
+        file.type === 'image/jpeg' ||
+        file.type === 'image/png' ||
+        file.type === 'video/mp4';
       if (!isJpgOrPng) {
-        this.msg.error('You can only upload Images (jpg, png) and videos (mp4) file!');
+        this.msg.error(
+          'You can only upload Images (jpg, png) and videos (mp4) file!',
+        );
         observer.complete();
         return;
       }
@@ -59,30 +84,118 @@ export class UploadMediaComponent implements OnInit {
         // this.msg.info('Uploading...');
         break;
       case 'done':
-        var res = info.file.response;
+        // var res = info.file.response;
 
-        if (res.status) {
-          this.msg.success(res.message);
-          let path = res.data.path;
-          this.filePaths.push(path);
-          this.uploadedFiles.emit(this.filePaths);
-        } else {
-          this.msg.error(res.message);
-        }
+        // if (res.status) {
+        //   this.msg.success(res.message);
+        //   let path = res.data.path;
+        //   this.filePaths.push(path);
+        //   this.uploadedFiles.emit(this.filePaths);
+        // } else {
+        //   this.msg.error(res.message);
+        // }
 
         break;
       case 'error':
         this.msg.error('Network error');
         break;
       case 'removed':
-        var file = info.file.response.data.path;
-        let index = this.filePaths.indexOf(file);
-        if (index !== -1) {
-          this.filePaths.splice(index, 1);
+        var file: any;
+        if (info.file.response) {
+          file = info.file.response.data.path;
+        } else {
+          file = info.file.url;
         }
+        this.filePaths = this.filePaths.filter((filePath) => filePath !== file);
         this.uploadedFiles.emit(this.filePaths);
         break;
     }
   }
 
+  getRandomId() {
+    // Generate a random 16-character string
+    return Math.random().toString(36).substring(2, 18);
+  }
+
+  getFileExtension(filename: string) {
+    // Get the file extension by splitting the filename by '.'
+    return filename.split('.').pop();
+  }
+
+  generateRandomFilename(fileName: string) {
+    // 
+    const fileExtension = this.getFileExtension(fileName);
+    const randomId = this.getRandomId();
+    const newFileName = `${randomId}.${fileExtension}`;
+    
+    return newFileName;
+  }
+
+  customUploadReq = (item: NzUploadXHRArgs): Subscription => {
+    var fileName = this.generateRandomFilename(item.file.name);
+    var filePath = `social/uploads/` + fileName;
+    let fileType: string = item.file.type || '';
+    return this.getSignedUrl(filePath, fileType).subscribe(
+      (res: any) => {
+        if (res.status) {
+          this.uploadUrl = res.data.url;
+
+          console.log(this.uploadUrl);
+
+          const formData = new FormData();
+          formData.append('files', item.file as any);
+
+          const headers = new HttpHeaders({
+            'Content-Type': fileType,
+          });
+
+          return this.http
+            .put(res.data.url, item.file, {
+              headers: headers,
+              reportProgress: true,
+              observe: 'events',
+            })
+            .subscribe(
+              (event: any) => {
+                if (event.type === HttpEventType.UploadProgress) {
+                  if (event.total! > 0) {
+                    (event as any).percent =
+                      (event.loaded / event.total!) * 100;
+                  }
+                  if (item.onProgress) {
+                    item.onProgress(event, item.file);
+                  }
+                } else if (event.type === HttpEventType.Response) {
+                  if (item.onSuccess) {
+                    this.msg.success('Upload success');
+                    var path =
+                      `https://storage.googleapis.com/with-code-example/` +
+                      filePath;
+                    this.filePaths.push(path);
+                    this.uploadedFiles.emit(this.filePaths);
+                    item.onSuccess(event.body, item.file, event);
+                  }
+                }
+              },
+              (err: any) => {
+                if (item.onError) {
+                  item.onError(err, item.file);
+                }
+              },
+            );
+        } else {
+          if (item.onError) {
+            this.msg.error(res.message);
+            item.onError(res, item.file);
+          }
+        }
+      },
+      (err: any) => {
+        if (item.onError) {
+          this.msg.error(err.message);
+          item.onError(err, item.file);
+        }
+      },
+    );
+  };
 }

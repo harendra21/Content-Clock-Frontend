@@ -10,7 +10,7 @@ import { InstagramCardComponent } from './instagram-card/instagram-card.componen
 import { LinkedinCardComponent } from './linkedin-card/linkedin-card.component';
 import { ViewComponent } from './view/view.component';
 import { PreviewComponent } from './preview/preview.component';
-
+import { PinterestCardComponent } from './pinterest-card/pinterest-card.component';
 @NgModule({
   declarations: [
     AddComponent,
@@ -19,7 +19,8 @@ import { PreviewComponent } from './preview/preview.component';
     InstagramCardComponent,
     LinkedinCardComponent,
     ViewComponent,
-    PreviewComponent
+    PreviewComponent,
+    PinterestCardComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { PreviewComponent } from './preview/preview.component';
     FacebookCardComponent,
     TwitterCardComponent,
     InstagramCardComponent,
-    LinkedinCardComponent
+    LinkedinCardComponent,
+    PinterestCardComponent
   ]
 })
 export class SchedulerModule { }

@@ -1,12 +1,12 @@
 <nz-upload
   nzType="drag"
-  [nzAction]="uploadUrl"
   [nzHeaders]="headers"
   nzListType="picture"
   [(nzFileList)]="files"
   [nzBeforeUpload]="beforeUpload"
   (nzChange)="handleChange($event)"
   [nzMultiple]="true"
+  [nzCustomRequest]="customUploadReq"
 >
   <p class="ant-upload-drag-icon">
     <span nz-icon nzType="inbox"></span>

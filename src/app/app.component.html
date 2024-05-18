@@ -9,10 +9,10 @@
     <div class="sidebar-logo">
       <a routerLink="/admin/dashboard">
         <img
-          src="https://res.cloudinary.com/harendra21/image/upload/h_100/With_Code_Example_pemcaz.png"
+          src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock_hsLTMDOd.png"
           alt="logo"
         />
-        <h1>Admin Panel</h1>
+        <h1>Content Clock</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="light" nzMode="inline">
@@ -21,17 +21,9 @@
         <span><a routerLink="/admin/dashboard">Dashboard</a></span>
       </li>
 
-      <li nz-submenu nzTitle="Scheduler" nzIcon="schedule">
-        <ul>
-          <li nz-menu-item nzMatchRouterExact>
-            <span nz-icon nzType="eye" nzTheme="outline"></span>
-            <span><a routerLink="/scheduler/view">View All</a></span>
-          </li>
-          <li nz-menu-item nzMatchRouterExact>
-            <span nz-icon nzType="appstore-add" nzTheme="outline"></span>
-            <span><a routerLink="/scheduler/add">Add New</a></span>
-          </li>
-        </ul>
+      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
+        <span nz-icon nzType="appstore-add"></span>
+        <span><a routerLink="/scheduler/add">Bulk</a></span>
       </li>
 
       <ng-container *ngFor="let connection of connections">

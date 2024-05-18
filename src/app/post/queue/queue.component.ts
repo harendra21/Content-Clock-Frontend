@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ApiService } from 'src/app/auth/service/api.service';
 
@@ -13,6 +15,9 @@ export class QueueComponent implements OnInit {
   public isVisible: boolean = false;
   public slot: any;
   public schedulesPost: any[] = [];
+  public postId: number = 0;
+  public isEdit: boolean = false;
+  public loading: boolean = true
 
   public postingTimes: any = {
     Monday: ['04:00 AM', '10:00 AM', '11:00 AM', '04:00 PM', '07:00 PM'],
@@ -20,18 +25,41 @@ export class QueueComponent implements OnInit {
     Wednesday: ['09:00 AM', '11:00 AM', '12:00 PM', '03:00 PM', '04:00 PM'],
     Thursday: ['10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '04:00 PM'],
     Friday: ['08:00 AM', '11:00 AM', '01:00 PM', '02:00 PM', '06:00 PM'],
-    Saturday: ['08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM', '08:05 PM'],
+    Saturday: ['08:00 AM', '09:00 AM', '10:00 AM', '04:00 PM', '08:05 PM'],
     Sunday: ['10:00 AM', '11:00 AM', '03:00 PM', '07:00 PM', '12:10 AM'],
   };
   constructor(
     private modalService: NzModalService,
     private apiService: ApiService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private msgService: NzMessageService
   ) {}
 
+  
+  sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async runLoopWithDelay() {
+    for (let i = 0; i < 50; i++) {
+      if (Object.keys(this.connection).length !== 0){
+        this.getScheduledPosts(this.connection.ConnectionId);
+        break
+      }
+      await this.sleep(100);
+    }
+  }
   ngOnInit() {
-    setTimeout(() => {
-      this.getScheduledPosts(this.connection.ConnectionId);
-    }, 350);
+    this.runLoopWithDelay();
+    
+    this.route.queryParams.subscribe(params => {
+      if (params['edit']) {
+        this.editPost(params['edit']);
+        this.isEdit = true;
+      }
+    });
+
   }
 
   handleCancel() {
@@ -48,8 +76,8 @@ export class QueueComponent implements OnInit {
     this.isVisible = true;
   }
 
-  editPost(post: any) {
-    console.log(post);
+  editPost(postId: number) {
+    this.postId = postId;
     this.isVisible = true;
   }
 
@@ -64,6 +92,11 @@ export class QueueComponent implements OnInit {
       },
       nzOnOk: () => {
         this.isVisible = false;
+        this.postId = 0;
+        if (this.isEdit) {
+          this.router.navigate([`/post/create/${this.connection.ConnectionId}`], { queryParams: { "action": "queue" } })
+          this.isEdit = false;
+        }
       },
     });
   }
@@ -74,13 +107,19 @@ export class QueueComponent implements OnInit {
         `/social-posts?connectionId=${connection_id}&status=scheduled`,
       )
       .subscribe((res: any) => {
+        this.loading = false
         if (res.status) {
           this.schedulesPost = res.data;
           this.schedules = this.assignPostsToSlots(
             this.postingTimes,
             this.schedulesPost,
           );
+        }else{
+          this.msgService.error(res.message)
         }
+      }, err => {
+        this.loading = false
+        this.msgService.error(err.message)
       });
   }
 

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/auth/service/api.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { environment } from 'src/environments/environment';
-
+import { MenuService as Menu } from 'src/app/services/menu.service'
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -11,15 +11,20 @@ import { environment } from 'src/environments/environment';
 })
 export class AddComponent implements OnInit {
   public connections: any[] = []
+  public loading: boolean = false
+
   constructor(
     private apiService: ApiService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private menuService: Menu
   ) { }
 
   ngOnInit() {
 
+    this.menuService.getConnections()
+    this.loading = true
     this.apiService.getRequest("/connections", true, new HttpParams()).subscribe((res: any) => {
-
+      this.loading = false
       if(res.status){
         this.connections = res.data.results
       }else{
@@ -27,12 +32,14 @@ export class AddComponent implements OnInit {
       }
 
     }, err => {
+      this.loading = false
       this.alertService.showAlert(err.message)
     })
 
   }
 
   deleteConnection(id: any){
+    this.loading = true
     this.apiService.deleteRequest(`/connection/${id}`).subscribe((res: any) => {
 
       if(res.status){
@@ -43,6 +50,7 @@ export class AddComponent implements OnInit {
       }
 
     }, err => {
+      this.loading = false
       this.alertService.showAlert(err.message)
     })
   }

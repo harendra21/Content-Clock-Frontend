@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AntModule } from '../ant.module';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AntModule,
     GoogleChartsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzCalendarModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
