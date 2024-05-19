@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +13,40 @@ export class AuthService {
     private apiService: ApiService
   ) { }
 
+  private isAuthSubject = new BehaviorSubject<boolean>(false); // You can change the type and initial value as needed
+  public isAuth$ = this.isAuthSubject.asObservable();
+
+  setAuthStatus(value: boolean) {
+    this.isAuthSubject.next(value);
+  }
+
+  getAuthStatus(): boolean {
+    return this.isAuthSubject.value;
+  }
+
   canActivate() {
-    var isAuthenticated = sessionStorage.getItem('isAuthenticated')
+    var isAuthenticated = this.apiService.getAccessToken()
 
     if (isAuthenticated) {
+      this.setAuthStatus(true)
       return true
     }
 
     return this.apiService.getRequest(`/check-auth`).subscribe((res: any) => {
       if (res.status) {
-        sessionStorage.setItem('isAuthenticated', 'true')
+        this.setAuthStatus(true)
         return true
       } else {
+        this.setAuthStatus(false)
         this.route.navigate(["/auth/login"])
         return false
       }
     }, err => {
+      this.setAuthStatus(false)
       this.route.navigate(["/auth/login"])
       return false
     })
   }
+  
 
 }

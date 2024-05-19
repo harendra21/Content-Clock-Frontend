@@ -40,7 +40,7 @@
     >
 
     <div class="mt-10">
-      <button nz-button nzType="dashed" (click)="showModal()">
+      <button nz-button nzType="dashed" (click)="showModal()" style="width: 100%;">
         <span nz-icon nzType="bulb" nzTheme="fill"></span> Write With AI
       </button>
     </div>
@@ -61,25 +61,10 @@
     </div> -->
 
     <div class="clearfix mt-10">
-      <nz-upload
-        nzType="drag"
-        [nzAction]="uploadUrl"
-        [nzHeaders]="headers"
-        nzListType="picture"
-        [(nzFileList)]="files"
-        [nzBeforeUpload]="beforeUpload"
-        (nzChange)="handleChange($event)"
-        [nzMultiple]="true"
-      >
-        <p class="ant-upload-drag-icon">
-          <span nz-icon nzType="inbox"></span>
-        </p>
-        <p class="ant-upload-text">Click or drag file to this area to upload</p>
-        <p class="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibit from uploading
-          company data or other band files
-        </p>
-      </nz-upload>
+      <app-upload-media
+          [files]="files"
+          (uploadedFiles)="uploadedFiles($event)"
+        ></app-upload-media>
     </div>
 
     <div class="mt-10">
@@ -114,7 +99,7 @@
             <app-facebook-card
               [name]="selected.Name"
               [profile_image]="selected.ProfileImage"
-              [images]="filePaths"
+              [images]="images"
               [postDate]="postDate"
               [postContent]="postContent"
             ></app-facebook-card>
@@ -131,7 +116,7 @@
             <app-instagram-card
               [name]="selected.Name"
               [profile_image]="selected.ProfileImage"
-              [images]="filePaths"
+              [images]="images"
               [postDate]="postDate"
               [postContent]="postContent"
             ></app-instagram-card>
@@ -148,7 +133,7 @@
             <app-twitter-card
               [name]="selected.Name"
               [profile_image]="selected.ProfileImage"
-              [images]="filePaths"
+              [images]="images"
               [postDate]="postDate"
               [postContent]="postContent"
             ></app-twitter-card>
@@ -165,12 +150,32 @@
             <app-linkedin-card
               [name]="selected.Name"
               [profile_image]="selected.ProfileImage"
-              [images]="filePaths"
+              [images]="images"
               [postDate]="postDate"
               [postContent]="postContent"
             ></app-linkedin-card>
           </nz-tab>
         </ng-container>
+
+
+        <ng-container *ngIf="selected.ConnectionName == 'pintrest_board'">
+          <nz-tab [nzTitle]="title">
+            <ng-template #title>
+              <span nz-icon nzType="pushpin" nzTheme="outline"></span>
+              {{ selected.Name }}
+            </ng-template>
+
+            <app-pinterest-card
+              [name]="selected.Name"
+              [profile_image]="selected.ProfileImage"
+              [images]="images"
+              [postDate]="postDate"
+              [postContent]="postContent"
+            ></app-pinterest-card>
+          </nz-tab>
+        </ng-container>
+
+
       </ng-container>
     </nz-tabset>
   </div>
@@ -185,48 +190,6 @@
   (nzOnOk)="handleOk()"
 >
   <ng-container *nzModalContent>
-    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-      <input
-        type="text"
-        nz-input
-        placeholder="Input your topic"
-        [(ngModel)]="aiText"
-      />
-    </nz-input-group>
-    <ng-template #suffixIconButton>
-      <button nz-button nzType="primary" nzSearch>
-        <span nz-icon nzType="bulb" nzTheme="fill" (click)="writeAi()"></span>
-      </button>
-    </ng-template>
-
-    <ng-container *ngIf="aiPost != ''">
-      <p class="content">{{ aiPost }}</p>
-
-      <nz-space>
-        <button *nzSpaceItem nz-button nzType="primary" nzSearch>
-          <span
-            nz-icon
-            nzType="reload"
-            nzTheme="outline"
-            (click)="writeAi()"
-          ></span>
-        </button>
-
-        <button *nzSpaceItem nz-button nzType="primary" nzSearch>
-          <span
-            nz-icon
-            nzType="check-circle"
-            nzTheme="fill"
-            (click)="postContent = aiPost; isVisible = false"
-          ></span>
-        </button>
-      </nz-space>
-    </ng-container>
-
-    <div *ngIf="loadingAi" class="text-center">
-      <div class="spin-center">
-        <nz-spin nzSimple></nz-spin>
-      </div>
-    </div>
+    <app-ai-content (generatedContent)="generatedContent($event)"></app-ai-content>
   </ng-container>
 </nz-modal>

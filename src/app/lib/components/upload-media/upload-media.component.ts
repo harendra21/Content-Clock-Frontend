@@ -139,9 +139,6 @@ export class UploadMediaComponent implements OnInit {
       (res: any) => {
         if (res.status) {
           this.uploadUrl = res.data.url;
-
-          console.log(this.uploadUrl);
-
           const formData = new FormData();
           formData.append('files', item.file as any);
 

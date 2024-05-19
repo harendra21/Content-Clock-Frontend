@@ -8,8 +8,11 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ApiService {
+  
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
+
+  
 
   getRequest(uri: string, auth: boolean = true, params: HttpParams = new HttpParams()){
 
@@ -58,7 +61,7 @@ export class ApiService {
   }
 
   logOut(){
-    this.cookieService.delete('accessToken')
+    this.cookieService.delete('accessToken', '/')
     this.router.navigate(['/auth/login'])
   }
 

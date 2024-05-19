@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from './auth/service/api.service'
 import { MenuService as Menu } from './services/menu.service';
+import { AuthService } from './auth/service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,27 +15,26 @@ export class AppComponent {
 
   constructor(
     private apiService: ApiService,
-    private menuService: Menu
+    private menuService: Menu,
+    private authService: AuthService
   ){
     this.isAuthenticated = false
   }
 
   ngOnInit(){
     this.getMenuState()
-    if(sessionStorage.getItem('isAuthenticated') == 'true'){
-      this.isAuthenticated = true
-      this.getMenuConnections()
-    }
+
+    this.authService.isAuth$
+    .subscribe((data: boolean) => {
+      this.isAuthenticated = data
+      console.log(data)
+      if (data){
+        this.getMenuConnections()
+      }
+    })
   }
 
   getMenuConnections(){
-    // this.apiService.getRequest(`/menu`).subscribe((res: any) => {
-    //   if (res.status) {
-    //     this.connections = res.data
-    //   }else{
-    //     this.connections = []
-    //   }
-    // })
 
     this.menuService.getConnections()
 
@@ -63,6 +63,7 @@ export class AppComponent {
   }
 
   logout(){
+    this.authService.setAuthStatus(false)
     this.apiService.logOut()
   }
 

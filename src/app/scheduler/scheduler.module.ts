@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AntModule } from '../ant.module';
 import { SchedulerRoutingModule } from './scheduler-routing.module';
@@ -11,6 +11,7 @@ import { LinkedinCardComponent } from './linkedin-card/linkedin-card.component';
 import { ViewComponent } from './view/view.component';
 import { PreviewComponent } from './preview/preview.component';
 import { PinterestCardComponent } from './pinterest-card/pinterest-card.component';
+import { LibModule } from '../lib/lib.module';
 @NgModule({
   declarations: [
     AddComponent,
@@ -20,14 +21,15 @@ import { PinterestCardComponent } from './pinterest-card/pinterest-card.componen
     LinkedinCardComponent,
     ViewComponent,
     PreviewComponent,
-    PinterestCardComponent
+    PinterestCardComponent,
   ],
   imports: [
-    CommonModule,
     SchedulerRoutingModule,
     AntModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    LibModule
   ],
   exports: [
     FacebookCardComponent,
@@ -35,6 +37,7 @@ import { PinterestCardComponent } from './pinterest-card/pinterest-card.componen
     InstagramCardComponent,
     LinkedinCardComponent,
     PinterestCardComponent
-  ]
+  ],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SchedulerModule { }

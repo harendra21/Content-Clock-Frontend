@@ -21,7 +21,7 @@ export class AddNewComponent implements OnInit {
   public aiText: string = '';
   public files: any[] = [];
   public images: any[] = [];
-  public loading: boolean = false
+  public loading: boolean = false;
 
   constructor(
     private msg: NzMessageService,
@@ -38,21 +38,22 @@ export class AddNewComponent implements OnInit {
     }
 
     if (this.postId > 0) {
-      this.loading = true
+      this.loading = true;
       this.apiService.getRequest(`/social-post/${this.postId}`).subscribe(
         (res: any) => {
-          this.loading = false
+          this.loading = false;
           if (res.status) {
             const postData = res.data;
             this.postContent = postData.Description;
             this.link = postData.Link;
             this.title = postData.Title;
             this.date = postData.PublishAt;
-            this.images = postData.Medias != "" ? postData.Medias.split(',') : [];
+            this.images =
+              postData.Medias != '' ? postData.Medias.split(',') : [];
 
             if (this.images.length > 0) {
               var files: any[] = [];
-              
+
               this.images.forEach((image: string, index: number) => {
                 files.push({
                   uid: index,
@@ -68,7 +69,7 @@ export class AddNewComponent implements OnInit {
           }
         },
         (err) => {
-          this.loading = false
+          this.loading = false;
           this.msg.error(err.error.message);
         },
       );

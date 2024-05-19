@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/auth/service/api.service';
 import { AiService } from 'src/app/services/ai.service';
 import { environment } from 'src/environments/environment';
-import { Observable, Observer } from 'rxjs';
-
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -49,57 +47,6 @@ export class AddComponent implements OnInit {
   connectionToggle(event: any) {
   }
 
-  beforeUpload = (
-    file: NzUploadFile,
-    _fileList: NzUploadFile[],
-  ): Observable<boolean> =>
-    new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng =
-        file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'video/mp4';
-      if (!isJpgOrPng) {
-        this.msg.error('You can only upload Images (jpg, png) and videos (mp4) file!');
-        observer.complete();
-        return;
-      }
-      const isWithinSize = file.size! / 1024 / 1024 < 100;
-      if (!isWithinSize) {
-        this.msg.error('Image must smaller than 100MB!');
-        observer.complete();
-        return;
-      }
-      observer.next(isJpgOrPng && isWithinSize);
-      observer.complete();
-    });
-
-  handleChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {
-      case 'uploading':
-        // this.msg.info('Uploading...');
-        break;
-      case 'done':
-        var res = info.file.response;
-
-        if (res.status) {
-          this.msg.success(res.message);
-          let path = res.data.path;
-          this.filePaths.push(path);
-        } else {
-          this.msg.error(res.message);
-        }
-
-        break;
-      case 'error':
-        this.msg.error('Network error');
-        break;
-      case 'removed':
-        var file = info.file.response.data.path;
-        let index = this.filePaths.indexOf(file);
-        if (index !== -1) {
-          this.filePaths.splice(index, 1);
-        }
-        break;
-    }
-  }
 
   showModal(): void {
     this.isVisible = true;
@@ -136,7 +83,7 @@ export class AddComponent implements OnInit {
     return paragraph.replace("  ", "").replace(regex, '');
 }
 
-  schedulePost(draft: boolean = false) {
+  schedulePost(isDraft: boolean = false) {
     if (this.postContent == "") {
       this.msg.error("Enter post content"); return;
     }
@@ -148,32 +95,45 @@ export class AddComponent implements OnInit {
     }
     var connectionIds: any[] = [];
     this.selectedConnections.forEach((connection: any) => {
-      connectionIds.push(connection.ConnectionId);
-    });
-    let PublishStatus = "scheduled"
-    if(draft){
-      PublishStatus = "draft"
-    }
-    
-    
-    var body = {
-      "Title": "Post Scheduled",
-      "Content": this.postContent,
-      "ConnectionIds": connectionIds.join(","),
-      "PublishAt": this.postDate,
-      "Tags": "js",
-      "Medias": this.filePaths.join(","),
-      "PublishStatus": PublishStatus
-    }
+      const connectionId = connection.ConnectionId
 
-    this.apiService.postRequest(`/posts`, body).subscribe((res: any) => {
-      if (res.status) {
-        this.msg.success(res.message);
-        this.router.navigate(['/scheduler/view']);
-      } else {
-        this.msg.error(res.message);
+      let body = {
+        post_id: 0,
+        connection_id: connectionId,
+        description: this.postContent,
+        image: this.images.join(','),
+        link: "",
+        publish_at: this.postDate,
+        title: "",
+        type: 'post',
+        status: 'scheduled',
+      };
+      if (isDraft) {
+        body.status = 'draft';
       }
+
+      this.apiService.postRequest(`/social-posts`, body).subscribe((res: any) => {
+        if (res.status) {
+          this.msg.success("Post added")
+        }else{
+          this.msg.success(res.message)
+        }
+      }, err => {
+        this.msg.success(err.message)
+      });
+
     });
+    
     
   }
+  public images: any[] = [];
+  uploadedFiles(files: any) {
+    this.images = files;
+  }
+
+  generatedContent(content: any) {
+    this.postContent = content;
+    this.isVisible = false;
+  }
+
 }
