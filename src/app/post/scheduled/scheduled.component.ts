@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ApiService } from 'src/app/auth/service/api.service';
@@ -8,14 +8,14 @@ import { ApiService } from 'src/app/auth/service/api.service';
   templateUrl: './scheduled.component.html',
   styleUrls: ['./scheduled.component.css']
 })
-export class ScheduledComponent implements OnInit {
+export class ScheduledComponent implements OnInit, AfterViewInit {
 
   @Input() connection: any;
 
-  @ViewChild('defaultDot', { static: true }) defaultDot?: TemplateRef<any>;
-  @ViewChild('successDot', { static: true }) successDot?: TemplateRef<any>;
-  @ViewChild('errorDot', { static: true }) errorDot?: TemplateRef<any>;
-  @ViewChild('scheduledDot', { static: true }) scheduledDot?: TemplateRef<any>;
+  @ViewChild('defaultDot', { static: true }) defaultDot: TemplateRef<any> | null = null;
+  @ViewChild('successDot', { static: true }) successDot: TemplateRef<any> | null = null;
+  @ViewChild('errorDot', { static: true }) errorDot: TemplateRef<any> | null = null;
+  @ViewChild('scheduledDot', { static: true }) scheduledDot: TemplateRef<any> | null = null;
 
   public status: string = "";
   public loading: boolean = false;
@@ -31,6 +31,9 @@ export class ScheduledComponent implements OnInit {
     
     const id = this.route.snapshot.params['id'];
     this.getScheduledPosts(id);
+  }
+
+  ngAfterViewInit(): void {
   }
 
   statusChange(status: string){
@@ -81,6 +84,8 @@ export class ScheduledComponent implements OnInit {
     switch (status) {
       case 'published':
         return this.successDot;
+      case 'sending':
+        return this.scheduledDot;
       case 'draft':
         return this.scheduledDot;
       case 'failed':
