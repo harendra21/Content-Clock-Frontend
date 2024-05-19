@@ -34,7 +34,7 @@
   padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #eaeaea;
+  background: #fff;
   transition: all .3s;
 }
 
@@ -87,4 +87,11 @@ body{
 
 .ant-scroll-number-custom-component{
   top: 80%;
+}
+
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
 }

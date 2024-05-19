@@ -4,7 +4,7 @@ import { AuthService } from './auth/service/auth.service';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'admin/dashboard', pathMatch: 'full',
+    path: '', redirectTo: 'home', pathMatch: 'full',
   },
   {
     path: 'auth',
@@ -26,7 +26,7 @@ const routes: Routes = [
     canActivate: [AuthService]
   },
   {
-    path: 'admin/dashboard',
+    path: 'home',
     loadChildren: () => import('./home/home.module').then(mod => mod.HomeModule),
     canActivate: [AuthService]
   },

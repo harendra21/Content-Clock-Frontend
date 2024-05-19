@@ -44,7 +44,7 @@ export class LoginComponent {
       //   formData.email,
       //   formData.password
       // ).then((resp: any) => {
-      //   this.router.navigate(['/admin/dashboard']);
+      //   this.router.navigate(['/home']);
       //   this.alert.showAlert("Logged in", "success")
       // }, err => {
       //   this.alert.showAlert(err.message)

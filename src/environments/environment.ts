@@ -8,6 +8,7 @@ export const environment = {
     v1Api: "http://localhost:8080/api/v1",
     apiHost: "http://localhost:8080",
     authSuccess: "http://localhost:4200/auth/success",
-    authFailure: "http://localhost:4200/auth/failure"
+    authFailure: "http://localhost:4200/auth/failure",
+    lgBreakpoint: 992
 }
 // https://social-app-dtfau3loxa-uc.a.run.app

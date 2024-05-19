@@ -8,6 +8,7 @@ export const environment = {
     v1Api: "https://social-app-dtfau3loxa-uc.a.run.app/api/v1",
     apiHost: "https://social-app-dtfau3loxa-uc.a.run.app",
     authSuccess: "https://content-clock.web.app/auth/success",
-    authFailure: "https://content-clock.web.app/auth/failure"
+    authFailure: "https://content-clock.web.app/auth/failure",
+    lgBreakpoint: 992
 }
 // https://social-app-dtfau3loxa-uc.a.run.app

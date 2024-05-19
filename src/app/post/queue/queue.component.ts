@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ApiService } from 'src/app/auth/service/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-queue',
@@ -52,6 +53,7 @@ export class QueueComponent implements OnInit {
   }
   ngOnInit() {
     this.runLoopWithDelay();
+    this.addPostModal()
     
     this.route.queryParams.subscribe(params => {
       if (params['edit']) {
@@ -60,6 +62,16 @@ export class QueueComponent implements OnInit {
       }
     });
 
+    this.addPostModal()
+
+  }
+
+  public modalWidth = "80%"
+  addPostModal(): void {
+    if (window.innerWidth <= environment.lgBreakpoint) {
+      console.log()
+      this.modalWidth = "100%"
+    }
   }
 
   handleCancel() {

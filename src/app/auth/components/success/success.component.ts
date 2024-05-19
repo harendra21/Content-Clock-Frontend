@@ -22,7 +22,7 @@ export class SuccessComponent implements OnInit {
     expiryDate.setTime(expiryDate.getTime() + (expirySeconds * 1000));
     this.cookieService.set('accessToken', accessToken, expiryDate, "/");
     setTimeout(() => {
-      this.router.navigate(['admin/dashboard'])
+      this.router.navigate(['/home'])
     }, 1500)
   }
 

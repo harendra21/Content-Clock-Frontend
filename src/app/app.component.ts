@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from './auth/service/api.service'
 import { MenuService as Menu } from './services/menu.service';
 import { AuthService } from './auth/service/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent {
   public isCollapsed: boolean = true;
   public isAuthenticated: boolean = false;
   public connections: any[] = []
+  private lgBreakpoint = environment.lgBreakpoint;
 
   constructor(
     private apiService: ApiService,
@@ -27,7 +29,6 @@ export class AppComponent {
     this.authService.isAuth$
     .subscribe((data: boolean) => {
       this.isAuthenticated = data
-      console.log(data)
       if (data){
         this.getMenuConnections()
       }
@@ -65,6 +66,15 @@ export class AppComponent {
   logout(){
     this.authService.setAuthStatus(false)
     this.apiService.logOut()
+  }
+
+  onCollapsedChange(collapsed: boolean): void {
+    this.changeMenuState(collapsed)
+  }
+  onMenuItemClick(): void {
+    if (window.innerWidth <= this.lgBreakpoint) {
+      this.changeMenuState(true)
+    }
   }
 
 

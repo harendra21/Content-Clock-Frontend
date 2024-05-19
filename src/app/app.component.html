@@ -1,15 +1,20 @@
-<nz-layout class="app-layout">
+<nz-layout class="layout">
   <nz-sider
-    *ngIf="isCollapsed && isAuthenticated"
+    *ngIf="isAuthenticated"
     class="menu-sidebar"
     nzWidth="256px"
     [nzTrigger]="null"
     nzTheme="light"
+    nzCollapsible
+    nzBreakpoint="lg"
+    [nzCollapsedWidth]="0"
+    (nzCollapsedChange)="onCollapsedChange($event)"
+    [(nzCollapsed)]="isCollapsed"
   >
     <div class="sidebar-logo">
-      <a routerLink="/admin/dashboard">
+      <a routerLink="/home">
         <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock_hsLTMDOd.png"
+          src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock-logo_DeqbqhU2.png"
           alt="logo"
         />
         <h1>Content Clock</h1>
@@ -18,12 +23,12 @@
     <ul nz-menu nzTheme="light" nzMode="inline">
       <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
         <span nz-icon nzType="dashboard"></span>
-        <span><a routerLink="/admin/dashboard">Dashboard</a></span>
+        <span><a routerLink="/home" (click)="onMenuItemClick()">Dashboard</a></span>
       </li>
 
       <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
         <span nz-icon nzType="appstore-add"></span>
-        <span><a routerLink="/scheduler/add">Bulk</a></span>
+        <span><a routerLink="/scheduler/add" (click)="onMenuItemClick()">Bulk</a></span>
       </li>
 
       <ng-container *ngFor="let connection of connections">
@@ -84,7 +89,7 @@
           </nz-badge>
 
           <span
-            ><a routerLink="post/create/{{ connection.connection_id }}">{{
+            ><a routerLink="post/create/{{ connection.connection_id }}" (click)="onMenuItemClick()">{{
               connection.name
             }}</a></span
           >
@@ -137,7 +142,7 @@
 
       <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
         <span nz-icon nzType="link" nzTheme="outline"></span>
-        <span><a routerLink="/connections">Connections</a></span>
+        <span><a routerLink="/connections" (click)="onMenuItemClick()">Connections</a></span>
       </li>
 
       <li nz-menu-item nzMatchRouter>
