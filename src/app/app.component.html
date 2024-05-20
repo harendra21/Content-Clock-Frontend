@@ -12,22 +12,22 @@
     [(nzCollapsed)]="isCollapsed"
   >
     <div class="sidebar-logo">
+      
       <a routerLink="/home">
-        <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock-logo_DeqbqhU2.png"
-          alt="logo"
-        />
+        
+          <nz-avatar [nzShape]="'square'" nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock-logo_DeqbqhU2.png" ></nz-avatar>
+        
         <h1>Content Clock</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="light" nzMode="inline">
       <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
-        <span nz-icon nzType="dashboard"></span>
-        <span><a routerLink="/home" (click)="onMenuItemClick()">Dashboard</a></span>
+        <nz-avatar nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/home_tBZN40zt.png"></nz-avatar> &nbsp; 
+        <span><a routerLink="/home" (click)="onMenuItemClick()">Home</a></span>
       </li>
 
       <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
-        <span nz-icon nzType="appstore-add"></span>
+        <nz-avatar nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/bulk-icon_HpS3YP0j.png"></nz-avatar> &nbsp;
         <span><a routerLink="/scheduler/add" (click)="onMenuItemClick()">Bulk</a></span>
       </li>
 
@@ -141,12 +141,13 @@
       </ng-template>
 
       <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
-        <span nz-icon nzType="link" nzTheme="outline"></span>
+        
+        <nz-avatar nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/link_N7Fxtbu3.png"></nz-avatar> &nbsp;
         <span><a routerLink="/connections" (click)="onMenuItemClick()">Connections</a></span>
       </li>
 
       <li nz-menu-item nzMatchRouter>
-        <span nz-icon nzType="logout" nzTheme="outline"></span>
+        <nz-avatar nzIcon="logout" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/logout_Jh9m8Vqt.png"></nz-avatar> &nbsp;
         <span><a (click)="logout()">Logout</a></span>
       </li>
     </ul>

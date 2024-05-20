@@ -1,7 +1,51 @@
+<ng-template #facebook>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/fb_fhxGf49v.png"
+    width="30px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  /> &nbsp; Facebook
+</ng-template>
+<ng-template #instagram>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_48/images/instagram_icon.png_P2n4El51.webp"
+    width="30px"
+    alt="instagram"
+    class="ant-scroll-number-custom-component"
+  /> &nbsp; Instagram
+</ng-template>
+
+<ng-template #linkedin>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_48/images/linkedin_logo_initials.png_G0eVpCWb.webp"
+    width="30px"
+    alt="LinkedIn"
+    class="ant-scroll-number-custom-component"
+  /> &nbsp; LinkedIn
+</ng-template>
+
+<ng-template #pintrest>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/pinterest-logo_lhG5inoN.png"
+    width="30px"
+    alt="pintrest"
+    class="ant-scroll-number-custom-component"
+  /> &nbsp; Pintrest
+</ng-template>
+
+<ng-template #twitter>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_48/images/twitter_6tGq0h68.webp"
+    width="30px"
+    alt="Twitter"
+    class="ant-scroll-number-custom-component"
+  /> &nbsp; Twitter
+</ng-template>
+
 <ng-container *ngIf="!loading">
   <div nz-row>
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <nz-card nzTitle="Facebook" [nzExtra]="fbButton">
+      <nz-card [nzTitle]="facebook" [nzExtra]="fbButton">
         <ng-container *ngFor="let connection of connections">
           <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
             <div nz-row class="mt-10 connection">
@@ -44,7 +88,7 @@
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <nz-card nzTitle="Instagram" [nzExtra]="instaButton">
+      <nz-card [nzTitle]="instagram" [nzExtra]="instaButton">
         <ng-container *ngFor="let connection of connections">
           <ng-container *ngIf="connection.ConnectionName == 'instagram'">
             <div nz-row class="mt-10 connection">
@@ -87,7 +131,7 @@
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <nz-card nzTitle="LinkedIn" [nzExtra]="linkedinButton">
+      <nz-card [nzTitle]="linkedin" [nzExtra]="linkedinButton">
         <ng-container *ngFor="let connection of connections">
           <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
             <div nz-row class="mt-10 connection">
@@ -130,7 +174,7 @@
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <nz-card nzTitle="Twitter" [nzExtra]="twitterButton">
+      <nz-card [nzTitle]="twitter" [nzExtra]="twitterButton">
         <ng-container *ngFor="let connection of connections">
           <ng-container *ngIf="connection.ConnectionName == 'twitter'">
             <div nz-row class="mt-10 connection">
@@ -173,7 +217,7 @@
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <nz-card nzTitle="Pintrest" [nzExtra]="pintrestButton">
+      <nz-card [nzTitle]="pintrest" [nzExtra]="pintrestButton">
         <ng-container *ngFor="let connection of connections">
           <ng-container *ngIf="connection.ConnectionName == 'pintrest_board'">
             <div nz-row class="mt-10 connection">
