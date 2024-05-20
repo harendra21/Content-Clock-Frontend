@@ -150,6 +150,10 @@
     nzTitle="Write With AI"
     (nzOnCancel)="handleCancel()"
     (nzOnOk)="handleOk()"
+    [nzBodyStyle]="{
+      'min-height': '200px'
+    }"
+    [nzFooter]="null"
   >
     <ng-container *nzModalContent>
       <app-ai-content

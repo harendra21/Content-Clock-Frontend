@@ -29,7 +29,7 @@
   </div>
 </div>
 <div class="mt-20">
-  <nz-calendar *ngIf="loadCalendar">
+  <nz-calendar *ngIf="!loading">
     <ul *nzDateCell="let date" class="events">
       <ng-container *ngIf="getPostsForDate(date).length">
         <li *ngFor="let item of getPostsForDate(date)">
@@ -40,7 +40,7 @@
   </nz-calendar>
 </div>
 
-<div class="animation-container" *ngIf="!loadCalendar">
+<div class="animation-container" *ngIf="loading">
     <lottie-player src="/assets/animations/loading.json" background="transparent" speed="1" loop autoplay >
     </lottie-player>
 </div>

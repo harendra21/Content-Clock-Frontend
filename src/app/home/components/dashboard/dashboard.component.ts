@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   public scheduledCount: number = 0
   public connectionsCount: number = 0
   public posts: any = {};
-  public loadCalendar: boolean = false
+  public loading: boolean = true
 
   constructor(
     private apiService: ApiService,
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
       if (res.status) {
         this.posts = this.formatPosts(res.data)
         setTimeout(() => {
-          this.loadCalendar = true
+          this.loading = false
         }, 2000)
       }else{
         this.msgService.error(res.message)

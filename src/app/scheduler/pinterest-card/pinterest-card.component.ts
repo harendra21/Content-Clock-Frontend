@@ -11,6 +11,7 @@ export class PinterestCardComponent implements OnInit {
   @Input() images: any;
   @Input() postDate: any;
   @Input() postContent: any;
+  @Input() status: any = null
 
   constructor() { }
 

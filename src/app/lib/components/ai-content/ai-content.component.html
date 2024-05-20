@@ -21,23 +21,23 @@
 <ng-container *ngIf="aiPost != '' && !loading">
   <p class="content">{{ aiPost }}</p>
 
-  <nz-space>
-    <button *nzSpaceItem nz-button nzType="primary" nzSearch>
-      <span
-        nz-icon
-        nzType="reload"
-        nzTheme="outline"
-        (click)="writeAi()"
-      ></span>
-    </button>
-
-    <button *nzSpaceItem nz-button nzType="primary" nzSearch>
-      <span
-        nz-icon
-        nzType="check-circle"
-        nzTheme="fill"
-        (click)="acceptContent()"
-      ></span>
-    </button>
-  </nz-space>
+  <div class="text-right">
+    <nz-space>
+      <button *nzSpaceItem nz-button nzType="primary" nzSearch (click)="writeAi()">
+        <span
+          nz-icon
+          nzType="reload"
+          nzTheme="outline"
+        ></span> Rewrite
+      </button>
+  
+      <button *nzSpaceItem nz-button nzType="primary" nzSearch (click)="acceptContent()">
+        <span
+          nz-icon
+          nzType="check-circle"
+          nzTheme="fill"
+        ></span> Accept
+      </button>
+    </nz-space>
+  </div>
 </ng-container>
