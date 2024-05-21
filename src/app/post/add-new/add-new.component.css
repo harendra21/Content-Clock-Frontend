@@ -1,0 +1,14 @@
+p.post-content {
+    min-height: 100px;
+}
+.char-count{
+    position: absolute;
+    width: 100%;
+    margin-top: -25px;
+    margin-left: -25px;
+}
+.card {
+    border: 1px solid #ccc;
+    padding: 10px 10px 0px 10px;
+    border-radius: 1px;
+}

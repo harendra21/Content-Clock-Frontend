@@ -1,0 +1,39 @@
+.card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    max-width: 500px;
+}
+
+.draft{
+    margin: 10px;
+}
+.draft .number{
+    border-left: 2px solid #ffc08d;
+}
+.number{
+    font-size: 30px;
+    padding-left: 10px;
+}
+.scheduled{
+    margin: 10px;
+}
+.scheduled .number {
+    border-left: 2px solid #bfbfe5;
+}
+.published{
+    margin: 10px;
+}
+.published .number {
+    border-left: 2px solid #85d1d0;
+}
+.failed{
+    margin: 10px;
+}
+.failed .number {
+    border-left: 2px solid #ffa1a6;
+}
+.active {
+    @apply text-blue-600 border-b-2 border-blue-600;
+  }

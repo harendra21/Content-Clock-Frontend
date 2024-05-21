@@ -18,7 +18,7 @@ import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 
 const ngZorroConfig: NzConfig = {
   theme: {
-    primaryColor: "#EF5350",
+    primaryColor: "#1c64f2",
     infoColor: "#2196F3",
     successColor: "#4CAF50",
     processingColor: "#78909C",

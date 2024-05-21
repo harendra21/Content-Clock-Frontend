@@ -1,177 +1,245 @@
-<nz-layout class="layout">
-  <nz-sider
-    *ngIf="isAuthenticated"
-    class="menu-sidebar"
-    nzWidth="256px"
-    [nzTrigger]="null"
-    nzTheme="light"
-    nzCollapsible
-    nzBreakpoint="lg"
-    [nzCollapsedWidth]="0"
-    (nzCollapsedChange)="onCollapsedChange($event)"
-    [(nzCollapsed)]="isCollapsed"
-  >
-    <div class="sidebar-logo">
-      
-      <a routerLink="/home">
-        
-          <nz-avatar [nzShape]="'square'" nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock-logo_DeqbqhU2.png" ></nz-avatar>
-        
-        <h1>Content Clock</h1>
-      </a>
-    </div>
-    <ul nz-menu nzTheme="light" nzMode="inline">
-      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
-        <nz-avatar nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/home_tBZN40zt.png"></nz-avatar> &nbsp; 
-        <span><a routerLink="/home" (click)="onMenuItemClick()">Home</a></span>
-      </li>
-
-      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
-        <nz-avatar nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/bulk-icon_HpS3YP0j.png"></nz-avatar> &nbsp;
-        <span><a routerLink="/scheduler/add" (click)="onMenuItemClick()">Bulk</a></span>
-      </li>
-
-      <ng-container *ngFor="let connection of connections">
-        <li nz-menu-item>
-          <nz-badge
-            [nzCount]="facebook"
-            style="margin-right: 5px"
-            *ngIf="connection.connection_name == 'facebook_page'"
-          >
-            <nz-avatar
-              nzIcon="user"
-              nzSrc="{{ connection.profile_image }}"
-            ></nz-avatar>
-          </nz-badge>
-
-          <nz-badge
-            [nzCount]="instagram"
-            style="margin-right: 5px"
-            *ngIf="connection.connection_name == 'instagram'"
-          >
-            <nz-avatar
-              nzIcon="user"
-              nzSrc="{{ connection.profile_image }}"
-            ></nz-avatar>
-          </nz-badge>
-
-          <nz-badge
-            [nzCount]="linkedin"
-            style="margin-right: 5px"
-            *ngIf="connection.connection_name == 'linkedin_profile'"
-          >
-            <nz-avatar
-              nzIcon="user"
-              nzSrc="{{ connection.profile_image }}"
-            ></nz-avatar>
-          </nz-badge>
-
-          <nz-badge
-            [nzCount]="pintrest"
-            style="margin-right: 5px"
-            *ngIf="connection.connection_name == 'pintrest_board'"
-          >
-            <nz-avatar
-              nzIcon="user"
-              nzSrc="{{ connection.profile_image }}"
-            ></nz-avatar>
-          </nz-badge>
-
-          <nz-badge
-            [nzCount]="twitter"
-            style="margin-right: 5px"
-            *ngIf="connection.connection_name == 'twitter'"
-          >
-            <nz-avatar
-              nzIcon="user"
-              nzSrc="{{ connection.profile_image }}"
-            ></nz-avatar>
-          </nz-badge>
-
-          <span
-            ><a routerLink="post/create/{{ connection.connection_id }}" (click)="onMenuItemClick()">{{
-              connection.name
-            }}</a></span
-          >
-        </li>
-      </ng-container>
-
-      <ng-template #facebook>
-        <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/fb_fhxGf49v.png"
-          width="15px"
-          alt=""
-          class="ant-scroll-number-custom-component"
-        />
-      </ng-template>
-      <ng-template #instagram>
-        <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/instagram_icon.png_P2n4El51.webp"
-          width="15px"
-          alt=""
-          class="ant-scroll-number-custom-component"
-        />
-      </ng-template>
-
-      <ng-template #linkedin>
-        <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/linkedin_logo_initials.png_G0eVpCWb.webp"
-          width="15px"
-          alt=""
-          class="ant-scroll-number-custom-component"
-        />
-      </ng-template>
-
-      <ng-template #pintrest>
-        <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/pinterest-logo_lhG5inoN.png"
-          width="15px"
-          alt=""
-          class="ant-scroll-number-custom-component"
-        />
-      </ng-template>
-
-      <ng-template #twitter>
-        <img
-          src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/twitter_6tGq0h68.webp"
-          width="15px"
-          alt=""
-          class="ant-scroll-number-custom-component"
-        />
-      </ng-template>
-
-      <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
-        
-        <nz-avatar nzIcon="user" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/link_N7Fxtbu3.png"></nz-avatar> &nbsp;
-        <span><a routerLink="/connections" (click)="onMenuItemClick()">Connections</a></span>
-      </li>
-
-      <li nz-menu-item nzMatchRouter>
-        <nz-avatar nzIcon="logout" nzSrc="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/logout_Jh9m8Vqt.png"></nz-avatar> &nbsp;
-        <span><a (click)="logout()">Logout</a></span>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span
-          class="header-trigger"
-          (click)="changeMenuState(!isCollapsed)"
-          *ngIf="isAuthenticated"
+<nav
+  class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+>
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center justify-start rtl:justify-end">
+        <button
+          data-drawer-target="logo-sidebar"
+          data-drawer-toggle="logo-sidebar"
+          aria-controls="logo-sidebar"
+          type="button"
+          class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         >
+          <span class="sr-only">Open sidebar</span>
+          <svg
+            class="w-6 h-6"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              fill-rule="evenodd"
+              d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+            ></path>
+          </svg>
+        </button>
+
+        <a routerLink="/home" class="flex ms-2 md:me-24">
+          <img
+            src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock-logo_DeqbqhU2.png"
+            class="h-8 me-3"
+            alt="Content Clock Logo"
+          />
           <span
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></span>
-        </span>
+            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
+            >Content Clock</span
+          >
+        </a>
       </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
+      <div class="flex items-center">
+        <div class="flex items-center ms-3">
+          <div>
+            <button
+              type="button"
+              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              aria-expanded="false"
+              data-dropdown-toggle="dropdown-user"
+            >
+              <span class="sr-only">Open user menu</span>
+              <img
+                class="w-8 h-8 rounded-full"
+                src="{{ avatar }}"
+                alt="user photo"
+              />
+            </button>
+          </div>
+          <div
+            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="dropdown-user"
+          >
+            <div class="px-4 py-3" role="none">
+              <p class="text-sm text-gray-900 dark:text-white" role="none">
+                {{ name }}
+              </p>
+              <p
+                class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
+                role="none"
+              >
+                {{ email }}
+              </p>
+            </div>
+            <ul class="py-1" role="none">
+              <li>
+                <a
+                  routerLink="/home"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  role="menuitem"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  (click)="logout()"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  role="menuitem"
+                  >Sign out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
+    </div>
+  </div>
+</nav>
+
+
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+  <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+      <ul class="space-y-2 font-medium">
+
+        <li>
+          <a routerLink="/home" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd"/>
+            </svg>
+            
+             <span class="ms-3">Home</span>
+          </a>
+       </li>
+
+       <li>
+        <a routerLink="/scheduler/add" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+          </svg>
+          
+           <span class="ms-3">Schedule</span>
+        </a>
+     </li>
+  
+
+        <ng-container *ngFor="let connection of connections">
+          <li>
+            <a
+              routerLink="post/create/{{ connection.connection_id }}"
+              (click)="onMenuItemClick()"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <nz-badge
+                [nzCount]="facebook"
+                style="margin-right: 5px"
+                *ngIf="connection.connection_name == 'facebook_page'"
+              >
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="{{ connection.profile_image }}"
+                ></nz-avatar>
+              </nz-badge>
+
+              <nz-badge
+                [nzCount]="instagram"
+                style="margin-right: 5px"
+                *ngIf="connection.connection_name == 'instagram'"
+              >
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="{{ connection.profile_image }}"
+                ></nz-avatar>
+              </nz-badge>
+
+              <nz-badge
+                [nzCount]="linkedin"
+                style="margin-right: 5px"
+                *ngIf="connection.connection_name == 'linkedin_profile'"
+              >
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="{{ connection.profile_image }}"
+                ></nz-avatar>
+              </nz-badge>
+
+              <nz-badge
+                [nzCount]="pintrest"
+                style="margin-right: 5px"
+                *ngIf="connection.connection_name == 'pintrest_board'"
+              >
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="{{ connection.profile_image }}"
+                ></nz-avatar>
+              </nz-badge>
+
+              <nz-badge
+                [nzCount]="twitter"
+                style="margin-right: 5px"
+                *ngIf="connection.connection_name == 'twitter'"
+              >
+                <nz-avatar
+                  nzIcon="user"
+                  nzSrc="{{ connection.profile_image }}"
+                ></nz-avatar>
+              </nz-badge>
+              <span class="ms-3">{{ connection.name }}</span>
+              </a
+            >
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </aside>
+
+  <div class="p-4 sm:ml-64 sm:w-full-screen">
+    <div
+      class="mt-14"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+<ng-template #facebook>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/fb_fhxGf49v.png"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+<ng-template #instagram>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/instagram_icon.png_P2n4El51.webp"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-template #linkedin>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/linkedin_logo_initials.png_G0eVpCWb.webp"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-template #pintrest>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/pinterest-logo_lhG5inoN.png"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>
+
+<ng-template #twitter>
+  <img
+    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/twitter_6tGq0h68.webp"
+    width="15px"
+    alt=""
+    class="ant-scroll-number-custom-component"
+  />
+</ng-template>

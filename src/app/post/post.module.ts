@@ -10,6 +10,8 @@ import { ScheduledComponent } from './scheduled/scheduled.component';
 import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { AddNewComponent } from './add-new/add-new.component';
 import { QueueComponent } from './queue/queue.component';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { QueueComponent } from './queue/queue.component';
     FormsModule,
     SchedulerModule,
     LibModule,
-    NzTimelineModule
+    NzTimelineModule,
+    NzCalendarModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

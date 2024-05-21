@@ -1,11 +1,16 @@
 <ng-container *ngIf="!loading">
-  <div class="mt-10 text-right">
-    <button nz-button nzType="primary" (click)="addNew()">Add New</button>
+  <div class="mt-2 text-right add-new-button">
+    <button type="button" class="btn-primary-icon" (click)="addNew()">
+      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg> &nbsp; Schedule New
+    </button>
+
   </div>
 
   <div *ngFor="let date of getDates()">
     <ng-container *ngIf="schedules[date].length > 0">
-      <h2>{{ date | date: "EEEE, MMMM d, y" }}</h2>
+      <h2 class="dark:text-white">{{ date | date: "EEEE, MMMM d, y" }} </h2>
 
       <ng-container *ngFor="let timeSlot of schedules[date]">
         <ng-container
@@ -14,12 +19,12 @@
           "
         >
           <div
-            class="card green-border"
+            class="card {{ getPostFromSlot(timeSlot).Status }}"
             (click)="editPost(getPostFromSlot(timeSlot).ID)"
           >
-            {{ getTimeFromSlot(timeSlot) }}
+            <span class="dark:text-white">{{ getTimeFromSlot(timeSlot) }}</span>
 
-            <span class="post-content">
+            <span class="post-content dark:text-white">
               {{
                 getPostFromSlot(timeSlot)
                   .Description.replaceAll("\n")
@@ -38,7 +43,7 @@
             class="card"
             (click)="addNew(date + ' ' + getTimeFromSlot(timeSlot))"
           >
-            {{ getTimeFromSlot(timeSlot) }}
+          <span class="dark:text-white">{{ getTimeFromSlot(timeSlot) }}</span>
           </div>
         </ng-container>
       </ng-container>
@@ -51,13 +56,14 @@
   nzDraggable
   nzCentered
   [(nzVisible)]="isVisible"
-  nzTitle="Write With AI"
+  nzTitle="Create New Post"
   (nzOnCancel)="handleCancel()"
   [nzWidth]="modalWidth"
   [nzClosable]="true"
   [nzKeyboard]="false"
   [nzCloseOnNavigation]="false"
   [nzFooter]="null"
+  class="dark:bg-gray-700"
 >
   <ng-container *nzModalContent>
     <add-new

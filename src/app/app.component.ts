@@ -3,6 +3,7 @@ import { ApiService } from './auth/service/api.service'
 import { MenuService as Menu } from './services/menu.service';
 import { AuthService } from './auth/service/auth.service';
 import { environment } from 'src/environments/environment';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,10 @@ export class AppComponent {
   public isAuthenticated: boolean = false;
   public connections: any[] = []
   private lgBreakpoint = environment.lgBreakpoint;
+  public avatar: string = ""
+  public name: string = ""
+  public email: string = ""
+
 
   constructor(
     private apiService: ApiService,
@@ -24,6 +29,7 @@ export class AppComponent {
   }
 
   ngOnInit(){
+    initFlowbite();
     this.getMenuState()
 
     this.authService.isAuth$
@@ -31,6 +37,17 @@ export class AppComponent {
       this.isAuthenticated = data
       if (data){
         this.getMenuConnections()
+        this.getUserInfo()
+      }
+    })
+  }
+
+  getUserInfo(){
+    this.apiService.getRequest(`/check-auth`).subscribe((res: any) => {
+      if (res.status){
+        this.avatar = res.data.avatar_url
+        this.name = res.data.name
+        this.email = res.data.email
       }
     })
   }

@@ -5,7 +5,9 @@
     border-radius: 5px;
     max-width: 500px;
 }
-.green-border {
-    border-color: #8edb8e;
-    background-color: #f1f1f1;
+.add-new-button{
+    max-width: 500px;
+}
+.card:hover {
+    @apply bg-gray-50 text-black dark:bg-gray-700 dark:text-white
 }

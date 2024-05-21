@@ -16,6 +16,7 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
   @ViewChild('successDot', { static: true }) successDot: TemplateRef<any> | null = null;
   @ViewChild('errorDot', { static: true }) errorDot: TemplateRef<any> | null = null;
   @ViewChild('scheduledDot', { static: true }) scheduledDot: TemplateRef<any> | null = null;
+  @ViewChild('draftDot', { static: true }) draftDot: TemplateRef<any> | null = null;
 
   public status: string = "";
   public loading: boolean = false;
@@ -87,7 +88,7 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
       case 'sending':
         return this.scheduledDot;
       case 'draft':
-        return this.scheduledDot;
+        return this.draftDot;
       case 'failed':
         return this.errorDot;
       case 'scheduled':

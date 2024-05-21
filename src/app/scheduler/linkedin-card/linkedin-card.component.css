@@ -46,13 +46,3 @@
 .img-half {
   width: 50%;
 }
-
-.scheduled, .draft{
-  border-color: #fadb14;
-}
-.failed{
-  border-color: red;
-}
-.published{
-  border-color: green;
-}

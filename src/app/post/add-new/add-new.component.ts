@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ApiService } from 'src/app/auth/service/api.service';
@@ -31,6 +31,8 @@ export class AddNewComponent implements OnInit {
   ) {
     // const id = this.route.snapshot.queryParamMap.get('id');
   }
+  
+  
 
   ngOnInit() {
     if (this.slot) {

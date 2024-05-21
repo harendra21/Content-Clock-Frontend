@@ -66,16 +66,14 @@ export class QueueComponent implements OnInit {
 
   }
 
-  public modalWidth = "80%"
+  public modalWidth = "1024px"
   addPostModal(): void {
     if (window.innerWidth <= environment.lgBreakpoint) {
-      console.log()
       this.modalWidth = "100%"
     }
   }
 
   handleCancel() {
-    // this.isVisible = true;
     this.showConfirm();
     return false;
   }

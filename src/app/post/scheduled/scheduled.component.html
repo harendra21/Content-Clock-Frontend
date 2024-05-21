@@ -1,37 +1,11 @@
 <ng-container *ngIf="!loading">
   <div class="m-10">
-
-    <nz-space>
-
-      <button *nzSpaceItem nz-button nzType="primary" (click)="statusChange('')" [nzLoading]="loading" nzGhost>
-        <span nz-icon nzType="calendar"></span>
-        View All
-      </button>
-  
-      <button *nzSpaceItem nz-button nzType="primary" (click)="statusChange('scheduled')" [nzLoading]="loading" nzGhost>
-        <span nz-icon nzType="calendar"></span>
-        Scheduled
-      </button>
-  
-      <button *nzSpaceItem nz-button nzType="primary" (click)="statusChange('published')" [nzLoading]="loading" nzGhost>
-        <span nz-icon nzType="check-circle"></span>
-        Published
-      </button>
-  
-      <button *nzSpaceItem nz-button nzType="primary" (click)="statusChange('draft')" [nzLoading]="loading" nzGhost>
-        <span nz-icon nzType="container"></span>
-        Draft
-      </button>
-  
-      <button *nzSpaceItem nz-button nzType="primary" (click)="statusChange('failed')" [nzLoading]="loading" nzGhost>
-        <span nz-icon nzType="close-circle"></span>
-        Failed
-      </button>
-
-    </nz-space>
-
     
-
+    <button (click)="statusChange('')" [ngClass]="{'btn-primary': status == '', 'btn-primary-outline': status != ''}">View All</button>
+    <button (click)="statusChange('scheduled')" [ngClass]="{'btn-primary': status == 'scheduled', 'btn-primary-outline': status != 'scheduled'}">Scheduled</button>
+    <button (click)="statusChange('published')" [ngClass]="{'btn-primary': status == 'published', 'btn-primary-outline': status != 'published'}">Published</button>
+    <button (click)="statusChange('draft')" [ngClass]="{'btn-primary': status == 'draft', 'btn-primary-outline': status != 'draft'}">Draft</button>
+    <button (click)="statusChange('failed')" [ngClass]="{'btn-primary': status == 'failed', 'btn-primary-outline': status != 'failed'}">Failed</button>
   </div>
 
   <div style="padding-left: 5px">
@@ -40,7 +14,10 @@
         *ngFor="let conn of connections"
         [nzDot]="getDotTemplate(conn.Status)"
       >
-        <strong>{{ conn.PublishAt | date: "yyyy-MM-dd HH:mm" }}</strong>
+        <strong class="dark:text-white">{{ conn.PublishAt | date: "yyyy-MM-dd HH:mm" }} </strong>
+        <ng-container *ngIf="conn.Status == 'failed'">
+          <span nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="{{ conn.Logs }}"></span>
+        </ng-container>
         <ng-container
           *ngIf="conn.Status == 'scheduled' || conn.Status == 'draft'"
         >
@@ -146,11 +123,11 @@
 </ng-template>
 
 <ng-template #successDot>
-  <i nz-icon nzType="check-circle" nzTheme="outline" style="color: green"></i>
+  <i nz-icon nzType="check-circle" nzTheme="outline" style="color: #85d1d0"></i>
 </ng-template>
 
 <ng-template #errorDot>
-  <i nz-icon nzType="close-circle" nzTheme="outline" style="color: red"></i>
+  <i nz-icon nzType="close-circle" nzTheme="outline" style="color: #ffa1a6"></i>
 </ng-template>
 
 <ng-template #scheduledDot>
@@ -158,6 +135,15 @@
     nz-icon
     nzType="calendar"
     nzTheme="outline"
-    style="color: rgb(226, 226, 22)"
+    style="color: #bfbfe5"
+  ></i>
+</ng-template>
+
+<ng-template #draftDot>
+  <i
+    nz-icon
+    nzType="save"
+    nzTheme="outline"
+    style="color: #ffc08d"
   ></i>
 </ng-template>

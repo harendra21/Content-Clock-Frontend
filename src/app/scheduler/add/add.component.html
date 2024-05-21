@@ -39,13 +39,13 @@
       >and {{ selectedList.length }} more selected</ng-template
     >
 
-    <div class="mt-10">
+    <div class="mt-2">
       <button nz-button nzType="dashed" (click)="showModal()" style="width: 100%;">
         <span nz-icon nzType="bulb" nzTheme="fill"></span> Write With AI
       </button>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-2">
       <textarea
         nz-input
         placeholder="Post Content"
@@ -54,20 +54,20 @@
       ></textarea>
     </div>
 
-    <!-- <div class="mt-10">
+    <!-- <div class="mt-2">
       <button nz-button nzType="dashed" (click)="showModal()">
         <span nz-icon nzType="bulb" nzTheme="fill"></span> Genrate With AI
       </button>
     </div> -->
 
-    <div class="clearfix mt-10">
+    <div class="clearfix mt-2">
       <app-upload-media
           [files]="files"
           (uploadedFiles)="uploadedFiles($event)"
         ></app-upload-media>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-2">
       <nz-date-picker
         nzShowTime
         nzFormat="yyyy-MM-dd HH:mm"
@@ -76,7 +76,7 @@
       ></nz-date-picker>
     </div>
 
-    <div class="mt-10 text-right">
+    <div class="mt-2 text-right">
       <button nz-button nzType="dashed" (click)="schedulePost(true)">
         Draft
       </button> &nbsp; 
