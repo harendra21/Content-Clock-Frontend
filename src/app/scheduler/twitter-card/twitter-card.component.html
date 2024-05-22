@@ -1,60 +1,33 @@
-<div class="tweet {{ status }}">
-  <div class="header">
-    <nz-avatar nzIcon="user" nzSrc="{{ profile_image }}"></nz-avatar>
-    <div class="user-info">
-      <div class="username">{{ name }}</div>
-      <div class="time">username</div>
+<div class="max-w-md bg-white shadow-md rounded-lg overflow-hidden">
+  <!-- Avatar and Username -->
+  <div class="flex items-center px-6 py-4">
+    <img class="w-10 h-10 rounded-full mr-4" src="{{ profile_image }}" alt="Avatar">
+    <div>
+      <div class="font-semibold dark:text-gray-800">{{ name }}</div>
     </div>
   </div>
-  <div class="content">
-    <p class="post-content">{{ postContent }}</p>
-    <ng-container *ngIf="images.length == 1">
-      <img
-        nz-image
-        nzSrc="{{ images[0] }}"
-        alt="{{ images[0] }}"
-        class="img-responsive"
-      />
-    </ng-container>
-    <ng-container *ngIf="images.length > 1">
-      <ng-container *ngFor="let file of images">
-        <img nz-image nzSrc="{{ file }}" alt="{{ file }}" class="img-half" />
+
+  <!-- Post Content -->
+  <div class="px-6 py-4">
+    <p class="text-gray-700 text-base">
+      {{ postContent }}
+    </p>
+  </div>
+
+  <ng-container *ngIf="images.length > 0">
+    <img class="w-full" src="{{ images[0] }}" alt="Post Image">
+  </ng-container>
+  
+  <ng-container *ngIf="images.length >= 1">
+    <div class="grid grid-cols-3 gap-1 mt-2">
+    <ng-container *ngFor="let image of images; let i = index">
+      
+      <ng-container *ngIf="i > 0">
+        <img class="w-full" src="{{ image }}" alt="Post Image">
       </ng-container>
+      
     </ng-container>
-    <div class="time mt-2">{{ postDate | date: "medium" }}</div>
   </div>
-
-  <div class="post-actions mt-2">
-    <div nz-row class="text-center">
-      <div nz-col nzSpan="4">
-        <span nz-icon nzType="comment" nzTheme="outline"></span>
-      </div>
-      <div nz-col nzSpan="4">
-        <span nz-icon nzType="retweet" nzTheme="outline"></span>
-      </div>
-      <div nz-col nzSpan="4">
-        <span nz-icon nzType="heart" nzTheme="outline"></span>
-      </div>
-
-      <div nz-col nzSpan="4">
-        <span nz-icon nzType="bar-chart" nzTheme="outline"></span>
-      </div>
-
-      <div nz-col nzSpan="4">
-        <span nz-icon nzType="book" nzTheme="outline"></span>
-      </div>
-
-      <div nz-col nzSpan="4">
-        <span nz-icon nzType="share-alt" nzTheme="outline"></span>
-      </div>
-
-     
-
-      
-
-      
-      
-    </div>
-  </div>
+  </ng-container>
 
 </div>

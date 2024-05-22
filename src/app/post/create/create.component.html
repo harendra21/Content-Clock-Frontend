@@ -1,37 +1,37 @@
 <div class="flex flex-wrap">
-  <div class="sm:w-full md:w-1/3 pr-4 pl-4">
+  <div class="sm:w-full md:w-1/3 ">
     <div class="flex flex-wrap">
-      <div class="sm:w-1/2 pr-4 pl-4">
+      <div class="sm:w-1/2 pr-1 pl-0 w-full">
         <div class="card scheduled">
-          <div class="number">18</div>
+          <div class="number">{{ postCount.scheduled_count? postCount.scheduled_count : 0 }}</div>
           <div class="heading">Scheduled</div>
         </div>
       </div>
 
-      <div class="sm:w-1/2 pr-4 pl-4">
+      <div class="sm:w-1/2 pr-1 pl-0 w-full">
         <div class="card published">
-          <div class="number">85</div>
+          <div class="number">{{ postCount.published_count? postCount.published_count : 0 }}</div>
           <div class="heading">Published</div>
         </div>
       </div>
 
-      <div class="sm:w-1/2 pr-4 pl-4">
+      <div class="sm:w-1/2 pr-1 pl-0 w-full">
         <div class="card draft">
-          <div class="number">56</div>
+          <div class="number">{{ postCount.draft_count? postCount.draft_count : 0 }}</div>
           <div class="heading">Draft</div>
         </div>
       </div>
 
-      <div class="sm:w-1/2 pr-4 pl-4">
+      <div class="sm:w-1/2 pr-1 pl-0 w-full">
         <div class="card failed">
-          <div class="number">4</div>
+          <div class="number">{{ postCount.failed_count? postCount.failed_count : 0 }}</div>
           <div class="heading">Failed</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="sm:w-full md:w-2/3 pr-4 pl-4">
+  <div class="sm:w-full md:w-2/3 pr-1 pl-0 w-full">
 
     <div class="container mx-auto p-4">
       <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-white  -700 dark:text-white">
@@ -49,6 +49,7 @@
       <ng-container *ngIf="action == 'view'">
         <app-scheduled [connection]="connection"></app-scheduled>
       </ng-container>
+
     </div>
 
   </div>

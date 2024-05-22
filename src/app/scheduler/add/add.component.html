@@ -1,6 +1,42 @@
 <div nz-row>
   <div nz-col nzXs="24" nzSm="15" nzMd="15" nzLg="15">
-    <nz-select
+    
+    <div class="clearfix">
+      <ng-container *ngFor="let item of connections">
+        <div class="relative float-left mr-3 mb-2 " (click)="connectionToggle(item)">
+          <img
+            class="w-10 h-10 rounded-full ring-4 "
+            src="{{ item.ProfileImage }}"
+            alt="{{ item.Name }}"
+            [ngClass]="{'ring-green-700 dark:ring-green-500': isSelected(item), 'ring-gray-300 dark:ring-gray-500': !isSelected(item)}"
+          />
+          <span
+            class="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 border-1 border-white dark:border-gray-800 rounded-full"
+          >
+            <ng-container *ngIf="item.ConnectionName == 'facebook_page'"
+              ><img src="{{ env.fbLogo }}" alt="{{ item.Name }}"
+            /></ng-container>
+  
+            <ng-container *ngIf="item.ConnectionName == 'instagram'"
+              ><img src="{{ env.instaLogo }}" alt="{{ item.Name }}"
+            /></ng-container>
+  
+            <ng-container *ngIf="item.ConnectionName == 'linkedin_profile'"
+              ><img src="{{ env.linkedinLogo }}" alt="{{ item.Name }}"
+            /></ng-container>
+  
+            <ng-container *ngIf="item.ConnectionName == 'pintrest_board'"
+              ><img src="{{ env.pinterestLogo }}" alt="{{ item.Name }}"
+            /></ng-container>
+  
+            <ng-container *ngIf="item.ConnectionName == 'twitter'"
+              ><img src="{{ env.twitterLogo }}" alt="{{ item.Name }}"
+            /></ng-container>
+          </span>
+        </div>
+      </ng-container>
+    </div>
+    <!-- <nz-select
       [nzMaxTagCount]="10"
       [nzMaxTagPlaceholder]="tagPlaceHolder"
       nzMode="multiple"
@@ -31,20 +67,35 @@
         ></ng-container>
         {{ item.Name }}
       </nz-option>
-    </nz-select>
+    </nz-select> -->
 
-   
-
-    <ng-template #tagPlaceHolder let-selectedList
+    <!-- <ng-template #tagPlaceHolder let-selectedList
       >and {{ selectedList.length }} more selected</ng-template
-    >
+    > -->
 
-    <button type="button" class="btn-primary-icon mt-2" (click)="showModal()">
-      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9a3 3 0 0 1 3-3m-2 15h4m0-3c0-4.1 4-4.9 4-9A6 6 0 1 0 6 9c0 4 4 5 4 9h4Z"/>
-      </svg> &nbsp; Write With AI
-    </button>
-    
+    <div class="mt-2">
+      <button type="button" class="btn-primary-icon mt-2" (click)="showModal()">
+        <svg
+          class="w-6 h-6 text-gray-800 dark:text-white"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 9a3 3 0 0 1 3-3m-2 15h4m0-3c0-4.1 4-4.9 4-9A6 6 0 1 0 6 9c0 4 4 5 4 9h4Z"
+          />
+        </svg>
+        &nbsp; Write With AI
+      </button>
+    </div>
+
     <div class="mt-2">
       <textarea
         id="message"
@@ -64,9 +115,9 @@
 
     <div class="clearfix mt-2">
       <app-upload-media
-          [files]="files"
-          (uploadedFiles)="uploadedFiles($event)"
-        ></app-upload-media>
+        [files]="files"
+        (uploadedFiles)="uploadedFiles($event)"
+      ></app-upload-media>
     </div>
 
     <div class="mt-2">
@@ -80,123 +131,71 @@
     </div>
 
     <div class="mt-2 text-right">
-      <button
-        class="btn-success"
-        nzType="default"
-        (click)="schedulePost(true)"
-      >
+      <button class="btn-success" nzType="default" (click)="schedulePost(true)">
         Send Now
       </button>
-      <button
-        class="btn-warning"
-        nzType="dashed"
-        (click)="schedulePost(true)"
-      >
+      <button class="btn-warning" nzType="dashed" (click)="schedulePost(true)">
         Draft
       </button>
-      <button
-        class="btn-primary"
-        nzType="primary"
-        (click)="schedulePost()"
-      >
+      <button class="btn-primary" nzType="primary" (click)="schedulePost()">
         Schedule
       </button>
     </div>
-
   </div>
 
   <div nz-col nzXs="24" nzSm="9" nzMd="9" nzLg="9" class="pd-10">
-    <nz-tabset>
-      <ng-container *ngFor="let selected of selectedConnections; let i = index">
-        <ng-container *ngIf="selected.ConnectionName == 'facebook_page'">
-          <nz-tab [nzTitle]="title">
-            <ng-template #title>
-              <span nz-icon nzType="facebook" nzTheme="outline"></span>
-              {{ selected.Name }}
-            </ng-template>
-
-            <app-facebook-card
-              [name]="selected.Name"
-              [profile_image]="selected.ProfileImage"
-              [images]="images"
-              [postDate]="postDate"
-              [postContent]="postContent"
-            ></app-facebook-card>
-          </nz-tab>
-        </ng-container>
-
-        <ng-container *ngIf="selected.ConnectionName == 'instagram'">
-          <nz-tab [nzTitle]="title">
-            <ng-template #title>
-              <span nz-icon nzType="instagram" nzTheme="outline"></span>
-              {{ selected.Name }}
-            </ng-template>
-
-            <app-instagram-card
-              [name]="selected.Name"
-              [profile_image]="selected.ProfileImage"
-              [images]="images"
-              [postDate]="postDate"
-              [postContent]="postContent"
-            ></app-instagram-card>
-          </nz-tab>
-        </ng-container>
-
-        <ng-container *ngIf="selected.ConnectionName == 'twitter'">
-          <nz-tab [nzTitle]="title">
-            <ng-template #title>
-              <span nz-icon nzType="twitter" nzTheme="outline"></span>
-              {{ selected.Name }}
-            </ng-template>
-
-            <app-twitter-card
-              [name]="selected.Name"
-              [profile_image]="selected.ProfileImage"
-              [images]="images"
-              [postDate]="postDate"
-              [postContent]="postContent"
-            ></app-twitter-card>
-          </nz-tab>
-        </ng-container>
-
-        <ng-container *ngIf="selected.ConnectionName == 'linkedin_profile'">
-          <nz-tab [nzTitle]="title">
-            <ng-template #title>
-              <span nz-icon nzType="linkedin" nzTheme="outline"></span>
-              {{ selected.Name }}
-            </ng-template>
-
-            <app-linkedin-card
-              [name]="selected.Name"
-              [profile_image]="selected.ProfileImage"
-              [images]="images"
-              [postDate]="postDate"
-              [postContent]="postContent"
-            ></app-linkedin-card>
-          </nz-tab>
-        </ng-container>
 
 
-        <ng-container *ngIf="selected.ConnectionName == 'pintrest_board'">
-          <nz-tab [nzTitle]="title">
-            <ng-template #title>
-              <span nz-icon nzType="pushpin" nzTheme="outline"></span>
-              {{ selected.Name }}
-            </ng-template>
+   
 
-            <app-pinterest-card
-              [name]="selected.Name"
-              [profile_image]="selected.ProfileImage"
-              [images]="images"
-              [postDate]="postDate"
-              [postContent]="postContent"
-            ></app-pinterest-card>
-          </nz-tab>
-        </ng-container>
+    <ng-container class="mt-2" *ngFor="let selected of selectedConnections; let i = index">
+      <h3 class="text-lg font-medium text-gray-900 dark:text-white">{{ selected.Name }}</h3>
+      <app-facebook-card
+        [name]="selected.Name"
+        [profile_image]="selected.ProfileImage"
+        [images]="images"
+        [postDate]="postDate"
+        [postContent]="postContent"
+        *ngIf="selected.ConnectionName == 'facebook_page'"
+      ></app-facebook-card>
 
+      <app-twitter-card
+        [name]="selected.Name"
+        [profile_image]="selected.ProfileImage"
+        [images]="images"
+        [postDate]="postDate"
+        [postContent]="postContent"
+        *ngIf="selected.ConnectionName == 'twitter'"
+      ></app-twitter-card>
 
-      </ng-container>
-    </nz-tabset>
+      <app-pinterest-card
+        [name]="selected.Name"
+        [profile_image]="selected.ProfileImage"
+        [images]="images"
+        [postDate]="postDate"
+        [postContent]="postContent"
+        *ngIf="selected.ConnectionName == 'pintrest_board'"
+      ></app-pinterest-card>
+
+      <app-linkedin-card
+        [name]="selected.Name"
+        [profile_image]="selected.ProfileImage"
+        [images]="images"
+        [postDate]="postDate"
+        [postContent]="postContent"
+        *ngIf="selected.ConnectionName == 'linkedin_profile'"
+      ></app-linkedin-card>
+
+      <app-instagram-card
+        [name]="selected.Name"
+        [profile_image]="selected.ProfileImage"
+        [images]="images"
+        [postDate]="postDate"
+        [postContent]="postContent"
+        *ngIf="selected.ConnectionName == 'instagram'"
+      ></app-instagram-card>
+
+    </ng-container>
   </div>
 </div>
 
@@ -213,6 +212,8 @@
   [nzFooter]="null"
 >
   <ng-container *nzModalContent>
-    <app-ai-content (generatedContent)="generatedContent($event)"></app-ai-content>
+    <app-ai-content
+      (generatedContent)="generatedContent($event)"
+    ></app-ai-content>
   </ng-container>
 </nz-modal>

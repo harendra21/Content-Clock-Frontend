@@ -97,7 +97,7 @@ export class AddNewComponent implements OnInit {
 
   schedulePost(isDraft: boolean = false) {
     let body = {
-      post_id: this.postId,
+      post_id: parseInt(this.postId.toString()),
       connection_id: this.connection.ConnectionId,
       description: this.postContent,
       image: this.images.join(','),

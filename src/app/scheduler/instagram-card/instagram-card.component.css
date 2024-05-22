@@ -3,6 +3,7 @@
   border-radius: 10px;
   padding: 12px;
   max-width: 500px;
+  @apply dark:bg-gray-300
 }
 .instagram-post-header img {
   width: 30px;

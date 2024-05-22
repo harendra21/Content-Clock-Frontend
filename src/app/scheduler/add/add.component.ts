@@ -25,6 +25,8 @@ export class AddComponent implements OnInit {
   };
   public isVisible: boolean = false;
   public aiText: string = ""
+  public env = environment;
+
 
   constructor(
     private apiService: ApiService,
@@ -44,7 +46,29 @@ export class AddComponent implements OnInit {
       }
     });
   }
-  connectionToggle(event: any) {
+  connectionToggle(item: any) {
+
+    const index = this.selectedConnections.indexOf(item);
+    if (index == -1) {
+      this.selectedConnections.push(item);
+    } else {
+      
+      if (index > -1) {
+        this.selectedConnections.splice(index, 1);
+      }
+    }
+
+    this.isSelected(item)
+
+  }
+
+  isSelected(item: any){
+    const index = this.selectedConnections.indexOf(item);
+    if (index == -1){
+      return false
+    }else{
+      return true
+    }
   }
 
 

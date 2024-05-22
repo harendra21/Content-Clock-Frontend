@@ -4,6 +4,7 @@
   padding: 16px;
   margin-bottom: 20px;
   max-width: 500px;
+  @apply dark:bg-gray-300
 }
 
 .post-header {
