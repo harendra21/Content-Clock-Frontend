@@ -12,6 +12,7 @@ import { MenuService as Menu } from 'src/app/services/menu.service'
 export class AddComponent implements OnInit {
   public connections: any[] = []
   public loading: boolean = false
+  public env: any = environment
 
   constructor(
     private apiService: ApiService,
