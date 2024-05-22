@@ -1,12 +1,11 @@
-
-
 <ng-template #facebook>
   <img
     src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/fb_fhxGf49v.png"
     width="30px"
     alt=""
     class="ant-scroll-number-custom-component"
-  /> &nbsp; Facebook
+  />
+  &nbsp; Facebook
 </ng-template>
 <ng-template #instagram>
   <img
@@ -14,7 +13,8 @@
     width="30px"
     alt="instagram"
     class="ant-scroll-number-custom-component"
-  /> &nbsp; Instagram
+  />
+  &nbsp; Instagram
 </ng-template>
 
 <ng-template #linkedin>
@@ -23,7 +23,8 @@
     width="30px"
     alt="LinkedIn"
     class="ant-scroll-number-custom-component"
-  /> &nbsp; LinkedIn
+  />
+  &nbsp; LinkedIn
 </ng-template>
 
 <ng-template #pintrest>
@@ -32,7 +33,8 @@
     width="30px"
     alt="pintrest"
     class="ant-scroll-number-custom-component"
-  /> &nbsp; Pintrest
+  />
+  &nbsp; Pintrest
 </ng-template>
 
 <ng-template #twitter>
@@ -41,28 +43,42 @@
     width="30px"
     alt="Twitter"
     class="ant-scroll-number-custom-component"
-  /> &nbsp; Twitter
+  />
+  &nbsp; Twitter
 </ng-template>
 
 <ng-container *ngIf="!loading">
   <div nz-row>
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-
-
-      <div class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white">
+      <div
+        class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white"
+      >
         <div class="flex items-center justify-between p-4 border-b">
           <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full object-cover" src="{{ env.fbLogo }}" alt="Avatar">
+            <img
+              class="w-10 h-10 rounded-full object-cover"
+              src="{{ env.fbLogo }}"
+              alt="Avatar"
+            />
             <div class="ml-3">
-              <p class="text-gray-800 font-semibold dark:text-white" >Facebook</p>
+              <p class="text-gray-800 font-semibold dark:text-white">
+                Facebook
+              </p>
             </div>
           </div>
-          <button class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm" (click)="connectFacebook()">Connect</button>
+          <button
+            class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm"
+            (click)="connectFacebook()"
+          >
+            Connect
+          </button>
         </div>
         <div class="p-4">
           <p class="text-gray-700">
             <ng-container *ngFor="let connection of connections">
-              <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
+              <ng-container
+                *ngIf="connection.ConnectionName == 'facebook_page'"
+              >
                 <div nz-row class="mt-2 connection">
                   <div nz-col nzXs="6">
                     <nz-avatar
@@ -73,12 +89,14 @@
                   </div>
                   <div nz-col nzXs="16">
                     <div class="name">{{ connection.Name }}</div>
-                    <div class="connection-id">{{ connection.ConnectionId }}</div>
+                    <div class="connection-id">
+                      {{ connection.ConnectionId }}
+                    </div>
                     <div class="connection-time">
                       {{ connection.CreatedAt | date: "medium" }}
                     </div>
                   </div>
-    
+
                   <div nz-col nzXs="2">
                     <button
                       nz-button
@@ -88,7 +106,11 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="deleteConnection(connection.ID)"
                     >
-                      <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+                      <span
+                        nz-icon
+                        nzType="disconnect"
+                        nzTheme="outline"
+                      ></span>
                     </button>
                   </div>
                 </div>
@@ -97,19 +119,31 @@
           </p>
         </div>
       </div>
-
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <div class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white">
+      <div
+        class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white"
+      >
         <div class="flex items-center justify-between p-4 border-b">
           <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full object-cover" src="{{ env.instaLogo }}" alt="Avatar">
+            <img
+              class="w-10 h-10 rounded-full object-cover"
+              src="{{ env.instaLogo }}"
+              alt="Avatar"
+            />
             <div class="ml-3">
-              <p class="text-gray-800 font-semibold dark:text-white" >Instagram</p>
+              <p class="text-gray-800 font-semibold dark:text-white">
+                Instagram
+              </p>
             </div>
           </div>
-          <button class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm" (click)="connectInstagram()">Connect</button>
+          <button
+            class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm"
+            (click)="connectInstagram()"
+          >
+            Connect
+          </button>
         </div>
         <div class="p-4">
           <p class="text-gray-700">
@@ -125,12 +159,14 @@
                   </div>
                   <div nz-col nzXs="16">
                     <div class="name">{{ connection.Name }}</div>
-                    <div class="connection-id">{{ connection.ConnectionId }}</div>
+                    <div class="connection-id">
+                      {{ connection.ConnectionId }}
+                    </div>
                     <div class="connection-time">
                       {{ connection.CreatedAt | date: "medium" }}
                     </div>
                   </div>
-    
+
                   <div nz-col nzXs="2">
                     <button
                       nz-button
@@ -140,7 +176,11 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="deleteConnection(connection.ID)"
                     >
-                      <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+                      <span
+                        nz-icon
+                        nzType="disconnect"
+                        nzTheme="outline"
+                      ></span>
                     </button>
                   </div>
                 </div>
@@ -149,24 +189,38 @@
           </p>
         </div>
       </div>
-      
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      <div class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white">
+      <div
+        class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white"
+      >
         <div class="flex items-center justify-between p-4 border-b">
           <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full object-cover" src="{{ env.linkedinLogo }}" alt="Avatar">
+            <img
+              class="w-10 h-10 rounded-full object-cover"
+              src="{{ env.linkedinLogo }}"
+              alt="Avatar"
+            />
             <div class="ml-3">
-              <p class="text-gray-800 font-semibold dark:text-white" >Linkedin</p>
+              <p class="text-gray-800 font-semibold dark:text-white">
+                Linkedin
+              </p>
             </div>
           </div>
-          <button class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm" (click)="connectLinkedin()">Connect</button>
+          <button
+            class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm"
+            (click)="connectLinkedin()"
+          >
+            Connect
+          </button>
         </div>
         <div class="p-4">
           <p class="text-gray-700">
             <ng-container *ngFor="let connection of connections">
-              <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
+              <ng-container
+                *ngIf="connection.ConnectionName == 'linkedin_profile'"
+              >
                 <div nz-row class="mt-2 connection">
                   <div nz-col nzXs="6">
                     <nz-avatar
@@ -177,12 +231,14 @@
                   </div>
                   <div nz-col nzXs="16">
                     <div class="name">{{ connection.Name }}</div>
-                    <div class="connection-id">{{ connection.ConnectionId }}</div>
+                    <div class="connection-id">
+                      {{ connection.ConnectionId }}
+                    </div>
                     <div class="connection-time">
                       {{ connection.CreatedAt | date: "medium" }}
                     </div>
                   </div>
-    
+
                   <div nz-col nzXs="2">
                     <button
                       nz-button
@@ -192,7 +248,11 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="deleteConnection(connection.ID)"
                     >
-                      <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+                      <span
+                        nz-icon
+                        nzType="disconnect"
+                        nzTheme="outline"
+                      ></span>
                     </button>
                   </div>
                 </div>
@@ -204,16 +264,26 @@
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-
-      <div class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white">
+      <div
+        class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white"
+      >
         <div class="flex items-center justify-between p-4 border-b">
           <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full object-cover" src="{{ env.twitterLogo }}" alt="Avatar">
+            <img
+              class="w-10 h-10 rounded-full object-cover"
+              src="{{ env.twitterLogo }}"
+              alt="Avatar"
+            />
             <div class="ml-3">
-              <p class="text-gray-800 font-semibold dark:text-white" >Twitter</p>
+              <p class="text-gray-800 font-semibold dark:text-white">Twitter</p>
             </div>
           </div>
-          <button class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm" (click)="connectTwitter()">Connect</button>
+          <button
+            class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm"
+            (click)="connectTwitter()"
+          >
+            Connect
+          </button>
         </div>
         <div class="p-4">
           <p class="text-gray-700">
@@ -229,12 +299,14 @@
                   </div>
                   <div nz-col nzXs="16">
                     <div class="name">{{ connection.Name }}</div>
-                    <div class="connection-id">{{ connection.ConnectionId }}</div>
+                    <div class="connection-id">
+                      {{ connection.ConnectionId }}
+                    </div>
                     <div class="connection-time">
                       {{ connection.CreatedAt | date: "medium" }}
                     </div>
                   </div>
-    
+
                   <div nz-col nzXs="2">
                     <button
                       nz-button
@@ -244,7 +316,11 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="deleteConnection(connection.ID)"
                     >
-                      <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+                      <span
+                        nz-icon
+                        nzType="disconnect"
+                        nzTheme="outline"
+                      ></span>
                     </button>
                   </div>
                 </div>
@@ -253,25 +329,38 @@
           </p>
         </div>
       </div>
-
     </div>
 
     <div nz-col nzXs="24" nzSm="12" nzMd="6">
-      
-      <div class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white">
+      <div
+        class="max-w-sm w-full bg-white shadow-lg rounded-lg overflow-hidden m-5 dark:bg-gray-700 dark:text-white"
+      >
         <div class="flex items-center justify-between p-4 border-b">
           <div class="flex items-center">
-            <img class="w-10 h-10 rounded-full object-cover" src="{{ env.pinterestLogo }}" alt="Avatar">
+            <img
+              class="w-10 h-10 rounded-full object-cover"
+              src="{{ env.pinterestLogo }}"
+              alt="Avatar"
+            />
             <div class="ml-3">
-              <p class="text-gray-800 font-semibold dark:text-white" >Pinterest</p>
+              <p class="text-gray-800 font-semibold dark:text-white">
+                Pinterest
+              </p>
             </div>
           </div>
-          <button class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm" (click)="connectPintrest()">Connect</button>
+          <button
+            class="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm"
+            (click)="connectPintrest()"
+          >
+            Connect
+          </button>
         </div>
         <div class="p-4">
           <p class="text-gray-700">
             <ng-container *ngFor="let connection of connections">
-              <ng-container *ngIf="connection.ConnectionName == 'pintrest_board'">
+              <ng-container
+                *ngIf="connection.ConnectionName == 'pintrest_board'"
+              >
                 <div nz-row class="mt-2 connection">
                   <div nz-col nzXs="6">
                     <nz-avatar
@@ -282,12 +371,14 @@
                   </div>
                   <div nz-col nzXs="16">
                     <div class="name">{{ connection.Name }}</div>
-                    <div class="connection-id">{{ connection.ConnectionId }}</div>
+                    <div class="connection-id">
+                      {{ connection.ConnectionId }}
+                    </div>
                     <div class="connection-time">
                       {{ connection.CreatedAt | date: "medium" }}
                     </div>
                   </div>
-    
+
                   <div nz-col nzXs="2">
                     <button
                       nz-button
@@ -297,7 +388,11 @@
                       nzPopconfirmPlacement="bottom"
                       (nzOnConfirm)="deleteConnection(connection.ID)"
                     >
-                      <span nz-icon nzType="disconnect" nzTheme="outline"></span>
+                      <span
+                        nz-icon
+                        nzType="disconnect"
+                        nzTheme="outline"
+                      ></span>
                     </button>
                   </div>
                 </div>
@@ -306,7 +401,6 @@
           </p>
         </div>
       </div>
-
     </div>
   </div>
 </ng-container>

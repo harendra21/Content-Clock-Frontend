@@ -1,56 +1,56 @@
 <div nz-row>
   <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="5" nzXl="5">
     <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 m-2"
     >
       <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
       >
         Connections
       </h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400 text-center">
+      <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
         {{ connectionsCount }}
       </p>
     </div>
   </div>
   <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="5" nzXl="5">
     <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 m-2"
     >
       <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
       >
         Posts Count
       </h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400 text-center">
+      <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
         {{ postCount }}
       </p>
     </div>
   </div>
   <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="5" nzXl="5">
     <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 m-2"
     >
       <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
       >
         Published
       </h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400 text-center">
+      <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
         {{ publishedCount }}
       </p>
     </div>
   </div>
   <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="5" nzXl="5">
     <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 m-2"
     >
       <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
       >
         Scheduled
       </h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400 text-center">
+      <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
         {{ scheduledCount }}
       </p>
     </div>
@@ -58,21 +58,22 @@
 
   <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="4" nzXl="4">
     <div
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 m-2"
     >
       <h5
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
       >
         Failed
       </h5>
-      <p class="font-normal text-gray-700 dark:text-gray-400 text-center">
+      <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
         {{ failedCount }}
       </p>
     </div>
   </div>
 </div>
 <div class="mt-2">
-  <nz-calendar *ngIf="!loading">
+  <app-calendar [data]="posts" *ngIf="!loading"></app-calendar>
+  <!-- <nz-calendar *ngIf="!loading">
     <ul *nzDateCell="let date" class="events">
       <ng-container *ngIf="getPostsForDate(date).length">
         <li *ngFor="let item of getPostsForDate(date)">
@@ -80,7 +81,7 @@
         </li>
       </ng-container>
     </ul>
-  </nz-calendar>
+  </nz-calendar> -->
 </div>
 
 <div class="animation-container" *ngIf="loading">

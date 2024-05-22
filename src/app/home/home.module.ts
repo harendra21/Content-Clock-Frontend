@@ -6,6 +6,7 @@ import { AntModule } from '../ant.module';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
+import { LibModule } from '../lib/lib.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NzCalendarModule } from 'ng-zorro-antd/calendar';
     GoogleChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    NzCalendarModule
+    NzCalendarModule,
+    LibModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

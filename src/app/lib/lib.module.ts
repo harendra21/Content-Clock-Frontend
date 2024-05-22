@@ -10,10 +10,12 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HttpClientModule } from '@angular/common/http';
+import { CalendarComponent } from './components/calendar/calendar.component';
 @NgModule({
   declarations: [
     UploadMediaComponent,
-    AiContentComponent
+    AiContentComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
   ], 
   exports: [
     UploadMediaComponent,
-    AiContentComponent
+    AiContentComponent,
+    CalendarComponent
   ]
 })
 export class LibModule { }

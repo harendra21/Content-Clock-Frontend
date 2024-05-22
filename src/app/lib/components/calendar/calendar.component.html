@@ -1,0 +1,40 @@
+
+<div class="w-full bg-white shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+  <div class="p-4 border-b">
+    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+      {{ getMonthName(month) }} {{ year }}
+    </h2>
+  </div>
+  <div class="grid grid-cols-7 p-4 text-center">
+
+    <div *ngFor="let weekday of weekdays" class="font-semibold text-gray-600 dark:text-white">{{ weekday }}</div>
+
+    <div *ngFor="let day of daysInMonth" class="text-gray-600 dark:text-white">
+      <div *ngIf="day" class="border border-gray-600 h-48 overflow-auto">
+        <div class="font-bold">{{ day }}</div>
+        <div class="mt-1 text-sm text-gray-600 dark:text-white">
+
+          <ng-container *ngIf="getPostsForDate(day).length">
+
+            <a class="flex flex-col items-center bg-white border border-gray-200 shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900" *ngFor="let item of getPostsForDate(day)">
+
+              <ng-container *ngIf="item.Medias != ''">
+                <img class="object-cover h-6" src="{{ getImage(item.Medias) }}" alt="" >
+              </ng-container>
+              
+              <div class="flex flex-col justify-between p-1 leading-normal">
+                  <p class=" font-normal text-gray-700 dark:text-gray-400">{{ item.PublishAt | date: 'HH:mm' }}</p>
+              </div>
+          </a>
+
+            
+            
+          </ng-container>
+
+        </div>
+      </div>
+      <div *ngIf="!day" class="h-48"></div>
+    </div>
+
+  </div>
+</div>

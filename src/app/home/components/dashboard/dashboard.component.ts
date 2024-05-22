@@ -31,15 +31,14 @@ export class DashboardComponent implements OnInit {
     this.apiService.getRequest(`/social-posts?from=2024-05-01&to=2024-05-31`).subscribe((res: any) => {
       if (res.status) {
         this.posts = this.formatPosts(res.data)
-        setTimeout(() => {
-          this.loading = false
-        }, 2000)
+        this.loading = false
       }else{
         this.msgService.error(res.message)
-        
+        this.loading = false
       }
 
     }, err => {
+      this.loading = false
       this.msgService.error(err.error.message)
     })
 
@@ -54,35 +53,10 @@ export class DashboardComponent implements OnInit {
       if (!result[date]) {
         result[date] = [];
       }
-      let time = post.PublishAt.split('T')[1];
-      time = time.split('.')[0];
-      time = time.split(':')[0] + ":"+time.split(':')[1];
-
-      let type = ""
-
-      switch (post.Status) {
-        case "published":
-          type = "success"
-          break
-        case "scheduled":
-          type = "warning"
-          break
-        case "draft":
-          type = "warning"
-          break
-        case "failed":
-          type = "error"
-          break
-        case "sending":
-          type = "warning"
-          break
-      }
-
-      result[date].push({ type: type, content: time });
+      
+      result[date].push({...post});
     });
     return result
-
-
   }
 
 
