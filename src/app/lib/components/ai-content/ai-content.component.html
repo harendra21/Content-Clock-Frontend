@@ -28,21 +28,15 @@
   </div>
 </div>
 
-<ng-container *ngIf="aiPost != '' && !loading">
-  <p class="content p-1">{{ aiPost }}</p>
+<ng-container *ngIf="aiPosts.length > 0 && !loading">
+
+  <ng-container *ngFor="let post of aiPosts">
+
+    <p class="content p-1">{{ post.content }}</p>
 
   <div class="text-right">
 
-      <button type="button" class="refresh" (click)="writeAi()">
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>
-        </svg>
-        
-        
-        Rewrite
-      </button>
-
-      <button type="button" class="accept" (click)="acceptContent()">
+      <button type="button" class="px-3 py-1 text-xs font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="acceptContent(post.content)">
         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
         </svg>
@@ -52,4 +46,20 @@
       </button>
      
   </div>
+
+
+  </ng-container>
+  <div class="text-right mt-2">
+  <button type="button" class="refresh" (click)="writeAi()">
+    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>
+    </svg>
+    
+    
+    Rewrite
+  </button>
+  </div>
+  
+  
+
 </ng-container>

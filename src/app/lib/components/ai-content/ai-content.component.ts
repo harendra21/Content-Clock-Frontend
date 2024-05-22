@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ApiService } from 'src/app/auth/service/api.service';
 import { AiService } from 'src/app/services/ai.service';
 
 @Component({
@@ -10,13 +11,13 @@ import { AiService } from 'src/app/services/ai.service';
 export class AiContentComponent implements OnInit {
   public aiText: string = '';
   public loading: boolean = false;
-  public aiPost: string = '';
+  public aiPosts: any[] = [];
 
   @Output() generatedContent = new EventEmitter<string>();
 
 
   constructor(
-    private aiService: AiService,
+    private apiService: ApiService,
     private msg: NzMessageService,
   ) {}
 
@@ -28,20 +29,21 @@ export class AiContentComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.aiService.askAi(this.aiText, 'Social').subscribe(
-      (data: any) => {
-        if (data.choices[0].message.content != '') {
-          this.aiPost = this.clean(data.choices[0].message.content);
-        } else {
-          this.msg.success('Something went wrong, Please try again');
-        }
+    this.apiService.getRequest(`/generate-ai-posts?topic=${this.aiText}`).subscribe((res: any) => {
+      if (res.status){
+
+        var data = JSON.parse(res.data);
+        this.aiPosts = data.posts;
+
         this.loading = false;
-      },
-      (err) => {
+      }else{
+        this.msg.error(res.message);
         this.loading = false;
-        this.msg.error(err.message);
-      },
-    );
+      }
+    }, err => {
+      this.msg.error(err.message);
+      this.loading = false;
+    })
   }
 
   clean(paragraph: string) {
@@ -50,8 +52,8 @@ export class AiContentComponent implements OnInit {
     return paragraph.replace('  ', '').replace(regex, '');
   }
 
-  acceptContent() {
+  acceptContent(post: string) {
     this.msg.success('Content accepted');
-    this.generatedContent.emit(this.aiPost);
+    this.generatedContent.emit(post);
   }
 }
