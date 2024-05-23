@@ -46,26 +46,14 @@ export class DashboardComponent implements OnInit {
 
   formatPosts(posts: any[]){
     const result: any = {};
-
     posts.forEach(post => {
-      const date = post.PublishAt.split('T')[0];
-      
+      const date = post.publish_at.split('T')[0];
       if (!result[date]) {
         result[date] = [];
       }
-      
       result[date].push({...post});
     });
     return result
-  }
-
-
-  getPostsForDate(date: Date): any {
-    const formattedDate = date.toISOString().split('T')[0];
-    if (this.posts[formattedDate]) {
-      return this.posts[formattedDate]
-    };
-    return []
   }
 
   getDashboardData() {

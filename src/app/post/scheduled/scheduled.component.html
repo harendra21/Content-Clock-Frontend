@@ -12,23 +12,23 @@
     <nz-timeline *ngIf="connections">
       <nz-timeline-item
         *ngFor="let conn of connections"
-        [nzDot]="getDotTemplate(conn.Status)"
+        [nzDot]="getDotTemplate(conn.status)"
       >
-        <strong class="dark:text-white">{{ conn.PublishAt | date: "yyyy-MM-dd HH:mm" }} </strong>
-        <ng-container *ngIf="conn.Status == 'failed'">
-          <span nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="{{ conn.Logs }}"></span>
+        <strong class="dark:text-white">{{ conn.publish_at | date: "yyyy-MM-dd HH:mm" }} </strong>
+        <ng-container *ngIf="conn.status == 'failed'">
+          <span nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="{{ conn.logs }}"></span>
         </ng-container>
         <ng-container
-          *ngIf="conn.Status == 'scheduled' || conn.Status == 'draft'"
+          *ngIf="conn.status == 'scheduled' || conn.status == 'draft'"
         >
-          <a nz-button nzType="link" (click)="navigateToEdit(conn.ID)">Edit</a>
+          <a nz-button nzType="link" (click)="navigateToEdit(conn.id)">Edit</a>
           <a
             nz-button
             nzType="link"
             nz-popconfirm
             nzPopconfirmTitle="Are you sure delete this post?"
             nzPopconfirmPlacement="bottom"
-            (nzOnConfirm)="deletePost(conn.ID)"
+            (nzOnConfirm)="deletePost(conn.id)"
             >Delete</a
           >
         </ng-container>
@@ -37,10 +37,10 @@
           <app-twitter-card
             [name]="connection.Name"
             [profile_image]="connection.ProfileImage"
-            [images]="conn.Medias"
-            [postDate]="conn.PublishAt"
-            [postContent]="conn.Description"
-            [status]="conn.Status"
+            [images]="conn.medias"
+            [postDate]="conn.publish_at"
+            [postContent]="conn.description"
+            [status]="conn.status"
           ></app-twitter-card>
         </ng-container>
 
@@ -48,10 +48,10 @@
           <app-facebook-card
             [name]="connection.Name"
             [profile_image]="connection.ProfileImage"
-            [images]="conn.Medias"
-            [postDate]="conn.PublishAt"
-            [postContent]="conn.Description"
-            [status]="conn.Status"
+            [images]="conn.medias"
+            [postDate]="conn.publish_at"
+            [postContent]="conn.description"
+            [status]="conn.status"
           ></app-facebook-card>
         </ng-container>
 
@@ -59,10 +59,10 @@
           <app-linkedin-card
             [name]="connection.Name"
             [profile_image]="connection.ProfileImage"
-            [images]="conn.Medias"
-            [postDate]="conn.PublishAt"
-            [postContent]="conn.Description"
-            [status]="conn.Status"
+            [images]="conn.medias"
+            [postDate]="conn.publish_at"
+            [postContent]="conn.description"
+            [status]="conn.status"
           ></app-linkedin-card>
         </ng-container>
 
@@ -70,10 +70,10 @@
           <app-instagram-card
             [name]="connection.Name"
             [profile_image]="connection.ProfileImage"
-            [images]="conn.Medias"
-            [postDate]="conn.PublishAt"
-            [postContent]="conn.Description"
-            [status]="conn.Status"
+            [images]="conn.medias"
+            [postDate]="conn.publish_at"
+            [postContent]="conn.description"
+            [status]="conn.status"
           ></app-instagram-card>
         </ng-container>
 
@@ -81,10 +81,10 @@
           <app-pinterest-card
             [name]="connection.Name"
             [profile_image]="connection.ProfileImage"
-            [images]="conn.Medias"
-            [postDate]="conn.PublishAt"
-            [postContent]="conn.Description"
-            [status]="conn.Status"
+            [images]="conn.medias"
+            [postDate]="conn.publish_at"
+            [postContent]="conn.description"
+            [status]="conn.status"
           ></app-pinterest-card>
         </ng-container>
       </nz-timeline-item>

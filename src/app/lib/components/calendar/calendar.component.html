@@ -16,16 +16,24 @@
 
           <ng-container *ngIf="getPostsForDate(day).length">
 
-            <a class="flex flex-col items-center bg-white border border-gray-200 shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900" *ngFor="let item of getPostsForDate(day)">
-
-              <ng-container *ngIf="item.Medias != ''">
-                <img class="object-cover h-6" src="{{ getImage(item.Medias) }}" alt="" >
-              </ng-container>
-              
-              <div class="flex flex-col justify-between p-1 leading-normal">
-                  <p class=" font-normal text-gray-700 dark:text-gray-400">{{ item.PublishAt | date: 'HH:mm' }}</p>
+            <a class="flex flex-col items-center bg-white border border-gray-200 shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900" *ngFor="let item of getPostsForDate(day)" nz-popover nzType="primary" nzPopoverTitle="{{ item.name }}" nzPopoverContent="{{ item.description }}">
+              <div class="flex items-center space-x-2 md:space-x-4 p-2">
+                <img class="object-cover h-4" src="{{ env.twitterLogo }}" alt="" *ngIf="item.connection_name == 'twitter'">
+                <img class="object-cover h-4" src="{{ env.pinterestLogo }}" alt="" *ngIf="item.connection_name == 'pintrest_board'">
+                <img class="object-cover h-4" src="{{ env.linkedinLogo }}" alt="" *ngIf="item.connection_name == 'linkedin_profile'">
+                <img class="object-cover h-4" src="{{ env.instaLogo }}" alt="" *ngIf="item.connection_name == 'instagram'">
+                <img class="object-cover h-4" src="{{ env.fbLogo }}" alt="" *ngIf="item.connection_name == 'facebook_page'">
               </div>
-          </a>
+              <div class="flex flex-col justify-between p-1 leading-normal">
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ item.publish_at | date: 'HH:mm' }}</p>
+              </div>
+              <ng-container *ngIf="item.medias != ''">
+                <div class="flex flex-col justify-end p-1 leading-normal ml-auto">
+                  <img class="object-cover h-6 w-6" src="{{ getImage(item.medias) }}" alt="">
+                </div>
+              </ng-container>
+            </a>
+            
 
             
             

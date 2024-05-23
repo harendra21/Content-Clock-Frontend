@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-calendar',
@@ -12,14 +13,14 @@ export class CalendarComponent implements OnInit {
   daysInMonth: any[] = [];
   weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   @Input() data: any;
-
+  env = environment
 
   constructor() {
     const currentDate = new Date();
     this.month = currentDate.getMonth(); // Current month (0-based index)
     this.year = currentDate.getFullYear(); // Current year
-
     
+
   }
 
   ngOnInit(): void {
@@ -51,7 +52,7 @@ export class CalendarComponent implements OnInit {
 
   getPostsForDate(day: number): any {
 
-    var date = new Date(this.year, this.month, day);
+    var date = new Date(this.year, this.month, day - 1);
 
     const formattedDate = date.toISOString().split('T')[0];
     if (this.data[formattedDate]) {
@@ -61,7 +62,6 @@ export class CalendarComponent implements OnInit {
   }
 
   getImage(images: string){
-    console.log(images)
     return images.split(',')[0]
   }
 

@@ -11,6 +11,8 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+
 @NgModule({
   declarations: [
     UploadMediaComponent,
@@ -26,7 +28,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     NzSpinModule,
     NzSpaceModule,
     NzButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    NzPopoverModule
   ], 
   exports: [
     UploadMediaComponent,
