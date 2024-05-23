@@ -21,7 +21,7 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
   public status: string = "";
   public loading: boolean = false;
 
-  public connections: any[] = []
+  public posts: any[] = []
 
   constructor(
     private router: Router, 
@@ -46,7 +46,7 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
     this.loading = true;
     this.apiService.getRequest(`/social-posts?connectionId=${connection_id}&status=${this.status}`).subscribe((res: any) => {
       if (res.status){
-        this.connections = res.data;
+        this.posts = res.data;
       }else{
         this.msgService.error(res.message);
       }
