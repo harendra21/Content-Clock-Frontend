@@ -161,11 +161,15 @@ export class QueueComponent implements OnInit {
     return datesArray;
   }
 
+  isValidDate(dateString: string) {
+    const date = new Date(dateString);
+    return !isNaN(date.getTime());
+  }
+
   convertDateToISO(dateStr: any) {
-    // Split the input date string by the slash (/) delimiter
+
     const [month, day, year] = dateStr.split('/');
 
-    // Ensure the month and day have two digits by padding with zero if necessary
     const paddedMonth = month.padStart(2, '0');
     const paddedDay = day.padStart(2, '0');
 
@@ -190,24 +194,28 @@ export class QueueComponent implements OnInit {
     const futureDates = this.getDatesArray(7);
 
     futureDates.forEach((date) => {
-      const day = daysOfWeek[date.getDay()];
-      const dayKey = this.convertDateToISO(
-        date.toLocaleString().split(', ')[0],
-      );
-      const slots = postingTimes[day].map((slot: any) =>
-        this.convertTime12to24(
-          slot + ' ' + (slot.includes('AM') || slot.includes('PM') ? '' : 'AM'),
-        ),
-      );
-      timeSlots[dayKey] = [];
+      var isValid = this.isValidDate(date.toDateString())
+      if (isValid) {
+        const day = daysOfWeek[date.getDay()];
+        const dayKey = this.convertDateToISO(
+          date.toLocaleString().split(', ')[0],
+        );
+        const slots = postingTimes[day].map((slot: any) =>
+          this.convertTime12to24(
+            slot + ' ' + (slot.includes('AM') || slot.includes('PM') ? '' : 'AM'),
+          ),
+        );
+        timeSlots[dayKey] = [];
 
-      slots.forEach((slot: any) => {
-        const emptySlot: any = {};
-        emptySlot[slot] = {};
-        if (new Date(dayKey + 'T' + slot) > new Date()) {
-          timeSlots[dayKey].push(emptySlot);
-        }
-      });
+        slots.forEach((slot: any) => {
+          const emptySlot: any = {};
+          emptySlot[slot] = {};
+          if (new Date(dayKey + 'T' + slot) > new Date()) {
+            timeSlots[dayKey].push(emptySlot);
+          }
+        });
+      }
+      
     });
 
     if (posts == null || posts.length <= 0) {
@@ -217,6 +225,9 @@ export class QueueComponent implements OnInit {
     posts.forEach((post: any) => {
       const publishDate = new Date(new Date(post.PublishAt).toLocaleString());
       var localTime = new Date(post.PublishAt).toLocaleString();
+
+      var isValid = this.isValidDate(localTime)
+      if (isValid) {
 
       const dayKey = this.convertDateToISO(localTime.split(', ')[0]);
       var time = this.convertTime12to24(localTime.split(', ')[1]);
@@ -237,6 +248,7 @@ export class QueueComponent implements OnInit {
           );
         }
       }
+    }
     });
 
     return timeSlots;
