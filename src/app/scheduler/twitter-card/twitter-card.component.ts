@@ -18,7 +18,7 @@ export class TwitterCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.images.length > 0) this.images = this.images.split(',');
+    if (this.images.length > 1) this.images = this.images.split(',');
   }
 
 }

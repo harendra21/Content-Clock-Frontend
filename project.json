@@ -35,7 +35,8 @@
           "src/styles.scss"
         ],
         "scripts": [
-          "./node_modules/@lottiefiles/lottie-player/dist/lottie-player.js"
+          "./node_modules/@lottiefiles/lottie-player/dist/lottie-player.js",
+          "node_modules/flowbite-datepicker/dist/js/datepicker-full.min.js"
         ]
       },
       "configurations": {

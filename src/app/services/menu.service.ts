@@ -23,8 +23,6 @@ export class MenuService {
     this.apiService.getRequest(`/menu`).subscribe((res: any) => {
       if (res.status) {
         this.setData(res.data)
-      } else {
-        console.log("Error in getting menu")
       }
     });
   }
