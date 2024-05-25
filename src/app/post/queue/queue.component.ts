@@ -107,7 +107,6 @@ export class QueueComponent implements OnInit, AfterViewInit {
     this.formModal.hide();
     this.postId = 0;
     this.confirmModal.hide();
-    this.addNewComponent.reloadComponent(this.slot, this.postId);
     if(this.isEdit) this.router.navigate([`/post/create/${this.connection.ConnectionId}`], { queryParams: { "action": "queue" } })
     
   }

@@ -29,6 +29,7 @@
     "@lottiefiles/lottie-player": "^2.0.4",
     "@types/marked": "^0.3.0",
     "angular-google-charts": "^2.2.3",
+    "apexcharts": "^3.49.1",
     "flowbite": "^2.3.0",
     "flowbite-datepicker": "^1.2.6",
     "lottie-web": "^5.12.2",
