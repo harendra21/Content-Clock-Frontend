@@ -5,6 +5,8 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
+  EventEmitter,
+  Output,
   
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +25,7 @@ export class AddNewComponent implements AfterViewInit, OnInit {
   @Input() slot: any;
   @Input() postId: number = 0;
   @ViewChild('aimodalcontainer') aiModalElement!: ElementRef;
+  @Output() createUpdatePost = new EventEmitter<boolean>();
 
   public postContent = '';
   public link = '';
@@ -104,10 +107,15 @@ export class AddNewComponent implements AfterViewInit, OnInit {
 
     this.apiService.postRequest(`/social-posts`, body).subscribe((res: any) => {
       if (res.status) {
-        this.router.navigate([`/post/create/${this.connection.ConnectionId}`], {
-          queryParams: { action: 'view' },
-        });
+        this.createUpdatePost.emit(true);
+        // this.router.navigate([`/post/create/${this.connection.ConnectionId}`], {
+        //   queryParams: { action: 'view' },
+        // });
+      }else{
+        this.msg.error(res.message);
       }
+    }, err => {
+      this.msg.error(err.message);
     });
   }
 

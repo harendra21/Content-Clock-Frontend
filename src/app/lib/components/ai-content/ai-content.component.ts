@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ApiService } from 'src/app/auth/service/api.service';
-import { AiService } from 'src/app/services/ai.service';
 
 @Component({
   selector: 'app-ai-content',
@@ -14,7 +13,6 @@ export class AiContentComponent implements OnInit {
   public aiPosts: any[] = [];
 
   @Output() generatedContent = new EventEmitter<string>();
-
 
   constructor(
     private apiService: ApiService,

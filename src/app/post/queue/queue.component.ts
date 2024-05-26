@@ -13,7 +13,6 @@ import { ApiService } from 'src/app/auth/service/api.service';
 import { Modal, ModalOptions } from 'flowbite';
 import { AddNewComponent } from '../add-new/add-new.component';
 
-
 @Component({
   selector: 'app-queue',
   templateUrl: './queue.component.html',
@@ -131,4 +130,11 @@ export class QueueComponent implements OnInit, AfterViewInit {
         },
       );
   }
+
+  createUpdatePost(data: any) {
+    this.getScheduledPosts(this.connection.ConnectionId);
+    this.handleCloseModel()
+    
+  }
+
 }

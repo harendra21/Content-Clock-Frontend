@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { TimezoneService } from 'src/app/services/timezone.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,13 @@ import { Router } from '@angular/router';
 export class ApiService {
   
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
+  constructor(
+    private http: HttpClient, 
+    private cookieService: CookieService, 
+    private router: Router,
+    private timezoneService: TimezoneService
+  
+  ) { }
 
   
 
@@ -19,9 +26,11 @@ export class ApiService {
     var headers
     if (auth){
         const accessToken = this.cookieService.get('accessToken')
+        const timezone = this.timezoneService.getUserTimezoneAbbreviation();
         headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+            'Authorization': `Bearer ${accessToken}`,
+            'Timezone': timezone
         });
     }
 
