@@ -91,6 +91,19 @@ export class ApiService {
       this.changeDailyPostCountData(res);
     })
   }
+
+  private postCountSource = new BehaviorSubject<any>({});
+  postCountData = this.postCountSource.asObservable();
+
+  changePostCountData(data: any) {
+    this.postCountSource.next(data);
+  }
+
+  setPostCount(connection_id: string) {
+    this.getRequest(`/social-post-count?connectionId=${connection_id}`).subscribe((res: any) => {
+      this.changePostCountData(res);
+    })
+  }
   
 
 }

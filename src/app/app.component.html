@@ -1,101 +1,88 @@
-<nav
-  class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700"
->
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">
-        <button
-          data-drawer-target="logo-sidebar"
-          data-drawer-toggle="logo-sidebar"
-          aria-controls="logo-sidebar"
+        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
           type="button"
           class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          *ngIf="isAuthenticated"
-        >
+          *ngIf="isAuthenticated">
           <span class="sr-only">Open sidebar</span>
-          <svg
-            class="w-6 h-6"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              fill-rule="evenodd"
-              d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-            ></path>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" fill-rule="evenodd"
+              d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+            </path>
           </svg>
         </button>
 
         <a routerLink="/home" class="flex ms-2 md:me-24">
           <img
             src="https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/content-clock-logo_DeqbqhU2.png"
-            class="h-8 me-3"
-            alt="Content Clock Logo"
-          />
-          <span
-            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"
-            >Content Clock</span
-          >
+            class="h-8 me-3" alt="Content Clock Logo" />
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Content
+            Clock</span>
         </a>
       </div>
-      <div class="flex items-center" *ngIf="isAuthenticated">
+      <div class="flex items-center">
         <div class="flex items-center ms-3">
-          <div>
-            <button
-              type="button"
-              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-              aria-expanded="false"
-              data-dropdown-toggle="dropdown-user"
-            >
+
+          <div class="mr-5">
+            <button type="button" class="flex text-sm dakr:bg-gray-800 rounded-full" aria-expanded="false"
+              (click)="toggleTheme()">
               <span class="sr-only">Open user menu</span>
-              <img
-                class="w-8 h-8 rounded-full"
-                src="{{ avatar }}"
-                alt="user photo"
-              />
+
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="currentColor" viewBox="0 0 24 24" *ngIf="currentTheme == 'dark'">
+                <path fill-rule="evenodd"
+                  d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z"
+                  clip-rule="evenodd" />
+              </svg>
+
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                width="24" height="24" fill="currentColor" viewBox="0 0 24 24" *ngIf="currentTheme == 'light'">
+                <path fill-rule="evenodd"
+                  d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z"
+                  clip-rule="evenodd" />
+              </svg>
+
+
+            </button>
+          </div>
+
+          <div *ngIf="isAuthenticated">
+            <button type="button"
+              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              aria-expanded="false" data-dropdown-toggle="dropdown-user">
+              <span class="sr-only">Open user menu</span>
+              <img class="w-8 h-8 rounded-full" src="{{ avatar }}" alt="user photo" />
             </button>
           </div>
           <div
             class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="dropdown-user"
-          >
+            id="dropdown-user">
             <div class="px-4 py-3" role="none">
               <p class="text-sm text-gray-900 dark:text-white" role="none">
                 {{ name }}
               </p>
-              <p
-                class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
-                role="none"
-              >
+              <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                 {{ email }}
               </p>
             </div>
             <ul class="py-1" role="none">
               <li>
-                <a
-                  routerLink="/home"
+                <a routerLink="/home"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                  role="menuitem"
-                  >Home</a
-                >
+                  role="menuitem">Home</a>
               </li>
               <li>
-                <a
-                  routerLink="/connections"
+                <a routerLink="/connections"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                  role="menuitem"
-                  >Connections</a
-                >
+                  role="menuitem">Connections</a>
               </li>
               <li>
-                <a
-                  (click)="logout()"
+                <a (click)="logout()"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                  role="menuitem"
-                  >Sign out</a
-                >
+                  role="menuitem">Sign out</a>
               </li>
             </ul>
           </div>
@@ -106,163 +93,118 @@
 </nav>
 
 
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar" *ngIf="isAuthenticated">
+<aside id="logo-sidebar"
+  class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+  aria-label="Sidebar" *ngIf="isAuthenticated">
   <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-      <ul class="space-y-2 font-medium">
+    <ul class="space-y-2 font-medium">
 
-        <li>
-          <a routerLink="/home" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-              <path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd"/>
-            </svg>
-            
-             <span class="ms-3">Home</span>
-          </a>
-       </li>
-
-       <li>
-        <a routerLink="/scheduler/add" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+      <li>
+        <a routerLink="/home"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+              clip-rule="evenodd" />
           </svg>
-          
-           <span class="ms-3">Schedule</span>
+
+          <span class="ms-3">Home</span>
         </a>
-     </li>
-  
+      </li>
 
-        <ng-container *ngFor="let connection of connections">
-          <li>
-            <a
-              routerLink="post/create/{{ connection.connection_id }}"
-              (click)="onMenuItemClick()"
-              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-            >
-              <nz-badge
-                [nzCount]="facebook"
-                style="margin-right: 5px"
-                *ngIf="connection.connection_name == 'facebook_page'"
-              >
-                <nz-avatar
-                  nzIcon="user"
-                  nzSrc="{{ connection.profile_image }}"
-                ></nz-avatar>
-              </nz-badge>
+      <li>
+        <a routerLink="/scheduler/add"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+              clip-rule="evenodd" />
+          </svg>
 
-              <nz-badge
-                [nzCount]="instagram"
-                style="margin-right: 5px"
-                *ngIf="connection.connection_name == 'instagram'"
-              >
-                <nz-avatar
-                  nzIcon="user"
-                  nzSrc="{{ connection.profile_image }}"
-                ></nz-avatar>
-              </nz-badge>
-
-              <nz-badge
-                [nzCount]="linkedin"
-                style="margin-right: 5px"
-                *ngIf="connection.connection_name == 'linkedin_profile'"
-              >
-                <nz-avatar
-                  nzIcon="user"
-                  nzSrc="{{ connection.profile_image }}"
-                ></nz-avatar>
-              </nz-badge>
-
-              <nz-badge
-                [nzCount]="pintrest"
-                style="margin-right: 5px"
-                *ngIf="connection.connection_name == 'pintrest_board'"
-              >
-                <nz-avatar
-                  nzIcon="user"
-                  nzSrc="{{ connection.profile_image }}"
-                ></nz-avatar>
-              </nz-badge>
-
-              <nz-badge
-                [nzCount]="twitter"
-                style="margin-right: 5px"
-                *ngIf="connection.connection_name == 'twitter'"
-              >
-                <nz-avatar
-                  nzIcon="user"
-                  nzSrc="{{ connection.profile_image }}"
-                ></nz-avatar>
-              </nz-badge>
-              <span class="ms-3">{{ connection.name }}</span>
-              </a
-            >
-          </li>
-        </ng-container>
+          <span class="ms-3">Schedule</span>
+        </a>
+      </li>
 
 
+      <ng-container *ngFor="let connection of connections">
         <li>
-          <a routerLink="/connections" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961"/>
-            </svg>
-            
-            
-             <span class="ms-3">Connections</span>
+          <a routerLink="post/create/{{ connection.connection_id }}" (click)="onMenuItemClick()"
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <nz-badge [nzCount]="facebook" style="margin-right: 5px"
+              *ngIf="connection.connection_name == 'facebook_page'">
+              <nz-avatar nzIcon="user" nzSrc="{{ connection.profile_image }}"></nz-avatar>
+            </nz-badge>
+
+            <nz-badge [nzCount]="instagram" style="margin-right: 5px" *ngIf="connection.connection_name == 'instagram'">
+              <nz-avatar nzIcon="user" nzSrc="{{ connection.profile_image }}"></nz-avatar>
+            </nz-badge>
+
+            <nz-badge [nzCount]="linkedin" style="margin-right: 5px"
+              *ngIf="connection.connection_name == 'linkedin_profile'">
+              <nz-avatar nzIcon="user" nzSrc="{{ connection.profile_image }}"></nz-avatar>
+            </nz-badge>
+
+            <nz-badge [nzCount]="pintrest" style="margin-right: 5px"
+              *ngIf="connection.connection_name == 'pintrest_board'">
+              <nz-avatar nzIcon="user" nzSrc="{{ connection.profile_image }}"></nz-avatar>
+            </nz-badge>
+
+            <nz-badge [nzCount]="twitter" style="margin-right: 5px" *ngIf="connection.connection_name == 'twitter'">
+              <nz-avatar nzIcon="user" nzSrc="{{ connection.profile_image }}"></nz-avatar>
+            </nz-badge>
+            <span class="ms-3">{{ connection.name }}</span>
           </a>
-       </li>
+        </li>
+      </ng-container>
 
 
-      </ul>
-    </div>
-  </aside>
+      <li>
+        <a routerLink="/connections"
+          class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
+          </svg>
 
-  <div class="p-4  sm:w-full-screen" [ngClass]="{'sm:ml-64': isAuthenticated}">
-    <div
-      class="mt-14"
-    >
-      <router-outlet></router-outlet>
-    </div>
+
+          <span class="ms-3">Connections</span>
+        </a>
+      </li>
+
+
+    </ul>
   </div>
+</aside>
+
+<div class="p-4  sm:w-full-screen" [ngClass]="{'sm:ml-64': isAuthenticated}">
+  <div class="mt-14">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
 <ng-template #facebook>
-  <img
-    src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/fb_fhxGf49v.png"
-    width="15px"
-    alt=""
-    class="ant-scroll-number-custom-component"
-  />
+  <img src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/fb_fhxGf49v.png" width="15px" alt=""
+    class="ant-scroll-number-custom-component" />
 </ng-template>
 <ng-template #instagram>
-  <img
-    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/instagram_icon.png_P2n4El51.webp"
-    width="15px"
-    alt=""
-    class="ant-scroll-number-custom-component"
-  />
+  <img src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/instagram_icon.png_P2n4El51.webp"
+    width="15px" alt="" class="ant-scroll-number-custom-component" />
 </ng-template>
 
 <ng-template #linkedin>
-  <img
-    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/linkedin_logo_initials.png_G0eVpCWb.webp"
-    width="15px"
-    alt=""
-    class="ant-scroll-number-custom-component"
-  />
+  <img src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/linkedin_logo_initials.png_G0eVpCWb.webp"
+    width="15px" alt="" class="ant-scroll-number-custom-component" />
 </ng-template>
 
 <ng-template #pintrest>
-  <img
-    src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/pinterest-logo_lhG5inoN.png"
-    width="15px"
-    alt=""
-    class="ant-scroll-number-custom-component"
-  />
+  <img src="https://res.cloudinary.com/harendra21/image/upload/w_25,f_auto/images/pinterest-logo_lhG5inoN.png"
+    width="15px" alt="" class="ant-scroll-number-custom-component" />
 </ng-template>
 
 <ng-template #twitter>
-  <img
-    src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/twitter_6tGq0h68.webp"
-    width="15px"
-    alt=""
-    class="ant-scroll-number-custom-component"
-  />
+  <img src="https://res.cloudinary.com/harendra21/image/upload/w_25/images/twitter_6tGq0h68.webp" width="15px" alt=""
+    class="ant-scroll-number-custom-component" />
 </ng-template>

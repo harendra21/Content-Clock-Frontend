@@ -12,7 +12,7 @@ module.exports = {
       charts: true,
   }),
   ],
-  darkMode: 'media',
+  darkMode: 'class',
   important:false,
 }
 

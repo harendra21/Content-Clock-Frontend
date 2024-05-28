@@ -24,12 +24,12 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
   public posts: any[] = []
 
   constructor(
-    private router: Router, 
-    private route: ActivatedRoute, 
+    private router: Router,
+    private route: ActivatedRoute,
     private apiService: ApiService,
     private msgService: NzMessageService
   ) {
-    
+
     const id = this.route.snapshot.params['id'];
     this.getScheduledPosts(id);
   }
@@ -37,17 +37,17 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  statusChange(status: string){
+  statusChange(status: string) {
     this.status = status;
     this.getScheduledPosts(this.connection.ConnectionId);
   }
 
-  getScheduledPosts(connection_id : string){
+  getScheduledPosts(connection_id: string) {
     this.loading = true;
     this.apiService.getRequest(`/social-posts?connectionId=${connection_id}&status=${this.status}`).subscribe((res: any) => {
-      if (res.status){
+      if (res.status) {
         this.posts = res.data;
-      }else{
+      } else {
         this.msgService.error(res.message);
       }
       this.loading = false;
@@ -60,20 +60,22 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
-  redirectAddNew(){
+  redirectAddNew() {
     this.router.navigate([`/post/create/${this.connection.ConnectionId}`], { queryParams: { "action": "add-new" } })
   }
 
-  navigateToEdit(postId: any){
+  navigateToEdit(postId: any) {
     this.router.navigate([`/post/create/${this.connection.ConnectionId}`], { queryParams: { "action": "queue", "edit": postId } })
   }
 
-  deletePost(postId: any){
+  deletePost(postId: any) {
     this.apiService.deleteRequest(`/social-posts/${postId}`).subscribe((res: any) => {
-      if (res.status){
+      if (res.status) {
         this.msgService.success(res.message);
         this.getScheduledPosts(this.connection.ConnectionId);
-      }else{
+        this.apiService.setDailyPostCount(this.connection.ConnectionId);
+        this.apiService.setPostCount(this.connection.ConnectionId);
+      } else {
         this.msgService.error(res.message);
       }
     }, err => {

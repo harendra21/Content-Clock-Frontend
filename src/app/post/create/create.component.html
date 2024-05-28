@@ -1,79 +1,69 @@
 <div class="flex flex-wrap">
   <div class="sm:w-full md:w-1/3">
-    <div
-        class="max-w-lg w-full bg-white rounded-lg shadow dark:bg-gray-700 p-4 md:p-6"
-      >
-    <div class="flex flex-wrap">
-      <div class="sm:w-1/2 pr-1 pl-0 w-full">
-        <div class="card scheduled">
-          <div class="number">
-            {{ postCount.scheduled_count ? postCount.scheduled_count : 0 }}
+    <div class="max-w-lg w-full bg-white rounded-lg shadow dark:bg-gray-700 p-4 md:p-6">
+      <div class="flex flex-wrap">
+        <div class="sm:w-1/2 pr-1 pl-0 w-full">
+          <div class="card scheduled">
+            <div class="number">
+              {{ postCount.scheduled_count ? postCount.scheduled_count : 0 }}
+            </div>
+            <div class="heading">Scheduled</div>
           </div>
-          <div class="heading">Scheduled</div>
         </div>
-      </div>
 
-      <div class="sm:w-1/2 pr-1 pl-0 w-full">
-        <div class="card published">
-          <div class="number">
-            {{ postCount.published_count ? postCount.published_count : 0 }}
+        <div class="sm:w-1/2 pr-1 pl-0 w-full">
+          <div class="card published">
+            <div class="number">
+              {{ postCount.published_count ? postCount.published_count : 0 }}
+            </div>
+            <div class="heading">Published</div>
           </div>
-          <div class="heading">Published</div>
         </div>
-      </div>
 
-      <div class="sm:w-1/2 pr-1 pl-0 w-full">
-        <div class="card draft">
-          <div class="number">
-            {{ postCount.draft_count ? postCount.draft_count : 0 }}
+        <div class="sm:w-1/2 pr-1 pl-0 w-full">
+          <div class="card draft">
+            <div class="number">
+              {{ postCount.draft_count ? postCount.draft_count : 0 }}
+            </div>
+            <div class="heading">Draft</div>
           </div>
-          <div class="heading">Draft</div>
         </div>
-      </div>
 
-      <div class="sm:w-1/2 pr-1 pl-0 w-full">
-        <div class="card failed">
-          <div class="number">
-            {{ postCount.failed_count ? postCount.failed_count : 0 }}
+        <div class="sm:w-1/2 pr-1 pl-0 w-full">
+          <div class="card failed">
+            <div class="number">
+              {{ postCount.failed_count ? postCount.failed_count : 0 }}
+            </div>
+            <div class="heading">Failed</div>
           </div>
-          <div class="heading">Failed</div>
         </div>
       </div>
-    </div>
     </div>
 
     <div class="mt-5">
-      <div
-        class="max-w-lg w-full bg-white rounded-lg shadow dark:bg-gray-700 p-4 md:p-6"
-      >
+      <div class="max-w-lg w-full bg-white rounded-lg shadow dark:bg-gray-700 p-4 md:p-6">
         <div class="flex justify-between">
           <div>
-            <h5
-              class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2"
-            >
+            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
               {{ totalPostCount }}
             </h5>
             <p class="text-base font-normal text-gray-500 dark:text-gray-400">
               Posts in Next 30 Days
             </p>
           </div>
-          
+
         </div>
         <div id="area-chart"></div>
-        <div
-          class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
-        >
+        <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
           <div class="flex justify-between items-center pt-5">
             <!-- Button -->
             <button
-              
               class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
-              type="button"
-            >
+              type="button">
               Next 30 days
-              
+
             </button>
-            
+
           </div>
         </div>
       </div>
@@ -83,26 +73,14 @@
   <div class="sm:w-full md:w-2/3 pr-1 pl-0 w-full">
     <div class="container mx-auto p-4">
       <ul
-        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-white -700 dark:text-white"
-      >
+        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-white -700 dark:text-white">
         <li class="mr-2">
-          <a
-            [routerLink]="['.']"
-            [queryParams]="{ action: 'queue' }"
-            queryParamsHandling="merge"
-            routerLinkActive="active"
-            class="inline-block p-4 rounded-t-lg dark:text-white"
-            >Queue</a
-          >
+          <a [routerLink]="['.']" [queryParams]="{ action: 'queue' }" queryParamsHandling="merge"
+            routerLinkActive="active" class="inline-block p-4 rounded-t-lg dark:text-white">Queue</a>
         </li>
         <li class="mr-2">
-          <a
-            [routerLink]="['.']"
-            [queryParams]="{ action: 'view' }"
-            routerLinkActive="active"
-            class="inline-block p-4 rounded-t-lg dark:text-white"
-            >View</a
-          >
+          <a [routerLink]="['.']" [queryParams]="{ action: 'view' }" routerLinkActive="active"
+            class="inline-block p-4 rounded-t-lg dark:text-white">View</a>
         </li>
       </ul>
       <ng-container *ngIf="action == 'queue' && connection">

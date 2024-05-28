@@ -4,6 +4,7 @@ import { MenuService as Menu } from './services/menu.service';
 import { AuthService } from './auth/service/auth.service';
 import { environment } from 'src/environments/environment';
 import { initFlowbite } from 'flowbite';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -23,28 +24,36 @@ export class AppComponent {
   constructor(
     private apiService: ApiService,
     private menuService: Menu,
-    private authService: AuthService
-  ){
+    private authService: AuthService,
+    private themeService: ThemeService
+  ) {
     this.isAuthenticated = false
   }
 
-  ngOnInit(){
+  ngOnInit() {
     initFlowbite();
     this.getMenuState()
 
     this.authService.isAuth$
-    .subscribe((data: boolean) => {
-      this.isAuthenticated = data
-      if (data){
-        this.getMenuConnections()
-        this.getUserInfo()
-      }
-    })
+      .subscribe((data: boolean) => {
+        this.isAuthenticated = data
+        if (data) {
+          this.getMenuConnections()
+          this.getUserInfo()
+        }
+      })
   }
 
-  getUserInfo(){
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+  get currentTheme(): 'light' | 'dark' {
+    return this.themeService.getTheme();
+  }
+
+  getUserInfo() {
     this.apiService.getRequest(`/check-auth`).subscribe((res: any) => {
-      if (res.status){
+      if (res.status) {
         this.avatar = res.data.avatar_url
         this.name = res.data.name
         this.email = res.data.email
@@ -52,7 +61,7 @@ export class AppComponent {
     })
   }
 
-  getMenuConnections(){
+  getMenuConnections() {
 
     this.menuService.getConnections()
 
@@ -62,25 +71,25 @@ export class AppComponent {
 
   }
 
-  getMenuState(){
-   var menu = localStorage.getItem('menu')
-   if(menu == '0'){
-    this.isCollapsed = false
-   }else{
-    this.isCollapsed = true
-   }
+  getMenuState() {
+    var menu = localStorage.getItem('menu')
+    if (menu == '0') {
+      this.isCollapsed = false
+    } else {
+      this.isCollapsed = true
+    }
 
   }
-  changeMenuState(isCollapsed: boolean){
-    if (isCollapsed){
+  changeMenuState(isCollapsed: boolean) {
+    if (isCollapsed) {
       localStorage.setItem('menu', '1')
-    }else{
+    } else {
       localStorage.setItem('menu', '0')
     }
     this.isCollapsed = isCollapsed
   }
 
-  logout(){
+  logout() {
     this.authService.setAuthStatus(false)
     this.apiService.logOut()
   }

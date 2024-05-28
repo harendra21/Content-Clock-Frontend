@@ -108,17 +108,13 @@ export class CreateComponent implements OnInit {
   }
   public postCount: any = {};
   GetPostCount() {
-    this.apiService
-      .getRequest(
-        `/social-post-count?connectionId=${this.route.snapshot.params['id']}`,
-      )
-      .subscribe((res: any) => {
-        if (res.status) {
-          this.postCount = res.data;
-        } else {
-          this.msg.error(res.message);
-        }
-      });
+
+    this.apiService.setPostCount(this.route.snapshot.params['id']);
+    this.apiService.postCountData.subscribe((res: any) => {
+      if (res.status) {
+        this.postCount = res.data;
+      }
+    });
   }
 
   public totalPostCount: number = 0;
@@ -129,6 +125,9 @@ export class CreateComponent implements OnInit {
       if (res.status) {
         var postCount: any[] = [];
         var dates: any[] = [];
+        if (!res.data) {
+          return;
+        }
         const postCounts = this.generateDailyCounts(res.data);
         postCounts.forEach((element: any) => {
           postCount.push(element.daily_count);

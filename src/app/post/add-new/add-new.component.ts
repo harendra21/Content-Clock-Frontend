@@ -110,9 +110,9 @@ export class AddNewComponent implements AfterViewInit, OnInit {
     this.apiService.postRequest(`/social-posts`, body).subscribe((res: any) => {
       if (res.status) {
         this.createUpdatePost.emit(true);
-        // this.router.navigate([`/post/create/${this.connection.ConnectionId}`], {
-        //   queryParams: { action: 'view' },
-        // });
+        this.apiService.setDailyPostCount(this.connection.ConnectionId);
+        this.apiService.setPostCount(this.connection.ConnectionId);
+        this.msg.success(res.message);
       }else{
         this.msg.error(res.message);
       }

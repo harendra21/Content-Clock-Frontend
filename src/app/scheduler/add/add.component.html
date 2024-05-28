@@ -1,102 +1,85 @@
 <div nz-row>
   <div nz-col nzXs="24" nzSm="15" nzMd="15" nzLg="15">
-    
+
     <div class="clearfix">
       <ng-container *ngFor="let item of connections">
         <div class="relative float-left mr-3 mb-2 " (click)="connectionToggle(item)">
-          <img
-            class="w-10 h-10 rounded-full ring-4 "
-            src="{{ item.ProfileImage }}"
-            alt="{{ item.Name }}"
-            [ngClass]="{'ring-green-700 dark:ring-green-500': isSelected(item), 'ring-gray-300 dark:ring-gray-500': !isSelected(item)}"
-          />
+          <img class="w-10 h-10 rounded-full ring-4 " src="{{ item.ProfileImage }}" alt="{{ item.Name }}"
+            [ngClass]="{'ring-green-700 dark:ring-green-500': isSelected(item), 'ring-gray-300 dark:ring-gray-500': !isSelected(item)}" />
           <span
-            class="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 border-1 border-white dark:border-gray-800 rounded-full"
-          >
-            <ng-container *ngIf="item.ConnectionName == 'facebook_page'"
-              ><img src="{{ env.fbLogo }}" alt="{{ item.Name }}"
-            /></ng-container>
-  
-            <ng-container *ngIf="item.ConnectionName == 'instagram'"
-              ><img src="{{ env.instaLogo }}" alt="{{ item.Name }}"
-            /></ng-container>
-  
-            <ng-container *ngIf="item.ConnectionName == 'linkedin_profile'"
-              ><img src="{{ env.linkedinLogo }}" alt="{{ item.Name }}"
-            /></ng-container>
-  
-            <ng-container *ngIf="item.ConnectionName == 'pintrest_board'"
-              ><img src="{{ env.pinterestLogo }}" alt="{{ item.Name }}"
-            /></ng-container>
-  
-            <ng-container *ngIf="item.ConnectionName == 'twitter'"
-              ><img src="{{ env.twitterLogo }}" alt="{{ item.Name }}"
-            /></ng-container>
+            class="absolute bottom-0 left-8 transform translate-y-1/4 w-3.5 h-3.5 border-1 border-white dark:border-gray-800 rounded-full">
+            <ng-container *ngIf="item.ConnectionName == 'facebook_page'"><img src="{{ env.fbLogo }}"
+                alt="{{ item.Name }}" /></ng-container>
+
+            <ng-container *ngIf="item.ConnectionName == 'instagram'"><img src="{{ env.instaLogo }}"
+                alt="{{ item.Name }}" /></ng-container>
+
+            <ng-container *ngIf="item.ConnectionName == 'linkedin_profile'"><img src="{{ env.linkedinLogo }}"
+                alt="{{ item.Name }}" /></ng-container>
+
+            <ng-container *ngIf="item.ConnectionName == 'pintrest_board'"><img src="{{ env.pinterestLogo }}"
+                alt="{{ item.Name }}" /></ng-container>
+
+            <ng-container *ngIf="item.ConnectionName == 'twitter'"><img src="{{ env.twitterLogo }}"
+                alt="{{ item.Name }}" /></ng-container>
           </span>
         </div>
       </ng-container>
     </div>
     <div class="mt-2">
       <button type="button" class="btn-primary-icon mt-2" (click)="showModal()">
-        <svg
-          class="w-6 h-6 text-gray-800 dark:text-white"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 9a3 3 0 0 1 3-3m-2 15h4m0-3c0-4.1 4-4.9 4-9A6 6 0 1 0 6 9c0 4 4 5 4 9h4Z"
-          />
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 9a3 3 0 0 1 3-3m-2 15h4m0-3c0-4.1 4-4.9 4-9A6 6 0 1 0 6 9c0 4 4 5 4 9h4Z" />
         </svg>
         &nbsp; Write With AI
       </button>
     </div>
 
     <div class="mt-2">
-      <textarea
-        id="message"
-        rows="8"
-        class="textarea"
-        placeholder="Post content..."
-        [(ngModel)]="postContent"
-      ></textarea>
+      <textarea id="message" rows="8" class="textarea" placeholder="Post content..."
+        [(ngModel)]="postContent"></textarea>
       <div class="char-count text-right">{{ postContent.length }}</div>
     </div>
 
 
     <div class="clearfix mt-2">
-      <app-upload-media
-        [files]="files"
-        (uploadedFiles)="uploadedFiles($event)"
-      ></app-upload-media>
+      <app-upload-media [files]="files" (uploadedFiles)="uploadedFiles($event)"></app-upload-media>
     </div>
 
     <div class="mt-2">
-      <nz-date-picker
-        nzShowTime
-        nzFormat="yyyy-MM-dd HH:mm"
-        [(ngModel)]="postDate"
-        ngModel
-        class="datepicker"
-      ></nz-date-picker>
+      <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm" [(ngModel)]="postDate" ngModel
+        class="datepicker"></nz-date-picker>
     </div>
 
     <div class="mt-2 text-right">
-      <button class="btn-success" nzType="default" (click)="schedulePost(true)">
-        Send Now
+      <button class="btn btn-success" nzType="default" (click)="schedulePost(true)">
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd"
+            d="M3 4a1 1 0 0 0-.822 1.57L6.632 12l-4.454 6.43A1 1 0 0 0 3 20h13.153a1 1 0 0 0 .822-.43l4.847-7a1 1 0 0 0 0-1.14l-4.847-7a1 1 0 0 0-.822-.43H3Z"
+            clip-rule="evenodd" />
+        </svg>
+        &nbsp; Send Now
       </button>
-      <button class="btn-warning" nzType="dashed" (click)="schedulePost(true)">
-        Draft
+      <button class="btn btn-warning" nzType="dashed" (click)="schedulePost(true)">
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Z" />
+          <path fill-rule="evenodd"
+            d="M11 7V2h7a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Zm4.707 5.707a1 1 0 0 0-1.414-1.414L11 14.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4Z"
+            clip-rule="evenodd" />
+        </svg>
+        &nbsp; Draft
       </button>
-      <button class="btn-primary" nzType="primary" (click)="schedulePost()">
-        Schedule
+      <button class="btn btn-primary" nzType="primary" (click)="schedulePost()">
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+        &nbsp; Schedule
       </button>
     </div>
   </div>
@@ -104,94 +87,54 @@
   <div nz-col nzXs="24" nzSm="9" nzMd="9" nzLg="9" class="pd-10">
     <div class="m-2">
       <ng-container class="mt-2" *ngFor="let selected of selectedConnections; let i = index">
-      
+
         <div class="text-lg font-medium text-gray-900 dark:text-white">
-          <ng-container *ngIf="selected.ConnectionName == 'facebook_page'"
-                ><img class="display-inline w-6" src="{{ env.fbLogo }}" alt="{{ selected.Name }}"
-              /></ng-container>
-    
-              <ng-container *ngIf="selected.ConnectionName == 'instagram'"
-                ><img class="display-inline w-6" src="{{ env.instaLogo }}" alt="{{ selected.Name }}"
-              /></ng-container>
-    
-              <ng-container *ngIf="selected.ConnectionName == 'linkedin_profile'"
-                ><img class="display-inline w-6" src="{{ env.linkedinLogo }}" alt="{{ selected.Name }}"
-              /></ng-container>
-    
-              <ng-container *ngIf="selected.ConnectionName == 'pintrest_board'"
-                ><img class="display-inline w-6" src="{{ env.pinterestLogo }}" alt="{{ selected.Name }}"
-              /></ng-container>
-    
-              <ng-container *ngIf="selected.ConnectionName == 'twitter'"
-                ><img class="display-inline w-6" src="{{ env.twitterLogo }}" alt="{{ selected.Name }}"
-              /></ng-container>
+          <ng-container *ngIf="selected.ConnectionName == 'facebook_page'"><img class="display-inline w-6"
+              src="{{ env.fbLogo }}" alt="{{ selected.Name }}" /></ng-container>
+
+          <ng-container *ngIf="selected.ConnectionName == 'instagram'"><img class="display-inline w-6"
+              src="{{ env.instaLogo }}" alt="{{ selected.Name }}" /></ng-container>
+
+          <ng-container *ngIf="selected.ConnectionName == 'linkedin_profile'"><img class="display-inline w-6"
+              src="{{ env.linkedinLogo }}" alt="{{ selected.Name }}" /></ng-container>
+
+          <ng-container *ngIf="selected.ConnectionName == 'pintrest_board'"><img class="display-inline w-6"
+              src="{{ env.pinterestLogo }}" alt="{{ selected.Name }}" /></ng-container>
+
+          <ng-container *ngIf="selected.ConnectionName == 'twitter'"><img class="display-inline w-6"
+              src="{{ env.twitterLogo }}" alt="{{ selected.Name }}" /></ng-container>
           {{ selected.Name }}
         </div>
-        <app-facebook-card
-          [name]="selected.Name"
-          [profile_image]="selected.ProfileImage"
-          [images]="images"
-          [postDate]="postDate"
-          [postContent]="postContent"
-          *ngIf="selected.ConnectionName == 'facebook_page'"
-        ></app-facebook-card>
-  
-        <app-twitter-card
-          [name]="selected.Name"
-          [profile_image]="selected.ProfileImage"
-          [images]="images"
-          [postDate]="postDate"
-          [postContent]="postContent"
-          *ngIf="selected.ConnectionName == 'twitter'"
-        ></app-twitter-card>
-  
-        <app-pinterest-card
-          [name]="selected.Name"
-          [profile_image]="selected.ProfileImage"
-          [images]="images"
-          [postDate]="postDate"
-          [postContent]="postContent"
-          *ngIf="selected.ConnectionName == 'pintrest_board'"
-        ></app-pinterest-card>
-  
-        <app-linkedin-card
-          [name]="selected.Name"
-          [profile_image]="selected.ProfileImage"
-          [images]="images"
-          [postDate]="postDate"
-          [postContent]="postContent"
-          *ngIf="selected.ConnectionName == 'linkedin_profile'"
-        ></app-linkedin-card>
-  
-        <app-instagram-card
-          [name]="selected.Name"
-          [profile_image]="selected.ProfileImage"
-          [images]="images"
-          [postDate]="postDate"
-          [postContent]="postContent"
-          *ngIf="selected.ConnectionName == 'instagram'"
-        ></app-instagram-card>
-  
+        <app-facebook-card [name]="selected.Name" [profile_image]="selected.ProfileImage" [images]="images"
+          [postDate]="postDate" [postContent]="postContent"
+          *ngIf="selected.ConnectionName == 'facebook_page'"></app-facebook-card>
+
+        <app-twitter-card [name]="selected.Name" [profile_image]="selected.ProfileImage" [images]="images"
+          [postDate]="postDate" [postContent]="postContent"
+          *ngIf="selected.ConnectionName == 'twitter'"></app-twitter-card>
+
+        <app-pinterest-card [name]="selected.Name" [profile_image]="selected.ProfileImage" [images]="images"
+          [postDate]="postDate" [postContent]="postContent"
+          *ngIf="selected.ConnectionName == 'pintrest_board'"></app-pinterest-card>
+
+        <app-linkedin-card [name]="selected.Name" [profile_image]="selected.ProfileImage" [images]="images"
+          [postDate]="postDate" [postContent]="postContent"
+          *ngIf="selected.ConnectionName == 'linkedin_profile'"></app-linkedin-card>
+
+        <app-instagram-card [name]="selected.Name" [profile_image]="selected.ProfileImage" [images]="images"
+          [postDate]="postDate" [postContent]="postContent"
+          *ngIf="selected.ConnectionName == 'instagram'"></app-instagram-card>
+
       </ng-container>
     </div>
   </div>
 </div>
 
-<nz-modal
-  nzDraggable
-  nzCentered
-  [(nzVisible)]="isVisible"
-  nzTitle="Write With AI"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
-  [nzBodyStyle]="{
+<nz-modal nzDraggable nzCentered [(nzVisible)]="isVisible" nzTitle="Write With AI" (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()" [nzBodyStyle]="{
     'min-height': '200px'
-  }"
-  [nzFooter]="null"
->
+  }" [nzFooter]="null">
   <ng-container *nzModalContent>
-    <app-ai-content
-      (generatedContent)="generatedContent($event)"
-    ></app-ai-content>
+    <app-ai-content (generatedContent)="generatedContent($event)"></app-ai-content>
   </ng-container>
 </nz-modal>
