@@ -1,17 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../../services/api.service';
 import { NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, Observer, Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import {
   HttpClient,
-  HttpEvent,
   HttpEventType,
   HttpHeaders,
   HttpParams,
-  HttpRequest,
-  HttpResponse,
 } from '@angular/common/http';
 
 @Component({

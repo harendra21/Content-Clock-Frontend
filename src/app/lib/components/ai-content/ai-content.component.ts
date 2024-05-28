@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../../services/api.service';
 
 @Component({
   selector: 'app-ai-content',

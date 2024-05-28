@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 import { AiService } from 'src/app/services/ai.service';
 import { environment } from 'src/environments/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';

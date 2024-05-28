@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 import { Router } from '@angular/router';
 
 

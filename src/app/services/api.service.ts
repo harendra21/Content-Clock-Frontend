@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { TimezoneService } from 'src/app/services/timezone.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,6 @@ export class ApiService {
     private timezoneService: TimezoneService
   
   ) { }
-
-  
-
   getRequest(uri: string, auth: boolean = true, params: HttpParams = new HttpParams()){
 
     var headers
@@ -74,6 +72,25 @@ export class ApiService {
     this.router.navigate(['/auth/login'])
   }
 
+  private addNewDataSource = new BehaviorSubject<any>({});
+  addNewData = this.addNewDataSource.asObservable();
 
+  changeAddNewData(data: any) {
+    this.addNewDataSource.next(data);
+  }
+
+  private dailyPostCountSource = new BehaviorSubject<any>({});
+  dailyPostCountData = this.dailyPostCountSource.asObservable();
+
+  changeDailyPostCountData(data: any) {
+    this.dailyPostCountSource.next(data);
+  }
+
+  setDailyPostCount(connection_id: string) {
+    this.getRequest(`/daily-social-posts-count?connectionId=${connection_id}`).subscribe((res: any) => {
+      this.changeDailyPostCountData(res);
+    })
+  }
+  
 
 }

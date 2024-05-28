@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from './auth/service/api.service'
+import { ApiService } from './services/api.service'
 import { MenuService as Menu } from './services/menu.service';
 import { AuthService } from './auth/service/auth.service';
 import { environment } from 'src/environments/environment';

@@ -39,7 +39,7 @@
         ></app-upload-media>
       </div>
 
-      <ng-container *ngIf="connection.ConnectionName == 'pintrest_board'">
+      <ng-container *ngIf="connection?.ConnectionName == 'pintrest_board'">
         <div class="mt-2">
           <input nz-input placeholder="Title" [(ngModel)]="title" type="text" />
         </div>
@@ -47,8 +47,8 @@
 
       <ng-container
         *ngIf="
-          connection.ConnectionName == 'facebook_page' ||
-          connection.ConnectionName == 'pintrest_board'
+          connection?.ConnectionName == 'facebook_page' ||
+          connection?.ConnectionName == 'pintrest_board'
         "
       >
         <div class="mt-2">
@@ -153,50 +153,50 @@
 
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="9">
       <div class="m-2">
-        <ng-container *ngIf="connection.ConnectionName == 'twitter'">
+        <ng-container *ngIf="connection?.ConnectionName == 'twitter'">
           <app-twitter-card
-            [name]="connection.Name"
-            [profile_image]="connection.ProfileImage"
+            [name]="connection?.Name"
+            [profile_image]="connection?.ProfileImage"
             [images]="images"
             [postDate]="date"
             [postContent]="postContent"
           ></app-twitter-card>
         </ng-container>
 
-        <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
+        <ng-container *ngIf="connection?.ConnectionName == 'facebook_page'">
           <app-facebook-card
-            [name]="connection.Name"
-            [profile_image]="connection.ProfileImage"
+            [name]="connection?.Name"
+            [profile_image]="connection?.ProfileImage"
             [images]="images"
             [postDate]="date"
             [postContent]="postContent"
           ></app-facebook-card>
         </ng-container>
 
-        <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
+        <ng-container *ngIf="connection?.ConnectionName == 'linkedin_profile'">
           <app-linkedin-card
-            [name]="connection.Name"
-            [profile_image]="connection.ProfileImage"
+            [name]="connection?.Name"
+            [profile_image]="connection?.ProfileImage"
             [images]="images"
             [postDate]="date"
             [postContent]="postContent"
           ></app-linkedin-card>
         </ng-container>
 
-        <ng-container *ngIf="connection.ConnectionName == 'instagram'">
+        <ng-container *ngIf="connection?.ConnectionName == 'instagram'">
           <app-instagram-card
-            [name]="connection.Name"
-            [profile_image]="connection.ProfileImage"
+            [name]="connection?.Name"
+            [profile_image]="connection?.ProfileImage"
             [images]="images"
             [postDate]="date"
             [postContent]="postContent"
           ></app-instagram-card>
         </ng-container>
 
-        <ng-container *ngIf="connection.ConnectionName == 'pintrest_board'">
+        <ng-container *ngIf="connection?.ConnectionName == 'pintrest_board'">
           <app-pinterest-card
-            [name]="connection.Name"
-            [profile_image]="connection.ProfileImage"
+            [name]="connection?.Name"
+            [profile_image]="connection?.ProfileImage"
             [images]="images"
             [postDate]="date"
             [postContent]="postContent"

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 declare var Datepicker: any;
 import { Modal } from 'flowbite';
 
@@ -49,10 +49,12 @@ export class AddNewComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    if (this.slot) {
-      this.date = this.formatDate(this.slot);
-      this.time = this.formatTime(this.slot);
-    }
+    this.apiService.addNewData.subscribe((res: any) => {
+      this.postId = res.postId; 
+      this.slot = res.slot;
+      this.connection = res.connection;
+      this.reloadComponent(this.slot, this.postId);
+    });
   }
 
   @ViewChild('dateField') dateField!: ElementRef;

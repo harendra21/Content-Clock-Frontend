@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 import { Modal, ModalOptions } from 'flowbite';
 import { AddNewComponent } from '../add-new/add-new.component';
 
@@ -49,6 +49,11 @@ export class QueueComponent implements OnInit, AfterViewInit {
         this.closeFormModal()
       },
       onShow: () => {
+        this.apiService.changeAddNewData({
+          slot: this.slot,
+          postId: this.postId,
+          connection: this.connection,
+        })
         this.isClosed = false;
       },
     };

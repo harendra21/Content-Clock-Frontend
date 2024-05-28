@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { environment } from 'src/environments/environment';
 import { MenuService as Menu } from 'src/app/services/menu.service'

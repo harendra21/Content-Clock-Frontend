@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/auth/service/api.service';
+import { ApiService } from './../../services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class FacebookComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) {
-    const queryParams = this.route.snapshot.queryParams;
     const accessToken = this.route.snapshot.queryParams['accessToken'];
     const userId = this.route.snapshot.queryParams['userId'];
     const uri = `/add-facebook-pages?accessToken=${accessToken}&userId=${userId}`
