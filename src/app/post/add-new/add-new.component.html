@@ -16,7 +16,8 @@
         <div class="char-count text-right">{{ postContent.length }}</div>
       </div>
       <div class="mt-2">
-        <app-upload-media [files]="files" (uploadedFiles)="uploadedFiles($event)"></app-upload-media>
+        <app-upload-media [files]="files" [filePaths]="filePaths"
+          (uploadedFiles)="uploadedFiles($event)"></app-upload-media>
       </div>
 
       <ng-container *ngIf="connection?.ConnectionName == 'pintrest_board'">
@@ -35,36 +36,14 @@
       </ng-container>
 
       <div nz-row>
-        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
-          <div class="mt-2 w-2/4 float-start">
-            <div class="relative ">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                </svg>
-              </div>
-              <input datepicker #dateField datepicker-title="Flowbite datepicker" type="text" class="datepicker"
-                placeholder="Select date" [(ngModel)]="date" datepicker-format="yyyy-mm-dd"
-                datepicker-autoselect-today />
-            </div>
-          </div>
-          <div class="mt-2 w-2/4 float-end">
 
-            <div class="relative ">
-              <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd"
-                    d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                    clip-rule="evenodd" />
-                </svg>
-              </div>
-              <input type="time" id="time" class="timepicker" min="00:00" max='23:59' [(ngModel)]="time" required />
-            </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+          <div class="mt-2">
+            <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm" [(ngModel)]="postDate"
+              class="datepicker"></nz-date-picker>
           </div>
         </div>
+
         <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
           <div class="mt-2 text-right">
             <button class="btn btn-success" (click)="schedulePost()" *ngIf="postId == 0">
@@ -112,27 +91,27 @@
       <div class="m-2">
         <ng-container *ngIf="connection?.ConnectionName == 'twitter'">
           <app-twitter-card [name]="connection?.Name" [profile_image]="connection?.ProfileImage" [images]="images"
-            [postDate]="date" [postContent]="postContent"></app-twitter-card>
+            [postDate]="postDate" [postContent]="postContent"></app-twitter-card>
         </ng-container>
 
         <ng-container *ngIf="connection?.ConnectionName == 'facebook_page'">
           <app-facebook-card [name]="connection?.Name" [profile_image]="connection?.ProfileImage" [images]="images"
-            [postDate]="date" [postContent]="postContent"></app-facebook-card>
+            [postDate]="postDate" [postContent]="postContent"></app-facebook-card>
         </ng-container>
 
         <ng-container *ngIf="connection?.ConnectionName == 'linkedin_profile'">
           <app-linkedin-card [name]="connection?.Name" [profile_image]="connection?.ProfileImage" [images]="images"
-            [postDate]="date" [postContent]="postContent"></app-linkedin-card>
+            [postDate]="postDate" [postContent]="postContent"></app-linkedin-card>
         </ng-container>
 
         <ng-container *ngIf="connection?.ConnectionName == 'instagram'">
           <app-instagram-card [name]="connection?.Name" [profile_image]="connection?.ProfileImage" [images]="images"
-            [postDate]="date" [postContent]="postContent"></app-instagram-card>
+            [postDate]="postDate" [postContent]="postContent"></app-instagram-card>
         </ng-container>
 
         <ng-container *ngIf="connection?.ConnectionName == 'pintrest_board'">
           <app-pinterest-card [name]="connection?.Name" [profile_image]="connection?.ProfileImage" [images]="images"
-            [postDate]="date" [postContent]="postContent"></app-pinterest-card>
+            [postDate]="postDate" [postContent]="postContent"></app-pinterest-card>
         </ng-container>
       </div>
     </div>

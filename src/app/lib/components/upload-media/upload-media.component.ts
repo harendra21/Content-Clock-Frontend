@@ -18,7 +18,7 @@ import {
 export class UploadMediaComponent implements OnInit {
   public uploadUrl = '';
   @Input() files: NzUploadFile[] = [];
-  public filePaths: any[] = [];
+  @Input() filePaths: any[] = [];
   @Output() uploadedFiles = new EventEmitter<any[]>();
 
   public accessToken = this.apiService.getAccessToken();
@@ -30,7 +30,7 @@ export class UploadMediaComponent implements OnInit {
     private apiService: ApiService,
     private msg: NzMessageService,
     private http: HttpClient,
-  ) {}
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -123,7 +123,7 @@ export class UploadMediaComponent implements OnInit {
     const fileExtension = this.getFileExtension(fileName);
     const randomId = this.getRandomId();
     const newFileName = `${randomId}.${fileExtension}`;
-    
+
     return newFileName;
   }
 

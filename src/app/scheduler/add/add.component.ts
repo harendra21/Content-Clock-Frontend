@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from './../../services/api.service';
 import { AiService } from 'src/app/services/ai.service';
 import { environment } from 'src/environments/environment';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
-
+import { Modal } from 'flowbite';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -26,14 +26,14 @@ export class AddComponent implements OnInit {
   public isVisible: boolean = false;
   public aiText: string = ""
   public env = environment;
-
+  @ViewChild('aimodalcontainer') aiModalElement!: ElementRef;
 
   constructor(
     private apiService: ApiService,
     private msg: NzMessageService,
     private ai: AiService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getConnections();
@@ -52,7 +52,7 @@ export class AddComponent implements OnInit {
     if (index == -1) {
       this.selectedConnections.push(item);
     } else {
-      
+
       if (index > -1) {
         this.selectedConnections.splice(index, 1);
       }
@@ -62,11 +62,11 @@ export class AddComponent implements OnInit {
 
   }
 
-  isSelected(item: any){
+  isSelected(item: any) {
     const index = this.selectedConnections.indexOf(item);
-    if (index == -1){
+    if (index == -1) {
       return false
-    }else{
+    } else {
       return true
     }
   }
@@ -84,13 +84,13 @@ export class AddComponent implements OnInit {
   }
   public aiPost: string = ""
   public loadingAi: boolean = false;
-  writeAi(){
-    if(this.aiText == "") {this.msg.error("Enter keyword to genrate the content with AI"); return}
+  writeAi() {
+    if (this.aiText == "") { this.msg.error("Enter keyword to genrate the content with AI"); return }
     this.loadingAi = true;
     this.ai.askAi(this.aiText, "Social").subscribe((data: any) => {
-      if(data.choices[0].message.content != ''){
+      if (data.choices[0].message.content != '') {
         this.aiPost = this.clean(data.choices[0].message.content)
-      }else{
+      } else {
         this.msg.success("Something went wrong, Please try again")
       }
       this.loadingAi = false
@@ -101,11 +101,11 @@ export class AddComponent implements OnInit {
   }
 
   clean(paragraph: string) {
-    
+
     const regex = /^"|"$/g
     // Replace leading quotes with an empty string
     return paragraph.replace("  ", "").replace(regex, '');
-}
+  }
 
   schedulePost(isDraft: boolean = false) {
     if (this.postContent == "") {
@@ -139,7 +139,7 @@ export class AddComponent implements OnInit {
       this.apiService.postRequest(`/social-posts`, body).subscribe((res: any) => {
         if (res.status) {
           this.msg.success("Post added")
-        }else{
+        } else {
           this.msg.success(res.message)
         }
       }, err => {
@@ -147,8 +147,8 @@ export class AddComponent implements OnInit {
       });
 
     });
-    
-    
+
+
   }
   public images: any[] = [];
   uploadedFiles(files: any) {
@@ -157,7 +157,22 @@ export class AddComponent implements OnInit {
 
   generatedContent(content: any) {
     this.postContent = content;
-    this.isVisible = false;
+    this.closeAiModal();
+  }
+
+  ngAfterViewInit(): void {
+    this.aiModal = new Modal(this.aiModalElement.nativeElement);
+  }
+  showAiModal(): void {
+    this.isAi = true;
+    this.aiModal.show();
+  }
+
+  public isAi = false;
+  public aiModal!: Modal;
+  closeAiModal(): void {
+    this.isAi = false;
+    this.aiModal.hide();
   }
 
 }

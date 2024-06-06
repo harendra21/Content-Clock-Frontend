@@ -135,22 +135,6 @@ nz-filter-trigger {
 
 
 
-.ant-modal-content {
-  @apply dark:bg-gray-700 dark:text-white;
-}
-
-.ant-modal-header {
-  @apply dark:bg-gray-700 dark:text-white;
-}
-
-.ant-modal-title {
-  @apply dark:text-white;
-}
-
-.ant-modal-close {
-  @apply dark:text-white dark:hover:text-white;
-}
-
 .textarea {
   @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
 }
@@ -183,14 +167,6 @@ nz-filter-trigger {
   @apply dark:border-gray-600
 }
 
-.ant-timeline-item-head-custom {
-  @apply dark:bg-gray-800
-}
-
-.ant-picker-body {
-  @apply dark:bg-gray-700 dark:text-white
-}
-
 .ant-picker-calendar-date-value {
   @apply dark:text-white
 }
@@ -213,4 +189,7 @@ nz-filter-trigger {
 
 .ant-picker-cell .ant-picker-cell-in-view:hover {
   @apply dark:bg-gray-600 dark:text-white
+}
+.char-count{
+  @apply dark:text-white
 }

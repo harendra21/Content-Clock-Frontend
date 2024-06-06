@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './auth/service/auth.service';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'home', pathMatch: 'full',
+    path: '', component: LandingComponent
   },
   {
     path: 'auth',
@@ -36,7 +37,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabledBlocking',
     onSameUrlNavigation: 'reload',
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

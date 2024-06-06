@@ -1,91 +1,54 @@
 <div class="mx-auto">
   <div class="grid gap-4 grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
-    <div class="bg-gray-700 hover:bg-gray-900 p-4 dark:text-white rounded-md">
-      <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-      >
+    <div class="bg-gray-700 hover:bg-gray-900 p-4 text-white rounded-md">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">
         Connections
       </h5>
-      <p
-        class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl"
-      >
+      <p class="font-normal text-gray-700 text-white text-center text-4xl">
         {{ connectionsCount }}
       </p>
     </div>
 
-    <div class="bg-blue-700 hover:bg-blue-900 p-4 dark:text-white rounded-md">
-      <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-      >
+    <div class="bg-blue-700 hover:bg-blue-900 p-4 text-white rounded-md">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">
         Posts Count
       </h5>
-      <p
-        class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl"
-      >
+      <p class="font-normal text-gray-700 text-white text-center text-4xl">
         {{ postCount }}
       </p>
     </div>
-    <div class="bg-green-700 hover:bg-green-900 p-4 dark:text-white rounded-md">
-      <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-      >
+    <div class="bg-green-700 hover:bg-green-900 p-4 text-white rounded-md">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">
         Published
       </h5>
-      <p
-        class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl"
-      >
+      <p class="font-normal text-gray-700 text-white text-center text-4xl">
         {{ publishedCount }}
       </p>
     </div>
-    <div
-      class="bg-yellow-700 hover:bg-yellow-900 p-4 dark:text-white rounded-md"
-    >
-      <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-      >
+    <div class="bg-yellow-700 hover:bg-yellow-900 p-4 text-white rounded-md">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">
         Scheduled
       </h5>
-      <p
-        class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl"
-      >
+      <p class="font-normal text-gray-700 text-white text-center text-4xl">
         {{ scheduledCount }}
       </p>
     </div>
-    <div class="bg-red-700 hover:bg-red-900 p-4 dark:text-white rounded-md">
-      <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-      >
+    <div class="bg-red-700 hover:bg-red-900 p-4 text-white rounded-md">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 text-white">
         Failed
       </h5>
-      <p
-        class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl"
-      >
+      <p class="font-normal text-gray-700 text-white text-center text-4xl">
         {{ failedCount }}
       </p>
     </div>
   </div>
 </div>
 
-<div class="mt-2">
-  <app-calendar [data]="posts" *ngIf="!loading"></app-calendar>
-  <!-- <nz-calendar *ngIf="!loading">
-    <ul *nzDateCell="let date" class="events">
-      <ng-container *ngIf="getPostsForDate(date).length">
-        <li *ngFor="let item of getPostsForDate(date)">
-          <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
-        </li>
-      </ng-container>
-    </ul>
-  </nz-calendar> -->
+<div class="mt-2" *ngIf="!loading">
+  <app-calendar [data]="posts"></app-calendar>
 </div>
 
 <div class="animation-container" *ngIf="loading">
-  <lottie-player
-    src="/assets/animations/loading.json"
-    background="transparent"
-    speed="1"
-    loop
-    autoplay
-  >
+  <lottie-player src="/assets/animations/loading.json" background="transparent" speed="1" loop autoplay>
   </lottie-player>
 </div>

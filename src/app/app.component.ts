@@ -19,7 +19,7 @@ export class AppComponent {
   public avatar: string = ""
   public name: string = ""
   public email: string = ""
-
+  public apiHost: string = environment.v1Api
 
   constructor(
     private apiService: ApiService,

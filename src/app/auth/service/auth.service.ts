@@ -13,7 +13,7 @@ export class AuthService {
     private apiService: ApiService
   ) { }
 
-  private isAuthSubject = new BehaviorSubject<boolean>(false); // You can change the type and initial value as needed
+  private isAuthSubject = new BehaviorSubject<boolean>(false);
   public isAuth$ = this.isAuthSubject.asObservable();
 
   setAuthStatus(value: boolean) {
@@ -47,6 +47,19 @@ export class AuthService {
       return false
     })
   }
-  
 
+  checkAuth() {
+    return this.apiService.getRequest(`/check-auth`).subscribe((res: any) => {
+      if (res.status) {
+        this.setAuthStatus(true)
+        return true
+      } else {
+        this.setAuthStatus(false)
+        return false
+      }
+    }, err => {
+      this.setAuthStatus(false)
+      return false
+    })
+  }
 }

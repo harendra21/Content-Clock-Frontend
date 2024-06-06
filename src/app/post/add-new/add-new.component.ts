@@ -7,12 +7,11 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  
+
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ApiService } from './../../services/api.service';
-declare var Datepicker: any;
 import { Modal } from 'flowbite';
 
 @Component({
@@ -30,8 +29,8 @@ export class AddNewComponent implements AfterViewInit, OnInit {
   public postContent = '';
   public link = '';
   public title = '';
-  public date: any;
-  public time: string = '';
+  public postDate: any;
+  public filePaths: any = []
 
   public isVisible: boolean = false;
   public aiText: string = '';
@@ -50,30 +49,17 @@ export class AddNewComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.apiService.addNewData.subscribe((res: any) => {
-      this.postId = res.postId; 
+      this.postId = res.postId;
       this.slot = res.slot;
       this.connection = res.connection;
       this.reloadComponent(this.slot, this.postId);
     });
   }
 
-  @ViewChild('dateField') dateField!: ElementRef;
   public aiModal!: Modal;
 
   ngAfterViewInit(): void {
-    new Datepicker(this.dateField.nativeElement, {
-      minDate: new Date(),
-      todayHighlight: true,
-      daysOfWeekDisabled: [0],
-      format: 'yyyy-mm-dd',
-    });
-
-    this.dateField.nativeElement.addEventListener('changeDate', (e: any) => {
-      this.date = e.target.value;
-    });
-
     this.aiModal = new Modal(this.aiModalElement.nativeElement);
-
   }
   public isAi = false;
   showAiModal(): void {
@@ -98,7 +84,7 @@ export class AddNewComponent implements AfterViewInit, OnInit {
       description: this.postContent,
       image: this.images.join(','),
       link: this.link,
-      publish_at: new Date(this.date + ' ' + this.time),
+      publish_at: this.postDate,
       title: this.title,
       type: 'post',
       status: 'scheduled',
@@ -113,7 +99,7 @@ export class AddNewComponent implements AfterViewInit, OnInit {
         this.apiService.setDailyPostCount(this.connection.ConnectionId);
         this.apiService.setPostCount(this.connection.ConnectionId);
         this.msg.success(res.message);
-      }else{
+      } else {
         this.msg.error(res.message);
       }
     }, err => {
@@ -152,11 +138,11 @@ export class AddNewComponent implements AfterViewInit, OnInit {
     this.postContent = '';
     this.link = '';
     this.title = '';
-    this.date = '';
-    this.time = '';
+    this.postDate = '';
     this.images = [];
     this.files = [];
     this.loading = false;
+    this.filePaths = []
 
     if (postId > 0) {
       this.apiService.getRequest(`/social-post/${postId}`).subscribe(
@@ -166,11 +152,10 @@ export class AddNewComponent implements AfterViewInit, OnInit {
             this.postContent = postData.Description;
             this.link = postData.Link;
             this.title = postData.Title;
-            this.date = this.formatDate(postData.PublishAt);
-            this.time = this.formatTime(postData.PublishAt);
+            this.postDate = postData.PublishAt;
             this.images =
               postData.Medias != '' ? postData.Medias.split(',') : [];
-
+            this.filePaths = this.images
             if (this.images.length > 0) {
               var files: any[] = [];
 
@@ -192,9 +177,8 @@ export class AddNewComponent implements AfterViewInit, OnInit {
           this.msg.error(err.error.message);
         },
       );
-    }else{
-      this.date = this.formatDate(slot);
-      this.time = this.formatTime(slot);
+    } else {
+      this.postDate = slot;
     }
 
   }
