@@ -137,7 +137,8 @@
 
       <ng-container *ngFor="let connection of connections">
         <li>
-          <a routerLink="post/create/{{ connection.connection_id }}" (click)="onMenuItemClick()"
+          <a routerLink="post/create/{{ connection.connection_id }}" (click)="onMenuItemClick()" gaEvent="sidebar"
+            gaCategory="sidebar-click"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <nz-badge [nzCount]="facebook" style="margin-right: 5px"
               *ngIf="connection.connection_name == 'facebook_page'">

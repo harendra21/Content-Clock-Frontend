@@ -15,6 +15,8 @@ import { AntModule } from './ant.module';
 import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import { environment } from './../environments/environment';
 
 const ngZorroConfig: NzConfig = {
   theme: {
@@ -34,18 +36,20 @@ registerLocaleData(en);
   ],
   imports: [
     BrowserModule.withServerTransition({
-      appId: 'my-app-id',
+      appId: 'content-clock',
     }),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     IconsProviderModule,
-    AntModule
+    AntModule,
+    NgxGoogleAnalyticsModule.forRoot(environment.ga),
+    NgxGoogleAnalyticsRouterModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    { provide: NZ_CONFIG, useValue:  ngZorroConfig },
+    { provide: NZ_CONFIG, useValue: ngZorroConfig },
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy }
   ],
   bootstrap: [AppComponent],
