@@ -11,13 +11,15 @@ import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 import { AddNewComponent } from './add-new/add-new.component';
 import { QueueComponent } from './queue/queue.component';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
+import { TweetComponent } from './preview/tweet/tweet.component';
 
 @NgModule({
   declarations: [
     CreateComponent,
     ScheduledComponent,
     AddNewComponent,
-    QueueComponent
+    QueueComponent,
+    TweetComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,6 @@ import { NzCalendarModule } from 'ng-zorro-antd/calendar';
     NzTimelineModule,
     NzCalendarModule,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PostModule { }

@@ -16,7 +16,7 @@ export const environment = {
   linkedinLogo: "https://res.cloudinary.com/harendra21/image/upload/w_48/images/linkedin_logo_initials.png_G0eVpCWb.webp",
   pinterestLogo: "https://res.cloudinary.com/harendra21/image/upload/w_48,f_auto/images/pinterest-logo_lhG5inoN.png",
   twitterLogo: "https://res.cloudinary.com/harendra21/image/upload/w_48/images/twitter_6tGq0h68.webp",
-  ga: "G-XGN7W8KDVJ"
+  ga: "" //G-XGN7W8KDVJ
 
 }
 // https://social-app-dtfau3loxa-uc.a.run.app

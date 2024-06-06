@@ -96,23 +96,19 @@
 
           <ng-container *ngIf="connection.ConnectionName == 'twitter' && conn.status=='published'">
             <div class="max-w-md">
-              <blockquote class="twitter-tweet">
-                <a href="https://twitter.com/{{ connection.Username }}/status/{{ conn.published_post_id }}"></a>
-              </blockquote>
+              <app-tweet
+                [tweetUrl]="'https://twitter.com/' + connection.Username + '/status/' + conn.published_post_id">
+              </app-tweet>
+
             </div>
-
           </ng-container>
 
-          <ng-container *ngIf="connection.ConnectionName == 'facebook_page' ">
-            <app-facebook-card [name]="connection.Name" [profile_image]="connection.ProfileImage" [images]="conn.medias"
-              [postDate]="conn.publish_at" [postContent]="conn.description" [status]="conn.status"></app-facebook-card>
+          <ng-container *ngIf="connection.ConnectionName == 'facebook_page'">
+            <app-facebook-card [name]=" connection.Name" [profile_image]="connection.ProfileImage"
+              [images]="conn.medias" [postDate]="conn.publish_at" [postContent]="conn.description"
+              [status]="conn.status"></app-facebook-card>
           </ng-container>
 
-          <!-- <ng-container *ngIf="connection.ConnectionName == 'facebook_page' && conn.status == 'published'">
-            <div class="fb-post max-w-md"
-              attr.data-href="//facebook.com/{{ connection.ConnectionId }}/posts/{{ conn.published_post_id }}"
-              data-width="500"></div>
-          </ng-container> -->
 
           <ng-container *ngIf="connection.ConnectionName == 'linkedin_profile'">
             <app-linkedin-card [name]="connection.Name" [profile_image]="connection.ProfileImage" [images]="conn.medias"
