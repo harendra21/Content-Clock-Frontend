@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { environment } from 'src/environments/environment';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent {
+export class RegisterComponent {
   public loginForm: FormGroup;
   public submitted = false;
   public apiHost = environment.v1Api

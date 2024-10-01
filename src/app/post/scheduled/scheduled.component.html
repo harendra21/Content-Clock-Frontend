@@ -75,9 +75,6 @@
         <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
           {{ conn.publish_at | date: "yyyy-MM-dd HH:mm" }}
 
-          <ng-container *ngIf="conn.status == 'failed'">
-            <span nz-icon nzType="info-circle" nzTheme="outline" nz-tooltip nzTooltipTitle="{{ conn.Logs }}"></span>
-          </ng-container>
           <ng-container *ngIf="conn.status == 'scheduled' || conn.status == 'draft'">
             <span
               class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-700 dark:text-white ms-3 cursor-pointer"
@@ -89,6 +86,9 @@
           </ng-container>
         </h3>
         <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+          <ng-container *ngIf="conn.status == 'failed'">
+            <div class=" text-sm ">{{ conn.logs }}</div>
+          </ng-container>
           <ng-container *ngIf="connection.ConnectionName == 'twitter' && conn.status !='published'">
             <app-twitter-card [name]="connection.Name" [profile_image]="connection.ProfileImage" [images]="conn.medias"
               [postDate]="conn.publish_at" [postContent]="conn.description" [status]="conn.status"></app-twitter-card>

@@ -41,15 +41,19 @@ export class QueueComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private msgService: NzMessageService,
-  ) {}
+  ) { }
+
+  ngOnInit() {
+    this.runLoopWithDelay();
+  }
 
   ngAfterViewInit(): void {
 
     const formModalOptions: ModalOptions = {
-      closable: true,
-      onHide: () => {
-        this.closeFormModal()
-      },
+      closable: false,
+      // onHide: () => {
+      //   this.closeFormModal()
+      // },
       onShow: () => {
         this.apiService.changeAddNewData({
           slot: this.slot,
@@ -72,7 +76,6 @@ export class QueueComponent implements OnInit, AfterViewInit {
   }
 
   closeFormModal() {
-    if(!this.isClosed) this.formModal.show();
     this.confirmModal.show()
   }
 
@@ -89,10 +92,7 @@ export class QueueComponent implements OnInit, AfterViewInit {
       await this.sleep(100);
     }
   }
-  ngOnInit() {
-    this.runLoopWithDelay();
-    
-  }
+
   addNew(dateTime: any = null) {
     if (dateTime == null) {
       dateTime = new Date();
@@ -113,8 +113,8 @@ export class QueueComponent implements OnInit, AfterViewInit {
     this.formModal.hide();
     this.postId = 0;
     this.confirmModal.hide();
-    if(this.isEdit) this.router.navigate([`/post/create/${this.connection.ConnectionId}`], { queryParams: { "action": "queue" } })
-    
+    if (this.isEdit) this.router.navigate([`/post/create/${this.connection.ConnectionId}`], { queryParams: { "action": "queue" } })
+
   }
 
   getScheduledPosts(connection_id: string) {
@@ -141,7 +141,7 @@ export class QueueComponent implements OnInit, AfterViewInit {
   createUpdatePost(data: any) {
     this.getScheduledPosts(this.connection.ConnectionId);
     this.handleCloseModel()
-    
+
   }
 
 }

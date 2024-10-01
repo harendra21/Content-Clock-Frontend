@@ -41,10 +41,11 @@ export class ScheduledComponent implements OnInit, AfterViewInit {
     this.status = status;
     this.getScheduledPosts(this.connection.ConnectionId);
   }
-
+  limit = 20;
+  page = 1
   getScheduledPosts(connection_id: string) {
     this.loading = true;
-    this.apiService.getRequest(`/social-posts?connectionId=${connection_id}&status=${this.status}`).subscribe((res: any) => {
+    this.apiService.getRequest(`/social-posts?connectionId=${connection_id}&status=${this.status}&limit=${this.limit}&page=${this.page}`).subscribe((res: any) => {
       if (res.status) {
         this.posts = res.data;
       } else {
